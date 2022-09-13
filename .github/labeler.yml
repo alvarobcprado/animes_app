@@ -1,0 +1,50 @@
+intl:
+  - any: ['*.arb']
+ 
+app-module:
+  - any: ['lib/**/*]
+
+core-module:
+  - any: ['modules/core/**/*']
+
+data-module:
+  - any: ['modules/data/**/*']
+
+dependency-injection-module:
+  - any: ['modules/dependency_injection/**/*']
+
+design-system-module:
+  - any: ['modules/design_system/**/*']
+
+feature-home-module:
+  - any: ['modules/feature_home/**/*']
+
+dependencies:
+  - all: ['**/pubspec.yaml','**/pubspec.lock']
+
+linting:
+  - any: ['**/*/analysis_options.yaml']
+
+code-gen:
+  - any: ['*.mocks.dart', '*.freezed.dart', '*.g.dart']
+
+CI/CD:
+  - any: ['.github/**/*']
+
+assets:
+  - any: ['**/*/assets/**/*']
+
+documentation:
+  - any: ['**/*/README.md','doc/**/*']
+
+chores:
+  - any: ['**/*/.gitignore']
+  
+native/android:
+  - any: ['**/*/android/**/*']
+
+native/ios:
+  - any: ['**/*/ios/**/*']
+
+tests:
+  - any: [ '**/*/test/**/*' ]
