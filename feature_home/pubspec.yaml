@@ -17,11 +17,19 @@ dependencies:
     path: ../core
   data:
     path: ../data
+  dio: ^4.0.6
+  json_serializable: ^6.3.1
+  cached_network_image: ^3.2.1
+  flutter_triple: ^1.2.7+4
+  go_router: ^4.4.1
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner: ^2.2.0
+  json_annotation: ^4.6.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
