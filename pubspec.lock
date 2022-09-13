@@ -114,9 +114,9 @@ packages:
     source: hosted
     version: "3.0.2"
   core:
-    dependency: transitive
+    dependency: "direct main"
     description:
-      path: core
+      path: "modules/core"
       relative: true
     source: path
     version: "0.0.1"
@@ -144,21 +144,21 @@ packages:
   data:
     dependency: transitive
     description:
-      path: data
+      path: "modules/data"
       relative: true
     source: path
     version: "0.0.1"
   dependency_injection:
     dependency: "direct main"
     description:
-      path: dependency_injection
+      path: "modules/dependency_injection"
       relative: true
     source: path
     version: "0.0.1"
   design_system:
     dependency: transitive
     description:
-      path: design_system
+      path: "modules/design_system"
       relative: true
     source: path
     version: "0.0.1"
@@ -179,7 +179,7 @@ packages:
   feature_home:
     dependency: "direct main"
     description:
-      path: feature_home
+      path: "modules/feature_home"
       relative: true
     source: path
     version: "0.0.1"
@@ -223,6 +223,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  flutter_localizations:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_modular:
     dependency: transitive
     description:
@@ -296,6 +301,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.1"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.17.0"
   js:
     dependency: transitive
     description:

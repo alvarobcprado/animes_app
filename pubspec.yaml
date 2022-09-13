@@ -29,12 +29,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   dependency_injection:
-    path: ./dependency_injection
+    path: ./modules/dependency_injection
   feature_home:
-    path: ./feature_home
+    path: ./modules/feature_home
   core:
-    path: ./core
+    path: ./modules/core
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
