@@ -2,7 +2,7 @@ intl:
   - any: ['*.arb']
  
 app-module:
-  - any: ['lib/**/*]
+  - any: ['lib/**/*']
 
 core-module:
   - any: ['modules/core/**/*']
