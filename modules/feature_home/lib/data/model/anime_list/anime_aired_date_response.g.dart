@@ -9,11 +9,11 @@ part of 'anime_aired_date_response.dart';
 AnimeAiredDateResponse _$AnimeAiredDateResponseFromJson(
         Map<String, dynamic> json) =>
     AnimeAiredDateResponse(
-      json['release'] as String?,
+      json['from'] as String?,
     );
 
 Map<String, dynamic> _$AnimeAiredDateResponseToJson(
         AnimeAiredDateResponse instance) =>
     <String, dynamic>{
-      'release': instance.from,
+      'from': instance.release,
     };
