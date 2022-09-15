@@ -9,14 +9,13 @@ part of 'anime_details_data_response.dart';
 AnimeDetailsDataResponse _$AnimeDetailsDataResponseFromJson(
         Map<String, dynamic> json) =>
     AnimeDetailsDataResponse(
-      json['animeDetails'] == null
+      json['data'] == null
           ? null
-          : AnimeDetailsResponse.fromJson(
-              json['animeDetails'] as Map<String, dynamic>),
+          : AnimeDetailsResponse.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AnimeDetailsDataResponseToJson(
         AnimeDetailsDataResponse instance) =>
     <String, dynamic>{
-      'animeDetails': instance.data,
+      'data': instance.animeDetails,
     };

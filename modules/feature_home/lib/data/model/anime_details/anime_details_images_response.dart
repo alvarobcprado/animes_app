@@ -5,13 +5,13 @@ part 'anime_details_images_response.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class AnimeDetailsImagesResponse {
-  AnimeDetailsImagesResponse(this.webp);
+  AnimeDetailsImagesResponse(this.image);
 
   factory AnimeDetailsImagesResponse.fromJson(Map<String, dynamic> json) =>
       _$AnimeDetailsImagesResponseFromJson(json);
 
-  @JsonKey(name: 'image')
-  final AnimeDetailsImageResponse? webp;
+  @JsonKey(name: 'webp')
+  final AnimeDetailsImageResponse? image;
 
   Map<String, dynamic> toJson() => _$AnimeDetailsImagesResponseToJson(this);
 }

@@ -9,14 +9,14 @@ part of 'anime_details_images_response.dart';
 AnimeDetailsImagesResponse _$AnimeDetailsImagesResponseFromJson(
         Map<String, dynamic> json) =>
     AnimeDetailsImagesResponse(
-      json['image'] == null
+      json['webp'] == null
           ? null
           : AnimeDetailsImageResponse.fromJson(
-              json['image'] as Map<String, dynamic>),
+              json['webp'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AnimeDetailsImagesResponseToJson(
         AnimeDetailsImagesResponse instance) =>
     <String, dynamic>{
-      'image': instance.webp,
+      'webp': instance.image,
     };

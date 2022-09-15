@@ -9,11 +9,11 @@ part of 'anime_details_image_response.dart';
 AnimeDetailsImageResponse _$AnimeDetailsImageResponseFromJson(
         Map<String, dynamic> json) =>
     AnimeDetailsImageResponse(
-      json['url'] as String?,
+      json['imageUrl'] as String?,
     );
 
 Map<String, dynamic> _$AnimeDetailsImageResponseToJson(
         AnimeDetailsImageResponse instance) =>
     <String, dynamic>{
-      'url': instance.imageUrl,
+      'imageUrl': instance.url,
     };

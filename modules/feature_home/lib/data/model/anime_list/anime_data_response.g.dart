@@ -8,16 +8,16 @@ part of 'anime_data_response.dart';
 
 AnimeDataResponse _$AnimeDataResponseFromJson(Map<String, dynamic> json) =>
     AnimeDataResponse(
-      (json['animes'] as List<dynamic>?)
+      (json['data'] as List<dynamic>?)
           ?.map((e) => AnimeResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
-      json['url'] == null
+      json['links'] == null
           ? null
-          : AnimeUrlResponse.fromJson(json['url'] as Map<String, dynamic>),
+          : AnimeUrlResponse.fromJson(json['links'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AnimeDataResponseToJson(AnimeDataResponse instance) =>
     <String, dynamic>{
-      'animes': instance.data,
-      'url': instance.links,
+      'data': instance.animes,
+      'links': instance.url,
     };

@@ -1,20 +1,20 @@
-import 'package:feature_home/data/anime_list/anime_url_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'anime_response.dart';
+import 'anime_url_response.dart';
 
 part 'anime_data_response.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class AnimeDataResponse {
-  AnimeDataResponse(this.data, this.links);
+  AnimeDataResponse(this.animes, this.url);
 
   factory AnimeDataResponse.fromJson(Map<String, dynamic> json) =>
       _$AnimeDataResponseFromJson(json);
 
-  @JsonKey(name: 'animes')
-  final List<AnimeResponse>? data;
-  @JsonKey(name: 'url')
-  final AnimeUrlResponse? links;
+  @JsonKey(name: 'data')
+  final List<AnimeResponse>? animes;
+  @JsonKey(name: 'links')
+  final AnimeUrlResponse? url;
 
   Map<String, dynamic> toJson() => _$AnimeDataResponseToJson(this);
 }

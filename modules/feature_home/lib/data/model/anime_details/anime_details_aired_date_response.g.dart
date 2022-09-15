@@ -9,13 +9,13 @@ part of 'anime_details_aired_date_response.dart';
 AnimeDetailsAiredDateResponse _$AnimeDetailsAiredDateResponseFromJson(
         Map<String, dynamic> json) =>
     AnimeDetailsAiredDateResponse(
-      json['release'] as String?,
-      json['end'] as String?,
+      json['from'] as String?,
+      json['to'] as String?,
     );
 
 Map<String, dynamic> _$AnimeDetailsAiredDateResponseToJson(
         AnimeDetailsAiredDateResponse instance) =>
     <String, dynamic>{
-      'release': instance.from,
-      'end': instance.to,
+      'from': instance.release,
+      'to': instance.end,
     };
