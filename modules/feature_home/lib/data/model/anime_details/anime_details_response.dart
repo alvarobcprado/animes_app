@@ -13,7 +13,7 @@ class AnimeDetailsResponse {
       _$AnimeDetailsResponseFromJson(json);
 
   @JsonKey(name: 'malId')
-  final int id;
+  final int? id;
   final String? title;
   final String? titleEnglish;
   final AnimeDetailsImagesResponse? images;

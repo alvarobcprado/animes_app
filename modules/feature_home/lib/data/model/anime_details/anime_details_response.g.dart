@@ -9,7 +9,7 @@ part of 'anime_details_response.dart';
 AnimeDetailsResponse _$AnimeDetailsResponseFromJson(
         Map<String, dynamic> json) =>
     AnimeDetailsResponse(
-      json['malId'] as int,
+      json['malId'] as int?,
       json['title'] as String?,
       json['title_english'] as String?,
       json['images'] == null

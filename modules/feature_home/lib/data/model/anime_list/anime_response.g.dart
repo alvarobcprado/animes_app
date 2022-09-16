@@ -8,7 +8,7 @@ part of 'anime_response.dart';
 
 AnimeResponse _$AnimeResponseFromJson(Map<String, dynamic> json) =>
     AnimeResponse(
-      json['malId'] as int,
+      json['malId'] as int?,
       json['images'] == null
           ? null
           : AnimeImagesResponse.fromJson(

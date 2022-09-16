@@ -7,7 +7,7 @@ import '../model/genre_list/genre_response.dart';
 extension AnimeListResponseToAnimeList on List<AnimeResponse> {
   List<Anime> toAnimeList() {
     return map((animeResponse) => Anime(
-          animeResponse.id,
+          animeResponse.id ?? -1,
           animeResponse.images?.image?.url ?? '',
           animeResponse.title ?? '',
           animeResponse.genres
@@ -23,7 +23,7 @@ extension AnimeListResponseToAnimeList on List<AnimeResponse> {
 extension AnimeDetailsResponseToAnimeDetails on AnimeDetailsResponse {
   AnimeDetails toAnimeDetails() {
     return AnimeDetails(
-        id,
+        id ?? -1,
         title ?? '',
         titleEnglish ?? '',
         images?.image?.url ?? '',

@@ -14,7 +14,7 @@ class AnimeResponse {
       _$AnimeResponseFromJson(json);
 
   @JsonKey(name: 'malId')
-  final int id;
+  final int? id;
   final AnimeImagesResponse? images;
   final String? title;
   final List<AnimeGenreResponse>? genres;
