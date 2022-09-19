@@ -1,7 +1,6 @@
-import 'package:data/model/aux/anime_aux_cache.dart';
-import 'package:data/model/aux/anime_details_aux_cache.dart';
-import 'package:data/model/aux/genre_aux_cache.dart';
-
+import 'package:data_local/model/aux/anime_aux_cache.dart';
+import 'package:data_local/model/aux/anime_details_aux_cache.dart';
+import 'package:data_local/model/aux/genre_aux_cache.dart';
 import '../../domain/anime.dart';
 import '../../domain/anime_details.dart';
 
