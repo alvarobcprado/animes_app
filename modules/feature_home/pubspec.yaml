@@ -15,7 +15,7 @@ dependencies:
     path: ../design_system
   core:
     path: ../core
-  data:
+  data_local:
     path: ../data_local
   dio: ^4.0.6
   json_serializable: ^6.3.1
