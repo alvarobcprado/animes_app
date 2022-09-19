@@ -43,6 +43,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
+  widgetbook: ^2.4.1
   flutter_test:
     sdk: flutter
 
