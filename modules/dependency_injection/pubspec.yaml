@@ -14,7 +14,7 @@ dependencies:
   feature_home:
     path: ../feature_home
   data:
-    path: ../data
+    path: ../data_local
   flutter_modular: ^5.0.3
 
 
