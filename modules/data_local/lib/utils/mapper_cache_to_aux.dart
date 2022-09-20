@@ -1,7 +1,8 @@
 import '../model/anime_cache.dart';
 import '../model/anime_details_cache.dart';
-import '../model/aux/anime_auxiliar_cache.dart';
-import '../model/aux/anime_details_auxiliar_cache.dart';
+
+import '../model/auxiliar/anime_auxiliar_cache.dart';
+import '../model/auxiliar/anime_details_auxiliar_cache.dart';
 import '../model/genre_cache.dart';
 
 extension AnimeListCacheToAnimeListAux on List<AnimeCache> {
