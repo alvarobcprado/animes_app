@@ -1,5 +1,5 @@
-class AnimeAuxCache {
-  AnimeAuxCache(this.id, this.image, this.title, this.genres, this.release,
+class AnimeAuxiliarCache {
+  AnimeAuxiliarCache(this.id, this.image, this.title, this.genres, this.release,
       this.totalEpisodes);
 
   final int id;
