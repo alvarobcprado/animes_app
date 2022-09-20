@@ -1,5 +1,5 @@
-class AnimeDetailsAuxCache {
-  AnimeDetailsAuxCache(this.id, this.title, this.titleEnglish, this.image,
+class AnimeDetailsAuxiliarCache {
+  AnimeDetailsAuxiliarCache(this.id, this.title, this.titleEnglish, this.image,
       this.release, this.end, this.synopsis, this.score);
 
   final int id;

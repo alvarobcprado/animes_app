@@ -1,4 +1,4 @@
-import 'package:data_local/model/aux/anime_details_aux_cache.dart';
+import 'package:data_local/model/aux/anime_details_auxiliar_cache.dart';
 import '../../domain/anime.dart';
 import '../../domain/anime_details.dart';
 import '../../domain/genre.dart';
@@ -17,8 +17,8 @@ extension AnimeListToAnimeListAuxCache on List<Anime> {
 }
 
 extension AnimeDetailsToAnimeDetailsAuxCache on AnimeDetails {
-  AnimeDetailsAuxCache toAnimeDetailsAuxCache() {
-    return AnimeDetailsAuxCache(
+  AnimeDetailsAuxiliarCache toAnimeDetailsAuxCache() {
+    return AnimeDetailsAuxiliarCache(
         id, title, titleEnglish, image, release, end, synopsis, score);
   }
 }

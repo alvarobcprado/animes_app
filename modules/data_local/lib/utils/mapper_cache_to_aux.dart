@@ -1,12 +1,12 @@
 import '../model/anime_cache.dart';
 import '../model/anime_details_cache.dart';
-import '../model/aux/anime_aux_cache.dart';
-import '../model/aux/anime_details_aux_cache.dart';
+import '../model/aux/anime_auxiliar_cache.dart';
+import '../model/aux/anime_details_auxiliar_cache.dart';
 import '../model/genre_cache.dart';
 
 extension AnimeListCacheToAnimeListAux on List<AnimeCache> {
-  List<AnimeAuxCache> toAnimeListAux() {
-    return map((animeCache) => AnimeAuxCache(
+  List<AnimeAuxiliarCache> toAnimeListAux() {
+    return map((animeCache) => AnimeAuxiliarCache(
           animeCache.id,
           animeCache.image,
           animeCache.title,
@@ -18,8 +18,8 @@ extension AnimeListCacheToAnimeListAux on List<AnimeCache> {
 }
 
 extension AnimeDetailsCacheToAnimeDetailsAux on AnimeDetailsCache {
-  AnimeDetailsAuxCache toAnimeDetailsAux() {
-    return AnimeDetailsAuxCache(
+  AnimeDetailsAuxiliarCache toAnimeDetailsAux() {
+    return AnimeDetailsAuxiliarCache(
         id, title, titleEnglish, image, release, end, synopsis, score);
   }
 }
