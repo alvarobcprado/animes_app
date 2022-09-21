@@ -43,7 +43,12 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
-  widgetbook: ^2.4.1
+  widgetbook:
+    git:
+      url: https://github.com/widgetbook/widgetbook.git
+      ref: main
+      path: packages/widgetbook
+
   flutter_test:
     sdk: flutter
 
