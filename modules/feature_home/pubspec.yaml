@@ -20,8 +20,9 @@ dependencies:
   json_serializable: ^6.3.1
   cached_network_image: ^3.2.1
   flutter_triple: ^1.2.7+4
-  
-
+  intl: ^0.17.0
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -66,3 +67,7 @@ flutter:
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/custom-fonts/#from-packages
+
+flutter_intl:
+  main_locale: en_US
+  enabled: true
