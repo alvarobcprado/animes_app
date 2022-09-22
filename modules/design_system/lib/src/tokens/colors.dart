@@ -12,8 +12,22 @@ abstract class AppColors {
   static const Color babyBlueEyes = Color(0xFFA0C9FF);
   static const Color mauve = Color(0xFFE2B6FF);
   static const Color cherryBlossomPink = Color(0xFFFFB1C0);
-  static const Color macaroniAndCheese = Color(0xFFFFB68F);
   static const Color lightPink = Color(0xFFFFB3B3);
+  static const Color macaroniAndCheese = Color(0xFFFFB68F);
+
+  // onLight
+  static const Color onYInMnBlue = Color(0xFFFFFFFF);
+  static const Color onChineseViolet = Color(0xFFffffff);
+  static const Color onCinnamonSatin = Color(0xFFffffff);
+  static const Color onCandyPink = Color(0xFF3f001a);
+  static const Color onTumbleweed = Color(0xFF3c0800);
+
+  // onDark
+  static const Color onBabyBlueEyes = Color(0xFF003259);
+  static const Color onMauve = Color(0xFF461868);
+  static const Color onCherryBlossomPink = Color(0xFF5f112a);
+  static const Color onLightPink = Color(0xFF64032e);
+  static const Color onMacaroniAndCheese = Color(0xFF5e1704);
 
   static const Color lightSurface = Color(0xFFFDFCFF);
   static const Color onLightSurface = Color(0xFF1A1C1E);

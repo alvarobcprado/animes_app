@@ -14,34 +14,49 @@ class AppColorsFoundation extends ThemeExtension<AppColorsFoundation> {
     required this.onError,
     required this.surface,
     required this.onSurface,
+    required this.onPrimary,
+    required this.onSecondary,
+    required this.onTertiary,
+    required this.onQuaternary,
+    required this.onQuinary,
   });
 
   static const dark = AppColorsFoundation(
     primary: AppColors.babyBlueEyes,
     secondary: AppColors.mauve,
     tertiary: AppColors.cherryBlossomPink,
-    quaternary: AppColors.macaroniAndCheese,
-    quinary: AppColors.lightPink,
+    quaternary: AppColors.lightPink,
+    quinary: AppColors.macaroniAndCheese,
     background: AppColors.darkBackground,
     onBackground: AppColors.onDarkBackground,
     error: AppColors.darkError,
     onError: AppColors.onDarkError,
     surface: AppColors.darkSurface,
     onSurface: AppColors.onDarkSurface,
+    onPrimary: AppColors.onBabyBlueEyes,
+    onSecondary: AppColors.onMauve,
+    onTertiary: AppColors.onCherryBlossomPink,
+    onQuaternary: AppColors.onLightPink,
+    onQuinary: AppColors.onMacaroniAndCheese,
   );
 
   static const light = AppColorsFoundation(
     primary: AppColors.yInMnBlue,
-    secondary: AppColors.mauve,
-    tertiary: AppColors.cherryBlossomPink,
-    quaternary: AppColors.macaroniAndCheese,
-    quinary: AppColors.lightPink,
+    secondary: AppColors.chineseViolet,
+    tertiary: AppColors.cinnamonSatin,
+    quaternary: AppColors.candyPink,
+    quinary: AppColors.tumbleweed,
     background: AppColors.lightBackground,
     onBackground: AppColors.onLightBackground,
     error: AppColors.lightError,
     onError: AppColors.onLightError,
     surface: AppColors.lightSurface,
     onSurface: AppColors.onLightSurface,
+    onPrimary: AppColors.onYInMnBlue,
+    onSecondary: AppColors.onChineseViolet,
+    onTertiary: AppColors.onCinnamonSatin,
+    onQuaternary: AppColors.onCandyPink,
+    onQuinary: AppColors.onTumbleweed,
   );
 
   final Color primary;
@@ -49,6 +64,12 @@ class AppColorsFoundation extends ThemeExtension<AppColorsFoundation> {
   final Color tertiary;
   final Color quaternary;
   final Color quinary;
+
+  final Color onPrimary;
+  final Color onSecondary;
+  final Color onTertiary;
+  final Color onQuaternary;
+  final Color onQuinary;
 
   final Color background;
   final Color onBackground;
@@ -72,6 +93,11 @@ class AppColorsFoundation extends ThemeExtension<AppColorsFoundation> {
     Color? onError,
     Color? surface,
     Color? onSurface,
+    Color? onPrimary,
+    Color? onSecondary,
+    Color? onTertiary,
+    Color? onQuaternary,
+    Color? onQuinary,
   }) {
     return AppColorsFoundation(
       primary: primary ?? this.primary,
@@ -85,6 +111,11 @@ class AppColorsFoundation extends ThemeExtension<AppColorsFoundation> {
       onError: onError ?? this.onError,
       surface: surface ?? this.surface,
       onSurface: onSurface ?? this.onSurface,
+      onPrimary: onPrimary ?? this.onPrimary,
+      onSecondary: onSecondary ?? this.onSecondary,
+      onTertiary: onTertiary ?? this.onTertiary,
+      onQuaternary: onQuaternary ?? this.onQuaternary,
+      onQuinary: onQuinary ?? this.onQuinary,
     );
   }
 
@@ -109,6 +140,12 @@ class AppColorsFoundation extends ThemeExtension<AppColorsFoundation> {
       onError: Color.lerp(onError, other.onError, t) ?? onError,
       surface: Color.lerp(surface, other.surface, t) ?? surface,
       onSurface: Color.lerp(onSurface, other.onSurface, t) ?? onSurface,
+      onPrimary: Color.lerp(onPrimary, other.onPrimary, t) ?? onPrimary,
+      onSecondary: Color.lerp(onSecondary, other.onSecondary, t) ?? onSecondary,
+      onTertiary: Color.lerp(onTertiary, other.onTertiary, t) ?? onTertiary,
+      onQuaternary:
+          Color.lerp(onQuaternary, other.onQuaternary, t) ?? onQuaternary,
+      onQuinary: Color.lerp(onQuinary, other.onQuinary, t) ?? onQuinary,
     );
   }
 }
