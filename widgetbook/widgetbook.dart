@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 import 'atoms/app_network_image_component.dart';
+import 'atoms/labeled_chip_component.dart';
 import 'atoms/labeled_icon_button_component.dart';
 import 'package:design_system/design_system.dart';
 
@@ -22,6 +23,7 @@ class WidgetbookHotReload extends StatelessWidget {
               widgets: [
                 LabeledIconButtonComponent(),
                 AppNetworkImageComponent(),
+                LabeledChipComponent(),
               ],
             ),
           ],
