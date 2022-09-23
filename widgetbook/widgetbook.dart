@@ -8,6 +8,8 @@ import 'atoms/labeled_chip_component.dart';
 import 'atoms/labeled_icon_button_component.dart';
 import 'package:design_system/design_system.dart';
 
+import 'molecules/filter_select_chip_list.dart';
+
 class WidgetbookHotReload extends StatelessWidget {
   const WidgetbookHotReload({Key? key}) : super(key: key);
 
@@ -26,12 +28,19 @@ class WidgetbookHotReload extends StatelessWidget {
                 LabeledChipComponent(),
               ],
             ),
+            WidgetbookFolder(
+              name: 'Molecules',
+              widgets: [
+                FilterSelectChipListComponent(),
+              ],
+            ),
           ],
         ),
       ],
       appInfo: AppInfo(name: 'design_system_book'),
       lightTheme: lightAppThemeData,
       darkTheme: darkAppThemeData,
+      defaultTheme: ThemeMode.light,
     );
   }
 }
