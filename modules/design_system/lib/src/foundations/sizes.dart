@@ -5,5 +5,8 @@ abstract class AppSizesFoundation {
   static const double buttonBorderRadius = AppSizes.sizeXXS;
   static const double buttonPadding = AppSizes.sizeXXXXS;
 
+  static const double chipVerticalPadding = AppSizes.sizeXXXXS;
+  static const double chipHorizontalPadding = AppSizes.sizeXXS;
+
   static const double baseSpace = AppSizes.sizeXXXS;
 }
