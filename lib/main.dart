@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
       ),
       routerDelegate: _router.routerDelegate,
       routeInformationParser: _router.routeInformationParser,
+      routeInformationProvider: _router.routeInformationProvider,
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
