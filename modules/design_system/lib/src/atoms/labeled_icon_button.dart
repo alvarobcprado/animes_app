@@ -6,14 +6,18 @@ class LabeledIconButton extends StatelessWidget {
     Key? key,
     required this.label,
     required this.icon,
+    this.onPressed,
     this.color,
+    this.backgroundColor,
     this.isReducedSize = false,
   }) : super(key: key);
 
   final String label;
   final IconData icon;
   final Color? color;
+  final Color? backgroundColor;
   final bool isReducedSize;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,7 @@ class LabeledIconButton extends StatelessWidget {
       width: isReducedSize ? null : double.infinity,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
+          backgroundColor: backgroundColor,
           side: BorderSide(
             color: buttonColor,
             width: AppSizesFoundation.buttonBorderStroke,
@@ -35,8 +40,9 @@ class LabeledIconButton extends StatelessWidget {
               AppSizesFoundation.buttonBorderRadius,
             ),
           ),
+          foregroundColor: buttonColor,
         ),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
