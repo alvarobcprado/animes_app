@@ -28,8 +28,16 @@ class WidgetbookHotReload extends StatelessWidget {
         ),
       ],
       appInfo: AppInfo(name: 'design_system_book'),
-      lightTheme: lightAppThemeData,
-      darkTheme: darkAppThemeData,
+      themes: [
+        WidgetbookTheme(
+          name: 'Light',
+          data: lightAppThemeData,
+        ),
+        WidgetbookTheme(
+          name: 'Dark',
+          data: darkAppThemeData,
+        ),
+      ],
     );
   }
 }
