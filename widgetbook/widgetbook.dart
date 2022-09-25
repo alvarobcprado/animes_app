@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 import 'atoms/app_network_image_component.dart';
+import 'atoms/labeled_card_component.dart';
 import 'atoms/labeled_chip_component.dart';
 import 'atoms/labeled_icon_button_component.dart';
+import 'atoms/regular_row_component.dart';
 import 'molecules/app_search_bar_component.dart';
+import 'molecules/card_list_component.dart';
 import 'molecules/filter_select_chip_list.dart';
 import 'molecules/image_card_button_component.dart';
 
@@ -27,6 +30,8 @@ class WidgetbookHotReload extends StatelessWidget {
                 LabeledIconButtonComponent(),
                 AppNetworkImageComponent(),
                 LabeledChipComponent(),
+                RegularRowComponent(),
+                LabeledCardComponent(),
               ],
             ),
             WidgetbookFolder(
@@ -35,6 +40,7 @@ class WidgetbookHotReload extends StatelessWidget {
                 FilterSelectChipListComponent(),
                 AppSearchBarComponent(),
                 ImageCardButtonComponent(),
+                CardListComponent(),
               ],
             ),
           ],
