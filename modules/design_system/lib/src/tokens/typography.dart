@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 abstract class AppTypography {
   static const TextStyle h1Light = TextStyle(
-    fontSize: 16,
+    fontSize: 12,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
     color: AppColors.onLightSurface,
   );
   static const TextStyle h1Dark = TextStyle(
-    fontSize: 16,
+    fontSize: 12,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
     color: AppColors.onDarkSurface,
@@ -27,12 +27,12 @@ abstract class AppTypography {
   );
 
   static const TextStyle h3Light = TextStyle(
-    fontSize: 14,
+    fontSize: 12,
     fontStyle: FontStyle.normal,
     color: AppColors.onLightSurface,
   );
   static const TextStyle h3Dark = TextStyle(
-    fontSize: 14,
+    fontSize: 12,
     fontStyle: FontStyle.normal,
     color: AppColors.onDarkSurface,
   );
