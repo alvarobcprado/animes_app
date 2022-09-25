@@ -14,17 +14,21 @@ class LabeledCardComponent extends WidgetbookWidget {
               builder: (context) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: LabeledCard(
-                    firstTitle: 'Nome:',
-                    secondTitle: 'N° de temporadas:',
-                    thirdTitle: 'Data de lançamento:',
-                    fourthTitle: 'Gênero:',
-                    firstSubtitle: 'Default',
-                    secondSubtitle: 'Default',
-                    thirdSubtitle: 'Default',
-                    fourthSubtitle: 'Default',
-                    imageUrl: 'https://picsum.photos/400/600',
-                    onTap: () {},
+                  child: Column(
+                    children: [
+                      LabeledCard(
+                        firstTitle: 'Nome:',
+                        secondTitle: 'N° de temporadas:',
+                        thirdTitle: 'Data de lançamento:',
+                        fourthTitle: 'Gênero:',
+                        firstSubtitle: 'Default',
+                        secondSubtitle: 'Default',
+                        thirdSubtitle: 'Default',
+                        fourthSubtitle: 'Default',
+                        imageUrl: 'https://picsum.photos/400/600',
+                        onTap: () {},
+                      ),
+                    ],
                   ),
                 );
               },
