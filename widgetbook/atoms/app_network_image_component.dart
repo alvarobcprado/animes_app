@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:design_system/design_system.dart';
 
-class AppNetworkImageComponent extends WidgetbookComponent {
+class AppNetworkImageComponent extends WidgetbookWidget {
   AppNetworkImageComponent({Key? key})
       : super(
           name: 'AppNetworkImage',
