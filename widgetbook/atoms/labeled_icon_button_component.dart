@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:design_system/design_system.dart';
 
-class LabeledIconButtonComponent extends WidgetbookWidget {
+class LabeledIconButtonComponent extends WidgetbookComponent {
   LabeledIconButtonComponent({Key? key})
       : super(
           name: 'LabeledIconButton',
