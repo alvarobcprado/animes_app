@@ -4,11 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 import 'atoms/app_network_image_component.dart';
-import 'atoms/labeled_chip_component.dart';
 import 'atoms/labeled_icon_button_component.dart';
 import 'package:design_system/design_system.dart';
-
-import 'molecules/filter_select_chip_list.dart';
 
 class WidgetbookHotReload extends StatelessWidget {
   const WidgetbookHotReload({Key? key}) : super(key: key);
@@ -25,13 +22,6 @@ class WidgetbookHotReload extends StatelessWidget {
               widgets: [
                 LabeledIconButtonComponent(),
                 AppNetworkImageComponent(),
-                LabeledChipComponent(),
-              ],
-            ),
-            WidgetbookFolder(
-              name: 'Molecules',
-              widgets: [
-                FilterSelectChipListComponent(),
               ],
             ),
           ],
@@ -40,7 +30,6 @@ class WidgetbookHotReload extends StatelessWidget {
       appInfo: AppInfo(name: 'design_system_book'),
       lightTheme: lightAppThemeData,
       darkTheme: darkAppThemeData,
-      defaultTheme: ThemeMode.light,
     );
   }
 }
