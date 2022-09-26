@@ -10,15 +10,15 @@ class AppTypographyFoundation extends ThemeExtension<AppTypographyFoundation> {
   });
 
   static const dark = AppTypographyFoundation(
-    h1: AppTypography.h1Light,
-    h2: AppTypography.h2Light,
-    h3: AppTypography.h3Light,
-  );
-
-  static const light = AppTypographyFoundation(
     h1: AppTypography.h1Dark,
     h2: AppTypography.h2Dark,
     h3: AppTypography.h3Dark,
+  );
+
+  static const light = AppTypographyFoundation(
+    h1: AppTypography.h1Light,
+    h2: AppTypography.h2Light,
+    h3: AppTypography.h3Light,
   );
 
   final TextStyle h1;
