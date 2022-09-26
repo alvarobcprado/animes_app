@@ -9,4 +9,9 @@ abstract class AppSizesFoundation {
   static const double chipHorizontalPadding = AppSizes.sizeXXS;
 
   static const double baseSpace = AppSizes.sizeXXXS;
+
+  static const double regularRowVerticalPadding = AppSizes.sizeXXXXS;
+
+  static const double cardVerticalMargin = AppSizes.sizeXXXS;
+
 }
