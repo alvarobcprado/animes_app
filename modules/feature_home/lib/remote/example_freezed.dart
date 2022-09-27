@@ -2,8 +2,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'example_freezed.freezed.dart';
 
-typedef WrapperCallback<T> = Future<T> Function();
-
 @freezed
 class Result<T> with _$Result<T> {
   const factory Result.success(T data) = _Success;
@@ -21,7 +19,7 @@ class A {
 }
 
 class DioWrapper {
-  Future<Result<T>> call<T>(WrapperCallback<T> function) async {
+  Future<Result<T>> call<T>(Future<T> Function() function) async {
     try {
       return Result.success(await function.call());
     } on Exception catch (e) {
