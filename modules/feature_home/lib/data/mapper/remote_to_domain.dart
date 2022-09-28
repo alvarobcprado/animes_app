@@ -1,11 +1,10 @@
-import '../../domain/anime.dart';
-import '../../domain/anime_details.dart';
+import 'package:feature_home/data/model/genre_list/genre_data_response.dart';
+import '../../domain/model/model.dart';
 import '../model/anime_details/anime_details_response.dart';
 import '../model/anime_list/anime_response.dart';
-import '../model/genre_list/genre_response.dart';
 
 extension AnimeListResponseToAnimeList on List<AnimeResponse> {
-  List<Anime> toAnimeList() {
+  List<Anime> toDomain() {
     return map((animeResponse) => Anime(
           animeResponse.id ?? -1,
           animeResponse.images?.image?.url ?? '',
@@ -21,7 +20,7 @@ extension AnimeListResponseToAnimeList on List<AnimeResponse> {
 }
 
 extension AnimeDetailsResponseToAnimeDetails on AnimeDetailsResponse {
-  AnimeDetails toAnimeDetails() {
+  AnimeDetails toDomain() {
     return AnimeDetails(
         id ?? -1,
         title ?? '',
@@ -34,8 +33,11 @@ extension AnimeDetailsResponseToAnimeDetails on AnimeDetailsResponse {
   }
 }
 
-extension GenreListResponseToGenreList on List<GenreResponse> {
-  List<String> toGenreList() {
-    return map((genreResponse) => genreResponse.name ?? '').toList();
+extension GenreListResponseToGenreList on GenreDataResponse {
+  List<Genre> toDomain() {
+    return data
+            ?.map((genreResponse) => Genre(genreResponse.name ?? ''))
+            .toList() ??
+        [];
   }
 }

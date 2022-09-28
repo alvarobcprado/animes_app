@@ -1,10 +1,12 @@
 import 'package:data_local/model/auxiliar/anime_details_auxiliar_cache.dart';
-import '../../domain/anime.dart';
-import '../../domain/anime_details.dart';
-import '../../domain/genre.dart';
+import 'package:data_local/model/auxiliar/genre_auxiliar_cache.dart';
+import 'package:feature_home/domain/model/anime.dart';
+import 'package:feature_home/domain/model/anime_details.dart';
+
+import '../../domain/model/genre.dart';
 
 extension AnimeListToAnimeListAuxCache on List<Anime> {
-  List<Anime> toAnimeListAuxCache() {
+  List<Anime> toCache() {
     return map((anime) => Anime(
           anime.id,
           anime.image,
@@ -17,14 +19,14 @@ extension AnimeListToAnimeListAuxCache on List<Anime> {
 }
 
 extension AnimeDetailsToAnimeDetailsAuxCache on AnimeDetails {
-  AnimeDetailsAuxiliarCache toAnimeDetailsAuxCache() {
+  AnimeDetailsAuxiliarCache toCache() {
     return AnimeDetailsAuxiliarCache(
         id, title, titleEnglish, image, release, end, synopsis, score);
   }
 }
 
 extension GenreListToGenreListAuxCache on List<Genre> {
-  List<String> toGenreListAuxCache() {
-    return map((genre) => genre.name).toList();
+  List<GenreAuxiliarCache> toCache() {
+    return map((genre) => GenreAuxiliarCache(genre.name)).toList();
   }
 }
