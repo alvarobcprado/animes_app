@@ -1,12 +1,12 @@
 import 'package:core/model/exceptions.dart';
 import 'package:dio/dio.dart';
 import 'package:feature_home/data/mapper/remote_to_domain.dart';
-import 'package:feature_home/data/model/anime_details/anime_details_data_response.dart';
-import 'package:feature_home/data/model/anime_list/anime_data_response.dart';
-import 'package:feature_home/data/model/genre_list/genre_data_response.dart';
 import 'package:feature_home/data/remote/anime_remote_data_source.dart';
 import 'package:feature_home/data/remote/dio_wrapper.dart';
 import 'package:core/model/result.dart';
+import 'package:feature_home/data/remote/model/anime_details/anime_details_data_response.dart';
+import 'package:feature_home/data/remote/model/anime_list/anime_data_response.dart';
+import 'package:feature_home/data/remote/model/genre_list/genre_data_response.dart';
 import 'package:feature_home/domain/model/anime.dart';
 import 'package:feature_home/domain/model/anime_details.dart';
 import 'package:feature_home/domain/model/genre.dart';
