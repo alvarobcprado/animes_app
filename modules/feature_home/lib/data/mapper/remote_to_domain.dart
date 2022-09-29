@@ -1,7 +1,8 @@
-import 'package:feature_home/data/model/genre_list/genre_data_response.dart';
+import 'package:feature_home/data/remote/model/anime_details/anime_details_response.dart';
+import 'package:feature_home/data/remote/model/anime_list/anime_response.dart';
+import 'package:feature_home/data/remote/model/genre_list/genre_data_response.dart';
+
 import '../../domain/model/model.dart';
-import '../model/anime_details/anime_details_response.dart';
-import '../model/anime_list/anime_response.dart';
 
 extension AnimeListResponseToAnimeList on List<AnimeResponse> {
   List<Anime> toDomain() {
