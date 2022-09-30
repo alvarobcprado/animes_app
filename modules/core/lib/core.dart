@@ -1,3 +1,4 @@
 library core;
 
-export 'src/dependencies/routing.dart';
+export 'src/dependencies/dependencies.dart';
+export 'src/models/models.dart';
