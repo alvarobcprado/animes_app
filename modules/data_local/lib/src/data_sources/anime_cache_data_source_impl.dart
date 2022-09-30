@@ -1,16 +1,8 @@
-import 'package:core/model/exceptions.dart';
-import 'package:core/model/result.dart';
-import 'package:data_local/mapper/mapper_auxiliar_to_cache.dart';
-import 'package:data_local/mapper/mapper_cache_to_auxiliar.dart';
-import 'package:data_local/model/anime_cache.dart';
-import 'package:data_local/model/anime_details_cache.dart';
-import 'package:data_local/model/genre_cache.dart';
-import 'package:data_local/utils/box_key.dart';
-import 'package:data_local/utils/box_name.dart';
-import 'package:feature_home/data/cache/anime_cache_data_source.dart';
-import 'package:feature_home/data/cache/model/anime_auxiliar_cache.dart';
-import 'package:feature_home/data/cache/model/anime_details_auxiliar_cache.dart';
-import 'package:feature_home/data/cache/model/genre_auxiliar_cache.dart';
+import 'package:core/core.dart';
+import 'package:data_local/src/mappers/mappers.dart';
+import 'package:data_local/src/models/models.dart';
+import 'package:data_local/src/utils/utils.dart';
+import 'package:feature_home/feature_home.dart';
 import 'package:hive/hive.dart';
 
 class AnimeCacheDataSourceImpl implements AnimeCacheDataSource {
