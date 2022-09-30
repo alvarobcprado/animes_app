@@ -1,5 +1,4 @@
 import 'package:design_system/design_system.dart';
-import 'package:design_system/src/atoms/regular_row.dart';
 import 'package:design_system/src/foundations/colors.dart';
 import 'package:design_system/src/foundations/sizes.dart';
 import 'package:flutter/material.dart';
