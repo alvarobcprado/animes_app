@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:core/dependencies/storage.dart';
 
 part 'anime_cache.g.dart';
 

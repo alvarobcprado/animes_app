@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:core/dependencies/storage.dart';
 
 part 'genre_cache.g.dart';
 
