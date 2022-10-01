@@ -14,18 +14,12 @@ dependencies:
     path: ../design_system
   core:
     path: ../core
-  dio: ^4.0.6
-  freezed_annotation: ^2.1.0
-  cached_network_image: ^3.2.1
-  json_annotation: ^4.7.0
-  flutter_triple: ^1.2.7+4
+
   intl: ^0.17.0
   flutter_localizations:
     sdk: flutter
 
 dev_dependencies:
-  json_serializable: ^6.3.1
-  freezed: ^2.1.1
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0

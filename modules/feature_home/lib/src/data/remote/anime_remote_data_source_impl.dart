@@ -1,5 +1,5 @@
 import 'package:core/core.dart';
-import 'package:dio/dio.dart';
+import 'package:core/dependencies/network.dart';
 import 'package:feature_home/src/data/mappers/mappers.dart';
 import 'package:feature_home/src/data/remote/remote.dart';
 import 'package:feature_home/src/domain/models/models.dart';

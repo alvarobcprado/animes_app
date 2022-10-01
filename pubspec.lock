@@ -165,20 +165,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_modular:
-    dependency: transitive
-    description:
-      name: flutter_modular
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.3"
-  flutter_modular_annotations:
-    dependency: transitive
-    description:
-      name: flutter_modular_annotations
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -258,7 +244,7 @@ packages:
       name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.6.0"
+    version: "4.7.0"
   lints:
     dependency: transitive
     description:
@@ -294,20 +280,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-  modular_core:
+  nested:
     dependency: transitive
     description:
-      name: modular_core
+      name: nested
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3+1"
-  modular_interfaces:
-    dependency: transitive
-    description:
-      name: modular_interfaces
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.2"
+    version: "1.0.0"
   octo_image:
     dependency: transitive
     description:
@@ -399,6 +378,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+  provider:
+    dependency: transitive
+    description:
+      name: provider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.0.3"
   rx_notifier:
     dependency: transitive
     description:

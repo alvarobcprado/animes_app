@@ -1,4 +1,5 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:core/dependencies/code_gen.dart';
+
 import 'genre_response.dart';
 
 part 'genre_data_response.g.dart';

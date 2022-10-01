@@ -1,4 +1,4 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:core/dependencies/code_gen.dart';
 
 import 'anime_aired_date_response.dart';
 import 'anime_genre_response.dart';
