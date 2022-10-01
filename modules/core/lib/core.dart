@@ -1,4 +1,4 @@
 library core;
 
-export 'src/dependencies/dependencies.dart';
+export 'generated/l10n.dart';
 export 'src/models/models.dart';
