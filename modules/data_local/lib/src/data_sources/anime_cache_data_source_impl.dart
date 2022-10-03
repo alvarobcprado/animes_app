@@ -1,9 +1,9 @@
 import 'package:core/core.dart';
+import 'package:core/dependencies/storage.dart';
 import 'package:data_local/src/mappers/mappers.dart';
 import 'package:data_local/src/models/models.dart';
 import 'package:data_local/src/utils/utils.dart';
 import 'package:feature_home/feature_home.dart';
-import 'package:hive/hive.dart';
 
 class AnimeCacheDataSourceImpl implements AnimeCacheDataSource {
   AnimeCacheDataSourceImpl({

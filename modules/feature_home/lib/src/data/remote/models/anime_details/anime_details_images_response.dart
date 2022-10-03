@@ -1,4 +1,5 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:core/dependencies/code_gen.dart';
+
 import 'anime_details_image_response.dart';
 
 part 'anime_details_images_response.g.dart';

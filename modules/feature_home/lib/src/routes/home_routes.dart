@@ -1,5 +1,5 @@
+import 'package:core/dependencies/routing.dart';
 import 'package:flutter/material.dart';
-import 'package:core/core.dart' show GoRoute, GoRouter;
 
 /// /home
 const _homeRoute = 'Home';

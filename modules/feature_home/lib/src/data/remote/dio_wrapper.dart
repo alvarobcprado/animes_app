@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:core/core.dart';
-import 'package:dio/dio.dart';
+import 'package:core/dependencies/network.dart';
 
 class DioWrapper<T> {
   Future<Result<T>> call(Future<T> Function() function) async {

@@ -1,4 +1,4 @@
-import 'package:core/core.dart' show GoRouter;
+import 'package:core/dependencies/routing.dart';
 import 'package:core/generated/l10n.dart';
 import 'package:feature_home/feature_home.dart';
 import 'package:flutter/foundation.dart';

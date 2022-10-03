@@ -1,4 +1,4 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:core/dependencies/code_gen.dart';
 
 part 'anime_genre_response.g.dart';
 
