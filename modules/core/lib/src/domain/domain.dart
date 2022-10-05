@@ -1,2 +1,2 @@
 export 'exceptions.dart';
-export 'result.dart';
+export 'use_case.dart';

@@ -2,7 +2,6 @@ import 'package:core/core.dart';
 
 import '../models/genre.dart';
 import '../repositories/anime_repository.dart';
-import 'use_case.dart';
 
 class GetAnimeGenresUseCase implements UseCase<void, List<Genre>> {
   GetAnimeGenresUseCase({
