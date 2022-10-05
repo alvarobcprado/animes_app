@@ -7,18 +7,17 @@ import 'package:feature_home/src/domain/models/models.dart';
 class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
   AnimeRemoteDataSourceImpl({
     required Dio dio,
-    required DioWrapper wrapper,
+    required HomeDioWrapper wrapper,
   })  : _dio = dio,
         _wrapper = wrapper;
 
   final Dio _dio;
-  final DioWrapper _wrapper;
-  static const baseUrl = 'https://api.jikan.moe/v4/';
+  final HomeDioWrapper _wrapper;
   String? _nextPage;
 
   @override
   Future<Result<List<Anime>>> getAnimeList() async {
-    final page = _nextPage ?? '${baseUrl}top/anime';
+    final page = _nextPage ?? '/top/anime';
     final result = _wrapper(() => _dio.get(page));
     return result.then(
       (value) => value.when(
@@ -36,7 +35,7 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
 
   @override
   Future<Result<AnimeDetails>> getAnimeDetails(int id) {
-    final result = _wrapper(() => _dio.get('${baseUrl}anime/$id'));
+    final result = _wrapper(() => _dio.get('/anime/$id'));
     return result.then(
       (value) => value.when(
         success: (success) {
@@ -55,7 +54,7 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
 
   @override
   Future<Result<List<Genre>>> getAnimeGenres() {
-    final result = _wrapper(() => _dio.get('${baseUrl}genres/anime'));
+    final result = _wrapper(() => _dio.get('/genres/anime'));
     return result.then(
       (value) => value.when(
         success: (success) {
@@ -71,7 +70,7 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
 
   @override
   Future<Result<List<Anime>>> getAnimeListBySearch(String query) {
-    final result = _wrapper(() => _dio.get('${baseUrl}anime?q=$query'));
+    final result = _wrapper(() => _dio.get('/anime?q=$query'));
     return result.then(
       (value) => value.when(
         success: (success) {
