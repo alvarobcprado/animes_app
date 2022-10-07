@@ -2,7 +2,6 @@ import 'package:core/core.dart';
 
 import '../models/anime.dart';
 import '../repositories/anime_repository.dart';
-import 'use_case.dart';
 
 class GetSearchedAnimeListUseCase
     implements UseCase<GetSearchedAnimeListUseCaseParams, List<Anime>> {

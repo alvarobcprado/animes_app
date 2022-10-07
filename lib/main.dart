@@ -1,5 +1,6 @@
 import 'package:core/dependencies/routing.dart';
 import 'package:core/generated/l10n.dart';
+import 'package:dependency_injection/dependency_injection.dart';
 import 'package:feature_home/feature_home.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -22,21 +23,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Animes App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return GeneralProvider(
+      child: MaterialApp.router(
+        title: 'Animes App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        routerDelegate: _router.routerDelegate,
+        routeInformationParser: _router.routeInformationParser,
+        routeInformationProvider: _router.routeInformationProvider,
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
       ),
-      routerDelegate: _router.routerDelegate,
-      routeInformationParser: _router.routeInformationParser,
-      routeInformationProvider: _router.routeInformationProvider,
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
     );
   }
 }

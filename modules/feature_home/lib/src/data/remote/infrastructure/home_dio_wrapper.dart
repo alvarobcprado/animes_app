@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:core/core.dart';
 import 'package:core/dependencies/network.dart';
 
-class DioWrapper<T> {
+class HomeDioWrapper<T> {
   Future<Result<T>> call(Future<T> Function() function) async {
     try {
       return Result.success(await function.call());

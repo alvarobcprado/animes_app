@@ -1,7 +1,3 @@
 library dependency_injection;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/general_provider.dart';

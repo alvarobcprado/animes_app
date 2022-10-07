@@ -2,7 +2,6 @@ import 'package:core/core.dart';
 
 import '../models/anime_details.dart';
 import '../repositories/anime_repository.dart';
-import 'use_case.dart';
 
 class GetAnimeDetailsUseCase
     implements UseCase<GetAnimeDetailsUseCaseParams, AnimeDetails> {
