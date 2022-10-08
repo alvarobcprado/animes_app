@@ -14,20 +14,20 @@ class FilterSelectChipList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      itemCount: items.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Center(
-          child: LabeledChip(
-            label: items[index],
-            onTap: (isActive) => onSelected(isActive, index),
-          ),
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return const SizedBox(width: AppSizesFoundation.baseSpace);
-      },
+      child: Row(
+        children: [
+          for (var index = 0; index < items.length; index++) ...[
+            LabeledChip(
+              label: items[index],
+              onTap: (isActive) => onSelected(isActive, index),
+            ),
+            if (index >= 0 && index < items.length - 1)
+              const SizedBox(width: AppSizesFoundation.baseSpace),
+          ],
+        ],
+      ),
     );
   }
 }
