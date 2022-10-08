@@ -35,8 +35,7 @@ class LabeledCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
-        margin: const EdgeInsets.symmetric(
-            vertical: AppSizesFoundation.cardVerticalMargin),
+        margin: EdgeInsets.zero,
         color: colors.surface,
         shape: RoundedRectangleBorder(
           side: BorderSide(
@@ -52,7 +51,7 @@ class LabeledCard extends StatelessWidget {
                 aspectRatio: 3 / 4,
                 child: AppNetworkImage(
                   imageUrl: imageUrl,
-                  fit: BoxFit.fitWidth,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             ),
