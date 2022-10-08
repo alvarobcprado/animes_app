@@ -1,6 +1,7 @@
 import 'package:core/dependencies/routing.dart';
 import 'package:core/generated/l10n.dart';
 import 'package:dependency_injection/dependency_injection.dart';
+import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +27,8 @@ class MyApp extends StatelessWidget {
     return GeneralProvider(
       child: MaterialApp.router(
         title: 'Animes App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: lightAppThemeData,
+        darkTheme: darkAppThemeData,
         routerDelegate: _router.routerDelegate,
         routeInformationParser: _router.routeInformationParser,
         routeInformationProvider: _router.routeInformationProvider,
