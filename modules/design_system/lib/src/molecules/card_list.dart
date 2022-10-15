@@ -8,7 +8,7 @@ class CardList extends StatelessWidget {
     required this.onTap,
   }) : super(key: key);
   final List<LabeledCardItem> items;
-  final VoidCallback onTap;
+  final Function(int) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class CardList extends StatelessWidget {
       separatorBuilder: (context, index) => SpacerBox.verticalS(),
       itemBuilder: (context, index) {
         return LabeledCard(
-          onTap: onTap,
+          onTap: () => onTap(index),
           item: items[index],
         );
       },
