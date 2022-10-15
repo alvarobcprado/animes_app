@@ -47,7 +47,7 @@ class CardListComponent extends WidgetbookWidget {
                         ),
                       )
                       .toList(),
-                  onTap: () {},
+                  onTap: (_) {},
                 );
               },
             ),
