@@ -39,7 +39,7 @@ class LabeledCard extends StatelessWidget {
                 aspectRatio: 3 / 4,
                 child: AppNetworkImage(
                   imageUrl: item.imageUrl,
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
