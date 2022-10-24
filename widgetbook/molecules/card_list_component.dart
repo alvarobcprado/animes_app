@@ -22,25 +22,32 @@ class CardListComponent extends WidgetbookWidget {
                   'Sete',
                 ];
                 return CardList(
-                  listLength: list.length,
-                  firstTitle: 'Nome:',
-                  secondTitle: 'N° de temporadas:',
-                  thirdTitle: 'Data de lançamento:',
-                  fourthTitle: 'Gênero:',
-                  firstSubtitles: list,
-                  secondSubtitles: list,
-                  thirdSubtitles: list,
-                  fourthSubtitles: list,
-                  imageUrl: const [
-                    'https://picsum.photos/200/300',
-                    'https://picsum.photos/200/300',
-                    'https://picsum.photos/200/300',
-                    'https://picsum.photos/200/300',
-                    'https://picsum.photos/200/300',
-                    'https://picsum.photos/200/300',
-                    'https://picsum.photos/200/300',
-                  ],
-                  onTap: () {},
+                  items: list
+                      .map(
+                        (e) => LabeledCardItem(
+                          imageUrl: 'https://picsum.photos/200/300',
+                          labels: [
+                            LabeledCardText(
+                              title: 'Título',
+                              subtitle: e,
+                            ),
+                            LabeledCardText(
+                              title: 'Gênero',
+                              subtitle: 'Ação, Aventura, Comédia',
+                            ),
+                            LabeledCardText(
+                              title: 'Episódios',
+                              subtitle: '12',
+                            ),
+                            LabeledCardText(
+                              title: 'Status',
+                              subtitle: 'Em andamento',
+                            ),
+                          ],
+                        ),
+                      )
+                      .toList(),
+                  onTap: (_) {},
                 );
               },
             ),

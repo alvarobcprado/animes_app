@@ -17,9 +17,11 @@ class RegularRow extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-          vertical: AppSizesFoundation.regularRowVerticalPadding),
+        vertical: AppSizesFoundation.regularRowVerticalPadding,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
@@ -30,6 +32,8 @@ class RegularRow extends StatelessWidget {
             child: Text(
               subtitle,
               style: textStyles.h3,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
             ),
           )
         ],
