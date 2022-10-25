@@ -24,8 +24,7 @@ class AnimeDetailsStore extends StreamStore<Exception, AnimeDetailsModel> {
     final animeDetails = await _getAnimeDetailsUseCase.call(
         params: GetAnimeDetailsUseCaseParams(id: id));
     animeDetails.when(success: (animeDetails) {
-      state.animeDetails = animeDetails;
-      update(state);
+      update(AnimeDetailsModel(animeDetails: animeDetails));
     }, error: (exception) {
       setError(exception);
     });
