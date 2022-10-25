@@ -6,7 +6,7 @@ import 'package:dependency_injection/src/modules/feature_home/use_case_providers
 
 List<SingleChildWidget> featureHomeProviders() => [
       ...networkProviders(),
-      ...dataSourceProviders(),
+      ...remoteDataSourceProviders(),
       ...repositoryProviders(),
       ...usecaseProviders(),
     ];
