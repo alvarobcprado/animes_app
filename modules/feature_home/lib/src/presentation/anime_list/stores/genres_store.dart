@@ -5,10 +5,10 @@ import '../../../domain/use_cases/get_anime_genres_use_case.dart';
 
 class GenresModel {
   GenresModel({
-    this.genres,
+    this.genres = const [],
   });
 
-  List<Genre>? genres;
+  List<Genre> genres;
 }
 
 class GenresStore extends StreamStore<Exception, GenresModel> {

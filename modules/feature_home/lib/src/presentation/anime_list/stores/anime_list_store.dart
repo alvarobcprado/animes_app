@@ -5,10 +5,10 @@ import '../../../domain/use_cases/get_anime_list_use_case.dart';
 
 class AnimesModel {
   AnimesModel({
-    this.animes,
+    this.animes = const [],
   });
 
-  List<Anime>? animes;
+  List<Anime> animes;
 }
 
 class AnimeListStore extends StreamStore<Exception, AnimesModel> {

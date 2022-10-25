@@ -5,10 +5,10 @@ import '../../../domain/use_cases/get_favorite_animes_use_case.dart';
 
 class FavoriteAnimesModel {
   FavoriteAnimesModel({
-    this.animes,
+    this.animes = const [],
   });
 
-  List<Anime>? animes;
+  List<Anime> animes;
 }
 
 class FavoriteAnimesStore extends StreamStore<Exception, FavoriteAnimesModel> {

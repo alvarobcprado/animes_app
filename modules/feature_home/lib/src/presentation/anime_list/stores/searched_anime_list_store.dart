@@ -5,10 +5,10 @@ import '../../../domain/models/anime.dart';
 
 class SearchedAnimesModel {
   SearchedAnimesModel({
-    this.animes,
+    this.animes = const [],
   });
 
-  List<Anime>? animes;
+  List<Anime> animes;
 }
 
 class SearchedAnimeListStore
