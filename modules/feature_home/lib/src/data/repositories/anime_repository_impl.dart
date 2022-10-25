@@ -33,4 +33,14 @@ class AnimeRepositoryImpl implements AnimeRepository {
   Future<Result<List<Anime>>> getAnimeListBySearch(String query) async {
     return await _remoteDataSource.getAnimeListBySearch(query);
   }
+
+  @override
+  Future<Result<List<Anime>>> getFavoriteAnimes() {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Result<void>> toggleFavoriteAnime(int id) {
+    throw UnimplementedError();
+  }
 }
