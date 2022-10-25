@@ -25,8 +25,7 @@ class SearchedAnimeListStore
     final animes = await _getSearchedAnimeListUseCase.call(
         params: GetSearchedAnimeListUseCaseParams(query: query));
     animes.when(success: (animes) {
-      state.animes = animes;
-      update(state);
+      update(SearchedAnimesModel(animes: animes));
     }, error: (exception) {
       setError(exception);
     });
