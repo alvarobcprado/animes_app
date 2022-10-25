@@ -24,8 +24,7 @@ class ToggleFavoriteAnimeStore
     final result = await _toggleFavoriteAnimeUseCase.call(
         params: ToggleFavoriteAnimeUseCaseParams(id: id));
     result.when(success: (_) {
-      state.success = true;
-      update(state);
+      update(ToggleFavoriteAnimeModel(success: true));
     }, error: (exception) {
       setError(exception);
     });
