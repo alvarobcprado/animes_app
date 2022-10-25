@@ -8,10 +8,10 @@ part of 'anime_image_response.dart';
 
 AnimeImageResponse _$AnimeImageResponseFromJson(Map<String, dynamic> json) =>
     AnimeImageResponse(
-      json['imageUrl'] as String?,
+      json['image_url'] as String?,
     );
 
 Map<String, dynamic> _$AnimeImageResponseToJson(AnimeImageResponse instance) =>
     <String, dynamic>{
-      'imageUrl': instance.url,
+      'image_url': instance.url,
     };

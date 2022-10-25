@@ -9,7 +9,7 @@ class AnimeImageResponse {
   factory AnimeImageResponse.fromJson(Map<String, dynamic> json) =>
       _$AnimeImageResponseFromJson(json);
 
-  @JsonKey(name: 'imageUrl')
+  @JsonKey(name: 'image_url')
   final String? url;
 
   Map<String, dynamic> toJson() => _$AnimeImageResponseToJson(this);
