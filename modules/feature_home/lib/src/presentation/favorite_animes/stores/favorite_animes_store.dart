@@ -23,8 +23,7 @@ class FavoriteAnimesStore extends StreamStore<Exception, FavoriteAnimesModel> {
     setLoading(true);
     final animes = await _getFavoriteAnimesUseCase.call(params: null);
     animes.when(success: (animes) {
-      state.animes = animes;
-      update(state);
+      update(FavoriteAnimesModel(animes: animes));
     }, error: (exception) {
       setError(exception);
     });
