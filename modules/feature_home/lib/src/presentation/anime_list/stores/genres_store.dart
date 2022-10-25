@@ -23,8 +23,7 @@ class GenresStore extends StreamStore<Exception, GenresModel> {
     setLoading(true);
     final genres = await _getAnimeGenresUseCase.call(params: null);
     genres.when(success: (genres) {
-      state.genres = genres;
-      update(state);
+      update(GenresModel(genres: genres));
     }, error: (exception) {
       setError(exception);
     });
