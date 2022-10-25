@@ -1,9 +1,34 @@
+import 'package:flutter_triple/flutter_triple.dart';
+
+import 'package:core/dependencies/dependency_injection.dart';
 import 'package:design_system/design_system.dart';
+import 'package:feature_home/feature_home.dart';
+import 'package:feature_home/src/presentation/anime_list/anime_list_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AnimeListPage extends StatefulWidget {
-  const AnimeListPage({super.key});
+  const AnimeListPage({
+    super.key,
+    required this.controller,
+  });
+
+  final AnimeListController controller;
+
+  static Widget create() => ProxyProvider3<GenresStore, AnimeListStore,
+          SearchedAnimeListStore, AnimeListController>(
+        update:
+            (_, genresStore, animeListStore, searchedAnimesStore, controller) =>
+                controller ??
+                AnimeListController(
+                  genresStore,
+                  animeListStore,
+                  searchedAnimesStore,
+                ),
+        child: Consumer<AnimeListController>(
+          builder: (_, controller, __) => AnimeListPage(controller: controller),
+        ),
+      );
 
   @override
   State<AnimeListPage> createState() => _AnimeListPageState();
@@ -64,6 +89,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
   void initState() {
     super.initState();
     _searchController = TextEditingController();
+    widget.controller.genresStore.getGenres();
   }
 
   @override
@@ -87,15 +113,20 @@ class _AnimeListPageState extends State<AnimeListPage> {
                 hintText: _searchHint,
               ),
               PaddingBox.verticalXS(
-                child: FilterSelectChipList(
-                  onSelected: (p0, p1) {
-                    if (kDebugMode) {
-                      print(
-                        'Genre ${_animeGenreList[p1]} ${p0 ? 'Selected' : 'Deselected'}',
-                      );
-                    }
-                  },
-                  items: _animeGenreList,
+                child: ScopedBuilder<GenresStore, Exception, GenresModel>(
+                  store: widget.controller.genresStore,
+                  onLoading: (_) => Text('loading'),
+                  onState: (_, state) => FilterSelectChipList(
+                    onSelected: (p0, p1) {
+                      if (kDebugMode) {
+                        print(
+                          'Genre ${state.genres![p1]} ${p0 ? 'Selected' : 'Deselected'}',
+                        );
+                      }
+                    },
+                    items: state.genres!.map((e) => e.name).toList(),
+                  ),
+                  onError: (_, error) => Text('error'),
                 ),
               ),
               Expanded(
