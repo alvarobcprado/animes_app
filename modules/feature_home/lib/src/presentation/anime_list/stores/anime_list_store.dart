@@ -23,8 +23,7 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
     setLoading(true);
     final animes = await _getAnimeListUseCase.call(params: null);
     animes.when(success: (animes) {
-      state.animes = animes;
-      update(state);
+      update(AnimesModel(animes: animes));
     }, error: (exception) {
       setError(exception);
     });
