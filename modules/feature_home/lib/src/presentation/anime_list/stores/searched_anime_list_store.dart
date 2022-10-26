@@ -1,5 +1,5 @@
+import 'package:core/dependencies/state_management.dart';
 import 'package:feature_home/src/domain/use_cases/get_searched_anime_list_use_case.dart';
-import 'package:flutter_triple/flutter_triple.dart';
 
 import '../../../domain/models/anime.dart';
 

@@ -1,4 +1,4 @@
-import 'package:flutter_triple/flutter_triple.dart';
+import 'package:core/dependencies/state_management.dart';
 
 import '../../../domain/models/genre.dart';
 import '../../../domain/use_cases/get_anime_genres_use_case.dart';
