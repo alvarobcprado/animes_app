@@ -8,7 +8,7 @@ part of 'anime_response.dart';
 
 AnimeResponse _$AnimeResponseFromJson(Map<String, dynamic> json) =>
     AnimeResponse(
-      json['malId'] as int?,
+      json['mal_id'] as int?,
       json['images'] == null
           ? null
           : AnimeImagesResponse.fromJson(
@@ -26,7 +26,7 @@ AnimeResponse _$AnimeResponseFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$AnimeResponseToJson(AnimeResponse instance) =>
     <String, dynamic>{
-      'malId': instance.id,
+      'mal_id': instance.id,
       'images': instance.images,
       'title': instance.title,
       'genres': instance.genres,
