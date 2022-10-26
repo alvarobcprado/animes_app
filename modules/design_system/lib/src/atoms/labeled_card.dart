@@ -1,5 +1,4 @@
 import 'package:design_system/design_system.dart';
-import 'package:design_system/src/foundations/colors.dart';
 import 'package:design_system/src/foundations/sizes.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +35,10 @@ class LabeledCard extends StatelessWidget {
           children: [
             Expanded(
               child: AspectRatio(
-                aspectRatio: 3 / 4,
+                aspectRatio:
+                    MediaQuery.of(context).orientation == Orientation.portrait
+                        ? 3 / 4
+                        : 1,
                 child: AppNetworkImage(
                   imageUrl: item.imageUrl,
                   fit: BoxFit.fill,
