@@ -7,9 +7,11 @@ class RegularRow extends StatelessWidget {
     Key? key,
     required this.title,
     required this.subtitle,
+    this.isLineRestricted = true,
   }) : super(key: key);
   final String title;
   final String subtitle;
+  final bool isLineRestricted;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +34,9 @@ class RegularRow extends StatelessWidget {
             child: Text(
               subtitle,
               style: textStyles.h3,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
+              maxLines: isLineRestricted ? 3 : null,
+              overflow: isLineRestricted ? TextOverflow.ellipsis : null,
+              textAlign: isLineRestricted ? null : TextAlign.justify,
             ),
           )
         ],
