@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core/dependencies/dependency_injection.dart';
+import 'package:core/dependencies/routing.dart';
 import 'package:core/dependencies/state_management.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
@@ -169,13 +170,9 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                   ),
                                 )
                                 .toList(),
-                            onTap: (index) {
-                              if (kDebugMode) {
-                                print(
-                                  'Anime ${_animeInfoList[index].labels[0].subtitle} selected',
-                                );
-                              }
-                            },
+                            onTap: (index) => GoRouter.of(context).pushDetails(
+                              state.animes[index].id,
+                            ),
                           )
                         : const Text('lista vazia');
                   },
