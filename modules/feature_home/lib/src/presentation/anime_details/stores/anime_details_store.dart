@@ -21,13 +21,20 @@ class AnimeDetailsStore extends StreamStore<Exception, AnimeDetailsModel> {
 
   Future<void> getAnimeDetails(int id) async {
     setLoading(true);
-    final animeDetails = await _getAnimeDetailsUseCase.call(
-        params: GetAnimeDetailsUseCaseParams(id: id));
-    animeDetails.when(success: (animeDetails) {
-      update(AnimeDetailsModel(animeDetails: animeDetails));
-    }, error: (exception) {
-      setError(exception);
-    });
+
+    final result = await _getAnimeDetailsUseCase(
+      params: GetAnimeDetailsUseCaseParams(id: id),
+    );
+
+    result.when(
+      success: (animeDetails) {
+        update(AnimeDetailsModel(animeDetails: animeDetails));
+      },
+      error: (error) {
+        setError(error);
+      },
+    );
+
     setLoading(false);
   }
 }
