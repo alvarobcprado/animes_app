@@ -9,6 +9,10 @@ final darkAppThemeData = ThemeData(
   backgroundColor: AppColors.darkBackground,
   errorColor: AppColors.darkError,
   useMaterial3: true,
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: AppColors.babyBlueEyes,
+    brightness: Brightness.dark,
+  ),
   extensions: const [
     AppColorsFoundation.dark,
     AppTypographyFoundation.dark,

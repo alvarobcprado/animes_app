@@ -9,6 +9,10 @@ final lightAppThemeData = ThemeData(
   backgroundColor: AppColors.lightBackground,
   errorColor: AppColors.lightError,
   useMaterial3: true,
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: AppColors.yInMnBlue,
+    brightness: Brightness.light,
+  ),
   extensions: const [
     AppColorsFoundation.light,
     AppTypographyFoundation.light,
