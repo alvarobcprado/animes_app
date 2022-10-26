@@ -21,15 +21,14 @@ dependencies:
   cached_network_image: ^3.2.1
   json_annotation: ^4.7.0
   flutter_triple: ^1.2.7+4
-  freezed: any
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  freezed: ^2.2.1
   build_runner: ^2.2.0
-  hive_generator: ^1.1.0
   json_serializable: ^6.3.1
   
 

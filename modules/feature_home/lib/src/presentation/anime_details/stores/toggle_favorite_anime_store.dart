@@ -1,4 +1,4 @@
-import 'package:flutter_triple/flutter_triple.dart';
+import 'package:core/dependencies/state_management.dart';
 
 import '../../../domain/use_cases/toggle_favorite_anime_use_case.dart';
 

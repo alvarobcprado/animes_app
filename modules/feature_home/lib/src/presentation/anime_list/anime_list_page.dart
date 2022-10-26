@@ -1,7 +1,6 @@
-import 'package:flutter_triple/flutter_triple.dart';
-
 import 'package:core/core.dart';
 import 'package:core/dependencies/dependency_injection.dart';
+import 'package:core/dependencies/state_management.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
 import 'package:feature_home/src/presentation/anime_list/anime_list_controller.dart';
