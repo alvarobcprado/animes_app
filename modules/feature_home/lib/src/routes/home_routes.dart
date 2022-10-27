@@ -9,8 +9,8 @@ class HomeRoutes extends GoRoute {
       : super(
           path: '/home',
           name: _homeRoute,
-          pageBuilder: (context, state) => const MaterialPage(
-            child: AnimeListPage(),
+          pageBuilder: (context, state) => MaterialPage(
+            child: AnimeListPage.create(),
           ),
           routes: [],
         );

@@ -20,7 +20,7 @@ class AnimeResponse {
   factory AnimeResponse.fromJson(Map<String, dynamic> json) =>
       _$AnimeResponseFromJson(json);
 
-  @JsonKey(name: 'malId')
+  @JsonKey(name: 'mal_id')
   final int? id;
   final AnimeImagesResponse? images;
   final String? title;

@@ -1,5 +1,4 @@
 import 'package:design_system/design_system.dart';
-import 'package:design_system/src/foundations/colors.dart';
 import 'package:design_system/src/foundations/sizes.dart';
 import 'package:flutter/material.dart';
 
@@ -30,10 +29,13 @@ class ImageCardButton extends StatelessWidget {
     final theme = Theme.of(context);
     final colors = theme.extension<AppColorsFoundation>()!;
     return AspectRatio(
-      aspectRatio: 16 / 9,
+      aspectRatio: MediaQuery.of(context).orientation == Orientation.portrait
+          ? 16 / 9
+          : 16 / 4.5,
       child: Card(
         elevation: 0,
         color: cardBackgroundColor ?? colors.primary,
+        margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSizesFoundation.baseSpace * 2),
           side: BorderSide.none,

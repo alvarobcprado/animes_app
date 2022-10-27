@@ -1,9 +1,34 @@
+import 'package:core/core.dart';
+import 'package:core/dependencies/dependency_injection.dart';
+import 'package:core/dependencies/state_management.dart';
 import 'package:design_system/design_system.dart';
+import 'package:feature_home/feature_home.dart';
+import 'package:feature_home/src/presentation/anime_list/anime_list_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AnimeListPage extends StatefulWidget {
-  const AnimeListPage({super.key});
+  const AnimeListPage({
+    super.key,
+    required this.controller,
+  });
+
+  final AnimeListController controller;
+
+  static Widget create() => ProxyProvider3<GenresStore, AnimeListStore,
+          SearchedAnimeListStore, AnimeListController>(
+        update:
+            (_, genresStore, animeListStore, searchedAnimesStore, controller) =>
+                controller ??
+                AnimeListController(
+                  genresStore,
+                  animeListStore,
+                  searchedAnimesStore,
+                ),
+        child: Consumer<AnimeListController>(
+          builder: (_, controller, __) => AnimeListPage(controller: controller),
+        ),
+      );
 
   @override
   State<AnimeListPage> createState() => _AnimeListPageState();
@@ -64,6 +89,8 @@ class _AnimeListPageState extends State<AnimeListPage> {
   void initState() {
     super.initState();
     _searchController = TextEditingController();
+    widget.controller.genresStore.getGenres();
+    widget.controller.animeListStore.getAnimeList();
   }
 
   @override
@@ -87,27 +114,72 @@ class _AnimeListPageState extends State<AnimeListPage> {
                 hintText: _searchHint,
               ),
               PaddingBox.verticalXS(
-                child: FilterSelectChipList(
-                  onSelected: (p0, p1) {
-                    if (kDebugMode) {
-                      print(
-                        'Genre ${_animeGenreList[p1]} ${p0 ? 'Selected' : 'Deselected'}',
-                      );
-                    }
+                child: ScopedBuilder<GenresStore, Exception, GenresModel>(
+                  store: widget.controller.genresStore,
+                  onLoading: (_) => const SizedBox(),
+                  onState: (_, state) {
+                    final genreList = state.genres;
+                    return genreList.isNotEmpty
+                        ? FilterSelectChipList(
+                            onSelected: (p0, p1) {
+                              if (kDebugMode) {
+                                print(
+                                  'Genre ${genreList[p1]} ${p0 ? 'Selected' : 'Deselected'}',
+                                );
+                              }
+                            },
+                            items: genreList.map((e) => e.name).toList(),
+                          )
+                        : const SizedBox();
                   },
-                  items: _animeGenreList,
+                  onError: (_, error) => const SizedBox(),
                 ),
               ),
               Expanded(
-                child: CardList(
-                  items: _animeInfoList,
-                  onTap: (index) {
-                    if (kDebugMode) {
-                      print(
-                        'Anime ${_animeInfoList[index].labels[0].subtitle} selected',
-                      );
-                    }
+                child: ScopedBuilder<AnimeListStore, Exception, AnimesModel>(
+                  store: widget.controller.animeListStore,
+                  onLoading: (_) => const Text('loading'),
+                  onState: (_, state) {
+                    final animeList = state.animes;
+                    return animeList.isNotEmpty
+                        ? CardList(
+                            items: animeList
+                                .map(
+                                  (e) => LabeledCardItem(
+                                    imageUrl: e.image,
+                                    labels: [
+                                      LabeledCardText(
+                                        title: 'Título',
+                                        subtitle: e.title,
+                                      ),
+                                      LabeledCardText(
+                                        title: 'Gênero',
+                                        subtitle: 'Gêneros',
+                                      ),
+                                      LabeledCardText(
+                                        title: 'Episódios',
+                                        subtitle: e.totalEpisodes.toString(),
+                                      ),
+                                      LabeledCardText(
+                                        title: 'Status',
+                                        subtitle:
+                                            e.release.convertDateToBrLocale(),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+                            onTap: (index) {
+                              if (kDebugMode) {
+                                print(
+                                  'Anime ${_animeInfoList[index].labels[0].subtitle} selected',
+                                );
+                              }
+                            },
+                          )
+                        : const Text('lista vazia');
                   },
+                  onError: (_, error) => const Text('erro'),
                 ),
               ),
             ],

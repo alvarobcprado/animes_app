@@ -30,4 +30,18 @@ List<SingleChildWidget> usecaseProviders() => [
               repository: repository,
             ),
       ),
+      ProxyProvider<AnimeRepository, ToggleFavoriteAnimeUseCase>(
+        update: (_, repository, usecase) =>
+            usecase ??
+            ToggleFavoriteAnimeUseCase(
+              repository: repository,
+            ),
+      ),
+      ProxyProvider<AnimeRepository, GetFavoriteAnimesUseCase>(
+        update: (_, repository, usecase) =>
+            usecase ??
+            GetFavoriteAnimesUseCase(
+              repository: repository,
+            ),
+      ),
     ];
