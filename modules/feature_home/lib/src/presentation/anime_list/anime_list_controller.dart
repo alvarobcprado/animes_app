@@ -4,12 +4,10 @@ class AnimeListController {
   AnimeListController(
     this.genresStore,
     this.animeListStore,
-    this.searchedAnimesStore,
   );
 
   final GenresStore genresStore;
   final AnimeListStore animeListStore;
-  final SearchedAnimeListStore searchedAnimesStore;
 
   Future<void> getGenres() async {
     await genresStore.getGenres();
@@ -19,7 +17,11 @@ class AnimeListController {
     await animeListStore.getAnimeList();
   }
 
-  Future<void> getSearchedAnimes(String query) async {
-    await searchedAnimesStore.getSearchedAnimes(query);
+  Future<void> getAnimesByGenre() async {
+    await animeListStore.getAnimeList();
+  }
+
+  Future<void> getAnimesBySearch(String query) async {
+    await animeListStore.getAnimesBySearch(query);
   }
 }
