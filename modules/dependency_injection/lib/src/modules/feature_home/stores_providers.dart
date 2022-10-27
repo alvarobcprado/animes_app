@@ -9,18 +9,15 @@ List<SingleChildWidget> storesProviders() => [
               getAnimeGenresUseCase: usecase,
             ),
       ),
-      ProxyProvider<GetAnimeListUseCase, AnimeListStore>(
-        update: (_, usecase, store) =>
+      ProxyProvider3<GetAnimeListUseCase, GetSearchedAnimeListUseCase,
+          GetAnimesByGenreUseCase, AnimeListStore>(
+        update: (_, getAnimeListUseCase, getSearchedAnimeListUseCase,
+                getAnimeByGenreUseCase, store) =>
             store ??
             AnimeListStore(
-              getAnimeListUseCase: usecase,
-            ),
-      ),
-      ProxyProvider<GetSearchedAnimeListUseCase, SearchedAnimeListStore>(
-        update: (_, usecase, store) =>
-            store ??
-            SearchedAnimeListStore(
-              getSearchedAnimeListUseCase: usecase,
+              getAnimeListUseCase: getAnimeListUseCase,
+              getSearchedAnimeListUseCase: getSearchedAnimeListUseCase,
+              getAnimesByGenreUseCase: getAnimeByGenreUseCase,
             ),
       ),
       ProxyProvider<GetAnimeDetailsUseCase, AnimeDetailsStore>(
