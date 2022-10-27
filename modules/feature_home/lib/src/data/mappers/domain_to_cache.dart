@@ -31,6 +31,6 @@ extension AnimeDetailsToAnimeDetailsAuxCache on AnimeDetails {
 
 extension GenreListToGenreListAuxCache on List<Genre> {
   List<GenreAuxiliarCache> toCache() {
-    return map((genre) => GenreAuxiliarCache(genre.name)).toList();
+    return map((genre) => GenreAuxiliarCache(genre.name, genre.id)).toList();
   }
 }

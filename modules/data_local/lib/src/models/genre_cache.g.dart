@@ -18,15 +18,18 @@ class GenreCacheAdapter extends TypeAdapter<GenreCache> {
     };
     return GenreCache(
       fields[0] as String,
+      fields[1] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, GenreCache obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.name);
+      ..write(obj.name)
+      ..writeByte(1)
+      ..write(obj.id);
   }
 
   @override
