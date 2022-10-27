@@ -1,5 +1,6 @@
 import 'package:core/dependencies/routing.dart';
 import 'package:core/generated/l10n.dart';
+import 'package:data_local/src/shared/shared.dart';
 import 'package:dependency_injection/dependency_injection.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
@@ -7,7 +8,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() {
+Future<void> main() async {
+  HiveInit().execute();
   runApp(MyApp());
 }
 
