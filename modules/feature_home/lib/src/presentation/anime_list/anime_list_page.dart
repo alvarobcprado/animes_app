@@ -116,7 +116,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
               PaddingBox.verticalXS(
                 child: ScopedBuilder<GenresStore, Exception, GenresModel>(
                   store: widget.controller.genresStore,
-                  onLoading: (_) => const Text('loading'),
+                  onLoading: (_) => const SizedBox(),
                   onState: (_, state) {
                     final genreList = state.genres;
                     return genreList.isNotEmpty
