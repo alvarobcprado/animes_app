@@ -15,16 +15,14 @@ class AnimeListPage extends StatefulWidget {
 
   final AnimeListController controller;
 
-  static Widget create() => ProxyProvider3<GenresStore, AnimeListStore,
-          SearchedAnimeListStore, AnimeListController>(
-        update:
-            (_, genresStore, animeListStore, searchedAnimesStore, controller) =>
-                controller ??
-                AnimeListController(
-                  genresStore,
-                  animeListStore,
-                  searchedAnimesStore,
-                ),
+  static Widget create() =>
+      ProxyProvider2<GenresStore, AnimeListStore, AnimeListController>(
+        update: (_, genresStore, animeListStore, controller) =>
+            controller ??
+            AnimeListController(
+              genresStore,
+              animeListStore,
+            ),
         child: Consumer<AnimeListController>(
           builder: (_, controller, __) => AnimeListPage(controller: controller),
         ),
@@ -36,6 +34,7 @@ class AnimeListPage extends StatefulWidget {
 
 class _AnimeListPageState extends State<AnimeListPage> {
   late TextEditingController _searchController;
+  late ScrollController _scrollController;
   final String _searchHint = 'Digite o nome do anime que procura';
   final List<String> _animeGenreList = const [
     'Ação',
@@ -89,6 +88,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
   void initState() {
     super.initState();
     _searchController = TextEditingController();
+    _setupScrollController();
     widget.controller.genresStore.getGenres();
     widget.controller.animeListStore.getAnimeList();
   }
@@ -96,7 +96,18 @@ class _AnimeListPageState extends State<AnimeListPage> {
   @override
   void dispose() {
     _searchController.dispose();
+    _scrollController.dispose();
     super.dispose();
+  }
+
+  void _setupScrollController() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        widget.controller.getAnimeList();
+      }
+    });
   }
 
   @override
@@ -138,11 +149,12 @@ class _AnimeListPageState extends State<AnimeListPage> {
               Expanded(
                 child: ScopedBuilder<AnimeListStore, Exception, AnimesModel>(
                   store: widget.controller.animeListStore,
-                  onLoading: (_) => const Text('loading'),
+                  onLoading: (_) => const Text('loading anime list'),
                   onState: (_, state) {
                     final animeList = state.animes;
                     return animeList.isNotEmpty
                         ? CardList(
+                            scrollController: _scrollController,
                             items: animeList
                                 .map(
                                   (e) => LabeledCardItem(
