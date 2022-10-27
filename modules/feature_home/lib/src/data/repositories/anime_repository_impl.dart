@@ -33,7 +33,7 @@ class AnimeRepositoryImpl implements AnimeRepository {
     });
   }
 
-  Future<FutureOr<Result<List<Genre>>>> _getGenreListFromCache() async {
+  Future<Result<List<Genre>>> _getGenreListFromCache() async {
     final resultCache = await _cacheDataSource.getAnimeGenres();
     return resultCache.when(success: (genresCache) {
       return Result.success(genresCache.toDomain());
