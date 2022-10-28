@@ -21,5 +21,18 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en_US';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "animeListPageInformationSoon":
+            MessageLookupByLibrary.simpleMessage("Em breve"),
+        "animeListPageLabeledCardEpisodes":
+            MessageLookupByLibrary.simpleMessage("Episodes:"),
+        "animeListPageLabeledCardGenre":
+            MessageLookupByLibrary.simpleMessage("Genre:"),
+        "animeListPageLabeledCardRelease":
+            MessageLookupByLibrary.simpleMessage("Release:"),
+        "animeListPageLabeledCardTitle":
+            MessageLookupByLibrary.simpleMessage("Title:"),
+        "animeListPageSearchHint": MessageLookupByLibrary.simpleMessage(
+            "Enter the anime name you are looking for")
+      };
 }

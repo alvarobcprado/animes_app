@@ -1,3 +1,9 @@
 {
-  "@@ locale": "pt_BR"
+  "@@ locale": "pt_BR",
+  "animeListPageSearchHint": "Digite o nome do anime que procura",
+  "animeListPageLabeledCardTitle": "Título:",
+  "animeListPageLabeledCardGenre": "Gênero:",
+  "animeListPageLabeledCardEpisodes": "Episódios:",
+  "animeListPageLabeledCardRelease": "Data de lançamento:",
+  "animeListPageInformationSoon": "Em breve"
 }

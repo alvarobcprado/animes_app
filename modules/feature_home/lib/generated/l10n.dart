@@ -49,6 +49,66 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `Enter the anime name you are looking for`
+  String get animeListPageSearchHint {
+    return Intl.message(
+      'Enter the anime name you are looking for',
+      name: 'animeListPageSearchHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title:`
+  String get animeListPageLabeledCardTitle {
+    return Intl.message(
+      'Title:',
+      name: 'animeListPageLabeledCardTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Genre:`
+  String get animeListPageLabeledCardGenre {
+    return Intl.message(
+      'Genre:',
+      name: 'animeListPageLabeledCardGenre',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Episodes:`
+  String get animeListPageLabeledCardEpisodes {
+    return Intl.message(
+      'Episodes:',
+      name: 'animeListPageLabeledCardEpisodes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Release:`
+  String get animeListPageLabeledCardRelease {
+    return Intl.message(
+      'Release:',
+      name: 'animeListPageLabeledCardRelease',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Em breve`
+  String get animeListPageInformationSoon {
+    return Intl.message(
+      'Em breve',
+      name: 'animeListPageInformationSoon',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
