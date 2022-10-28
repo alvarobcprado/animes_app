@@ -3,7 +3,8 @@ import 'package:core/core.dart';
 import '../models/anime.dart';
 import '../repositories/anime_repository.dart';
 
-class GetAnimesByGenreUseCase implements UseCase<void, List<Anime>> {
+class GetAnimesByGenreUseCase
+    implements UseCase<GetAnimesByGenreUseCaseParams, List<Anime>> {
   GetAnimesByGenreUseCase({
     required AnimeRepository repository,
   }) : _repository = repository;
@@ -11,7 +12,14 @@ class GetAnimesByGenreUseCase implements UseCase<void, List<Anime>> {
   final AnimeRepository _repository;
 
   @override
-  Future<Result<List<Anime>>> call({required params}) async {
-    return await _repository.getAnimeList();
+  Future<Result<List<Anime>>> call(
+      {required GetAnimesByGenreUseCaseParams params}) async {
+    return await _repository.getAnimeListByGenre(params.id);
   }
+}
+
+class GetAnimesByGenreUseCaseParams {
+  GetAnimesByGenreUseCaseParams({required this.id});
+
+  final String id;
 }
