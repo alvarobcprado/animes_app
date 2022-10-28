@@ -10,8 +10,8 @@ export 'anime_list/anime_data_response.dart';
 export 'anime_list/anime_genre_response.dart';
 export 'anime_list/anime_image_response.dart';
 export 'anime_list/anime_images_response.dart';
+export 'anime_list/anime_pagination_response.dart';
 export 'anime_list/anime_response.dart';
-export 'anime_list/anime_url_response.dart';
 // Genre list
 export 'genre_list/genre_data_response.dart';
 export 'genre_list/genre_response.dart';

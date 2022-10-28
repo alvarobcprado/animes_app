@@ -13,17 +13,25 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
 
   final Dio _dio;
   final HomeDioWrapper _wrapper;
-  String? _nextPage;
+  int _currentPage = 1;
 
   @override
   Future<Result<List<Anime>>> getAnimeList() async {
-    final page = _nextPage ?? '/top/anime';
+    final page = '/top/anime?page=$_currentPage';
     final result = _wrapper(() => _dio.get(page));
+
     return result.then(
       (value) => value.when(
         success: (success) {
           final response = AnimeDataResponse.fromJson(success.data);
-          _nextPage = response.url?.next;
+
+          final hasNextPage = response.pagination?.hasNextPage ?? true;
+          if (hasNextPage) {
+            _currentPage++;
+          } else {
+            return const Result.success([]);
+          }
+
           return Result.success(response.animes?.toDomain() ?? []);
         },
         error: (error) {
