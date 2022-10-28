@@ -18,8 +18,8 @@ class AnimeRepositoryImpl implements AnimeRepository {
   final AnimeCacheDataSource _cacheDataSource;
 
   @override
-  Future<Result<AnimeDetails>> getAnimeDetails(int id) async {
-    return await _remoteDataSource.getAnimeDetails(id);
+  Future<Result<AnimeDetails>> getAnimeDetails(int animeId) async {
+    return await _remoteDataSource.getAnimeDetails(animeId);
   }
 
   @override
@@ -50,6 +50,11 @@ class AnimeRepositoryImpl implements AnimeRepository {
   @override
   Future<Result<List<Anime>>> getAnimeListBySearch(String query) async {
     return await _remoteDataSource.getAnimeListBySearch(query);
+  }
+
+  @override
+  Future<Result<List<Anime>>> getAnimeListByGenre(String id) async {
+    return await _remoteDataSource.getAnimeListByGenre(id);
   }
 
   @override
