@@ -4,7 +4,6 @@ import 'package:core/dependencies/state_management.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
 import 'package:feature_home/src/presentation/anime_list/anime_list_controller.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AnimeListPage extends StatefulWidget {
@@ -35,15 +34,17 @@ class AnimeListPage extends StatefulWidget {
 class _AnimeListPageState extends State<AnimeListPage> {
   late TextEditingController _searchController;
   late ScrollController _scrollController;
+  late AnimeListController _pageController;
   final String _searchHint = 'Digite o nome do anime que procura';
 
   @override
   void initState() {
     super.initState();
     _setupScrollController();
-    _searchController = TextEditingController();
-    widget.controller.genresStore.getGenres();
-    widget.controller.animeListStore.getAnimeList();
+    _setupSearchController();
+    _pageController = widget.controller;
+    _pageController.genresStore.getGenres();
+    _pageController.animeListStore.getAnimeList();
   }
 
   @override
@@ -51,6 +52,16 @@ class _AnimeListPageState extends State<AnimeListPage> {
     _searchController.dispose();
     _scrollController.dispose();
     super.dispose();
+  }
+
+  void _setupSearchController() {
+    _searchController = TextEditingController();
+    _searchController.addListener(() {
+      if (_searchController.text.isNotEmpty) {
+        _pageController.animeListStore
+            .getAnimesBySearch(_searchController.text);
+      }
+    });
   }
 
   void _setupScrollController() {
@@ -82,17 +93,16 @@ class _AnimeListPageState extends State<AnimeListPage> {
               ),
               PaddingBox.verticalXS(
                 child: ScopedBuilder<GenresStore, Exception, GenresModel>(
-                  store: widget.controller.genresStore,
+                  store: _pageController.genresStore,
                   onLoading: (_) => const SizedBox(),
                   onState: (_, state) {
                     final genreList = state.genres;
                     return genreList.isNotEmpty
                         ? FilterSelectChipList(
                             onSelected: (p0, p1) {
-                              if (kDebugMode) {
-                                print(
-                                  'Genre ${genreList[p1]} ${p0 ? 'Selected' : 'Deselected'}',
-                                );
+                              if (p0) {
+                                _pageController.animeListStore.getAnimesByGenre(
+                                    genreList[p1].id.toString());
                               }
                             },
                             items: genreList.map((e) => e.name).toList(),
@@ -104,7 +114,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
               ),
               Expanded(
                 child: ScopedBuilder<AnimeListStore, Exception, AnimesModel>(
-                  store: widget.controller.animeListStore,
+                  store: _pageController.animeListStore,
                   onLoading: (_) => const Text('loading anime list'),
                   onState: (_, state) {
                     final animeList = state.animes;
@@ -122,22 +132,29 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                               imageUrl: e.image,
                                               labels: [
                                                 LabeledCardText(
-                                                  title: 'Título',
+                                                  title: 'Título:',
                                                   subtitle: e.title,
                                                 ),
                                                 LabeledCardText(
-                                                  title: 'Gênero',
-                                                  subtitle: 'Gêneros',
+                                                  title: 'Gênero:',
+                                                  subtitle: e.genres.isNotEmpty
+                                                      ? e.genres.join(", ")
+                                                      : '-',
                                                 ),
                                                 LabeledCardText(
-                                                  title: 'Episódios',
-                                                  subtitle: e.totalEpisodes
-                                                      .toString(),
+                                                  title: 'Episódios:',
+                                                  subtitle:
+                                                      e.totalEpisodes == -1
+                                                          ? 'Em breve'
+                                                          : e.totalEpisodes
+                                                              .toString(),
                                                 ),
                                                 LabeledCardText(
-                                                  title: 'Status',
-                                                  subtitle: e.release
-                                                      .convertDateToBrLocale(),
+                                                  title: 'Data de lançamento:',
+                                                  subtitle: e.release.isNotEmpty
+                                                      ? e.release
+                                                          .convertDateToBrLocale()
+                                                      : 'Em breve',
                                                 ),
                                               ],
                                             ),
