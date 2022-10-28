@@ -25,7 +25,9 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
   final GetSearchedAnimeListUseCase _getSearchedAnimeListUseCase;
   final GetAnimesByGenreUseCase _getAnimesByGenreUseCase;
 
-  List<Anime> animeList = [];
+  List<Anime> animesByPagination = [];
+  List<Anime> animesByGenre = [];
+  List<Anime> animesBySearch = [];
 
   Future<void> getAnimeList() async {
     if (state.animes.isEmpty) {
@@ -37,8 +39,8 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
 
     final result = await _getAnimeListUseCase.call(params: null);
     result.when(success: (animes) {
-      animeList.addAll(animes);
-      update(AnimesModel(animes: animeList));
+      animesByPagination.addAll(animes);
+      update(AnimesModel(animes: animesByPagination));
     }, error: (exception) {
       setError(exception);
     });
@@ -47,9 +49,10 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
 
   Future<void> getAnimesBySearch(String query) async {
     setLoading(true);
-    final animes = await _getSearchedAnimeListUseCase.call(
+    final result = await _getSearchedAnimeListUseCase.call(
         params: GetSearchedAnimeListUseCaseParams(query: query));
-    animes.when(success: (animes) {
+    result.when(success: (animes) {
+      animesBySearch.addAll(animes);
       update(AnimesModel(animes: animes));
     }, error: (exception) {
       setError(exception);
@@ -57,11 +60,13 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
     setLoading(false);
   }
 
-  Future<void> getAnimesByGenre() async {
+  Future<void> getAnimesByGenre(String id) async {
     setLoading(true);
-    final animes = await _getAnimesByGenreUseCase.call(params: null);
-    animes.when(success: (animes) {
-      update(AnimesModel(animes: animes));
+    final result = await _getAnimesByGenreUseCase.call(
+        params: GetAnimesByGenreUseCaseParams(id: id));
+    result.when(success: (animes) {
+      animesByGenre.insertAll(0, animes);
+      update(AnimesModel(animes: animesByGenre));
     }, error: (exception) {
       setError(exception);
     });
