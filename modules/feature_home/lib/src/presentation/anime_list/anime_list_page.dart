@@ -36,59 +36,12 @@ class _AnimeListPageState extends State<AnimeListPage> {
   late TextEditingController _searchController;
   late ScrollController _scrollController;
   final String _searchHint = 'Digite o nome do anime que procura';
-  final List<String> _animeGenreList = const [
-    'Ação',
-    'Aventura',
-    'Comédia',
-    'Drama',
-    'Ecchi',
-    'Fantasia',
-    'Harem',
-    'Magia',
-    'Mistério',
-    'Romance',
-    'Sci-Fi',
-    'Seinen',
-    'Shoujo',
-    'Shounen',
-    'Slice of Life',
-    'Sobrenatural',
-    'Super Poderes',
-    'Suspense',
-    'Terror',
-    'Vida Escolar',
-  ];
-
-  final List<LabeledCardItem> _animeInfoList = List.generate(
-    50,
-    (index) => LabeledCardItem(
-      imageUrl: 'https://picsum.photos/seed/picsum/300/300',
-      labels: [
-        LabeledCardText(
-          title: 'Título',
-          subtitle: 'Anime $index',
-        ),
-        LabeledCardText(
-          title: 'Gênero',
-          subtitle: 'Ação, Aventura, Comédia, Fantasia',
-        ),
-        LabeledCardText(
-          title: 'Episódios',
-          subtitle: '12',
-        ),
-        LabeledCardText(
-          title: 'Status',
-          subtitle: 'Em andamento',
-        ),
-      ],
-    ),
-  );
 
   @override
   void initState() {
     super.initState();
-    _searchController = TextEditingController();
     _setupScrollController();
+    _searchController = TextEditingController();
     widget.controller.genresStore.getGenres();
     widget.controller.animeListStore.getAnimeList();
   }
@@ -102,16 +55,19 @@ class _AnimeListPageState extends State<AnimeListPage> {
 
   void _setupScrollController() {
     _scrollController = ScrollController();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        widget.controller.getAnimeList();
-      }
-    });
+    _scrollController.addListener(
+      () {
+        if (_scrollController.position.pixels ==
+            _scrollController.position.maxScrollExtent) {
+          widget.controller.getAnimeList();
+        }
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).extension<AppColorsFoundation>();
     return Scaffold(
       body: SafeArea(
         child: PaddingBox.ltrbFactor(
@@ -153,41 +109,111 @@ class _AnimeListPageState extends State<AnimeListPage> {
                   onState: (_, state) {
                     final animeList = state.animes;
                     return animeList.isNotEmpty
-                        ? CardList(
-                            scrollController: _scrollController,
-                            items: animeList
-                                .map(
-                                  (e) => LabeledCardItem(
-                                    imageUrl: e.image,
-                                    labels: [
-                                      LabeledCardText(
-                                        title: 'Título',
-                                        subtitle: e.title,
-                                      ),
-                                      LabeledCardText(
-                                        title: 'Gênero',
-                                        subtitle: 'Gêneros',
-                                      ),
-                                      LabeledCardText(
-                                        title: 'Episódios',
-                                        subtitle: e.totalEpisodes.toString(),
-                                      ),
-                                      LabeledCardText(
-                                        title: 'Status',
-                                        subtitle:
-                                            e.release.convertDateToBrLocale(),
-                                      ),
-                                    ],
+                        ? Stack(
+                            children: [
+                              Column(
+                                children: [
+                                  Expanded(
+                                    child: CardList(
+                                      scrollController: _scrollController,
+                                      items: animeList
+                                          .map(
+                                            (e) => LabeledCardItem(
+                                              imageUrl: e.image,
+                                              labels: [
+                                                LabeledCardText(
+                                                  title: 'Título',
+                                                  subtitle: e.title,
+                                                ),
+                                                LabeledCardText(
+                                                  title: 'Gênero',
+                                                  subtitle: 'Gêneros',
+                                                ),
+                                                LabeledCardText(
+                                                  title: 'Episódios',
+                                                  subtitle: e.totalEpisodes
+                                                      .toString(),
+                                                ),
+                                                LabeledCardText(
+                                                  title: 'Status',
+                                                  subtitle: e.release
+                                                      .convertDateToBrLocale(),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                          .toList(),
+                                      onTap: (index) {},
+                                    ),
                                   ),
-                                )
-                                .toList(),
-                            onTap: (index) {
-                              if (kDebugMode) {
-                                print(
-                                  'Anime ${_animeInfoList[index].labels[0].subtitle} selected',
-                                );
-                              }
-                            },
+                                ],
+                              ),
+                              AnimatedPositioned(
+                                duration: const Duration(milliseconds: 300),
+                                bottom: state.isLoadingNewPage ? 48 : 0,
+                                left: 0,
+                                right: 0,
+                                child: AnimatedOpacity(
+                                  duration: const Duration(milliseconds: 300),
+                                  opacity: state.isLoadingNewPage ? 1 : 0,
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      color: colors?.surface,
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: colors!.onSurface.withOpacity(
+                                            0.5,
+                                          ),
+                                          blurRadius: 2,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: PaddingBox.allFactor(
+                                      factor: 0.5,
+                                      child: CircleAvatar(
+                                        backgroundColor: Colors.transparent,
+                                        child: CircularProgressIndicator(
+                                          color: colors.primary,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 16,
+                                right: 0,
+                                child: Column(
+                                  children: [
+                                    IconButton(
+                                      color: colors.onPrimary,
+                                      style: IconButton.styleFrom(
+                                        backgroundColor: colors.primary,
+                                        padding: const EdgeInsets.all(12),
+                                      ),
+                                      onPressed: () {
+                                        _scrollController.jumpTo(
+                                          0,
+                                        );
+                                      },
+                                      icon: const Icon(Icons.arrow_upward),
+                                    ),
+                                    SpacerBox.verticalXS(),
+                                    IconButton(
+                                      color: colors.onPrimary,
+                                      style: IconButton.styleFrom(
+                                        backgroundColor: colors.primary,
+                                        padding: const EdgeInsets.all(12),
+                                      ),
+                                      onPressed: () {},
+                                      icon: const Icon(Icons.favorite),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           )
                         : const Text('lista vazia');
                   },
