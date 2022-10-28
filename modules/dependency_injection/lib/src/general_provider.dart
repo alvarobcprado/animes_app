@@ -14,8 +14,8 @@ class GeneralProvider extends StatelessWidget {
     return MultiProvider(
       providers: [
         ...commonProviders(),
-        ...featureHomeProviders(),
         ...dataLocalProviders(),
+        ...featureHomeProviders(),
       ],
       builder: (context, child) => child!,
       child: child,
