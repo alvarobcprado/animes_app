@@ -4,9 +4,11 @@ import 'package:feature_home/feature_home.dart';
 class AnimesModel {
   AnimesModel({
     this.animes = const [],
+    this.isLoadingNewPage = false,
   });
 
   List<Anime> animes;
+  bool isLoadingNewPage;
 }
 
 class AnimeListStore extends StreamStore<Exception, AnimesModel> {
@@ -26,7 +28,13 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
   List<Anime> animeList = [];
 
   Future<void> getAnimeList() async {
-    setLoading(true);
+    if (state.animes.isEmpty) {
+      setLoading(true);
+    } else {
+      state.isLoadingNewPage = true;
+      update(state, force: true);
+    }
+
     final result = await _getAnimeListUseCase.call(params: null);
     result.when(success: (animes) {
       animeList.addAll(animes);
