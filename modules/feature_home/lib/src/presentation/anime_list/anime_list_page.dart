@@ -5,7 +5,6 @@ import 'package:core/dependencies/state_management.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
 import 'package:feature_home/src/presentation/anime_list/anime_list_controller.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AnimeListPage extends StatefulWidget {
@@ -117,18 +116,12 @@ class _AnimeListPageState extends State<AnimeListPage> {
               PaddingBox.verticalXS(
                 child: ScopedBuilder<GenresStore, Exception, GenresModel>(
                   store: widget.controller.genresStore,
-                  onLoading: (_) => const Text('loading'),
+                  onLoading: (_) => const SizedBox(),
                   onState: (_, state) {
                     final genreList = state.genres;
                     return genreList.isNotEmpty
                         ? FilterSelectChipList(
-                            onSelected: (p0, p1) {
-                              if (kDebugMode) {
-                                print(
-                                  'Genre ${genreList[p1]} ${p0 ? 'Selected' : 'Deselected'}',
-                                );
-                              }
-                            },
+                            onSelected: (p0, p1) {},
                             items: genreList.map((e) => e.name).toList(),
                           )
                         : const SizedBox();

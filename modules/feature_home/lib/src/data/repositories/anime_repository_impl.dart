@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:core/core.dart';
+import 'package:feature_home/feature_home.dart';
 import 'package:feature_home/src/data/cache/cache.dart';
 import 'package:feature_home/src/data/remote/remote.dart';
 import 'package:feature_home/src/domain/models/models.dart';
@@ -21,7 +24,22 @@ class AnimeRepositoryImpl implements AnimeRepository {
 
   @override
   Future<Result<List<Genre>>> getAnimeGenres() async {
-    return await _remoteDataSource.getAnimeGenres();
+    final result = await _remoteDataSource.getAnimeGenres();
+    return result.when(success: (genreList) async {
+      await _cacheDataSource.saveAnimeGenres(genreList.toCache());
+      return await _getGenreListFromCache();
+    }, error: (error) async {
+      return await _getGenreListFromCache();
+    });
+  }
+
+  Future<Result<List<Genre>>> _getGenreListFromCache() async {
+    final resultCache = await _cacheDataSource.getAnimeGenres();
+    return resultCache.when(success: (genresCache) {
+      return Result.success(genresCache.toDomain());
+    }, error: (error) {
+      return Result.error(error);
+    });
   }
 
   @override
