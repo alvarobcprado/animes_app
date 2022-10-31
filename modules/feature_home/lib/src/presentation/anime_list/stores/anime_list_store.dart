@@ -58,6 +58,12 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
   Future<void> getAnimesBySearch(String query) async {
     setLoading(true);
 
+    if (query.isEmpty) {
+      update(AnimesModel(animes: _animesByPagination));
+      setLoading(false);
+      return;
+    }
+
     final result = await _getSearchedAnimeListUseCase.call(
       params: GetSearchedAnimeListUseCaseParams(query: query),
     );
