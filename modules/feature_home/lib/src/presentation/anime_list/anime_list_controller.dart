@@ -17,8 +17,8 @@ class AnimeListController {
     await animeListStore.getAnimeList();
   }
 
-  Future<void> getAnimesByGenre(String id) async {
-    await animeListStore.getAnimesByGenre(id);
+  Future<void> getAnimesByGenre(String id, bool isAddingGenre) async {
+    await animeListStore.getAnimesByGenre(id, isAddingGenre);
   }
 
   Future<void> getAnimesBySearch(String query) async {
