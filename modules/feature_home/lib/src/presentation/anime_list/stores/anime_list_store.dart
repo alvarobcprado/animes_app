@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core/dependencies/state_management.dart';
 import 'package:feature_home/feature_home.dart';
 
@@ -28,7 +29,8 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
   final List<Anime> _animesByPagination = [];
   final List<Anime> _animesByGenre = [];
   final List<Anime> _animesBySearch = [];
-  final List<String> _genresFilter = [];
+  final Set<String> _genresFilter = {};
+  final Debouncer _debouncer = Debouncer(const Duration(milliseconds: 500));
 
   Future<void> getAnimeList() async {
     if (state.animes.isEmpty) {
@@ -77,28 +79,32 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
     setLoading(true);
     _updateGenresFilter(id, isAddingGenre);
 
-    execute(
-      delay: const Duration(milliseconds: 500),
-      () async {
-        if (_genresFilter.isEmpty) {
-          return AnimesModel(animes: _animesByPagination);
-        }
+    if (_genresFilter.isEmpty) {
+      update(AnimesModel(animes: _animesByPagination));
+      setLoading(false);
+      _debouncer.dispose();
+      return;
+    }
 
+    _debouncer(
+      () async {
         final composedGenres = _genresFilter.join(',');
 
         final result = await _getAnimesByGenreUseCase.call(
           params: GetAnimesByGenreUseCaseParams(id: composedGenres),
         );
 
-        return result.when(
+        result.when(
           success: (animes) {
             _animesByGenre.addAll(animes);
-            return AnimesModel(animes: _animesByGenre);
+            update(AnimesModel(animes: _animesByGenre));
           },
           error: (exception) {
-            throw exception;
+            setError(exception);
           },
         );
+
+        setLoading(false);
       },
     );
   }
