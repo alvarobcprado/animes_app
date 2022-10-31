@@ -99,11 +99,11 @@ class _AnimeListPageState extends State<AnimeListPage> {
                     final genreList = state.genres;
                     return genreList.isNotEmpty
                         ? FilterSelectChipList(
-                            onSelected: (p0, p1) {
-                              if (p0) {
-                                _pageController.animeListStore.getAnimesByGenre(
-                                    genreList[p1].id.toString());
-                              }
+                            onSelected: (isSelected, index) {
+                              _pageController.getAnimesByGenre(
+                                genreList[index].id.toString(),
+                                isSelected,
+                              );
                             },
                             items: genreList.map((e) => e.name).toList(),
                           )
