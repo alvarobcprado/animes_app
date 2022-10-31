@@ -57,10 +57,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
   void _setupSearchController() {
     _searchController = TextEditingController();
     _searchController.addListener(() {
-      if (_searchController.text.isNotEmpty) {
-        _pageController.animeListStore
-            .getAnimesBySearch(_searchController.text);
-      }
+      _pageController.animeListStore.getAnimesBySearch(_searchController.text);
     });
   }
 
@@ -115,7 +112,11 @@ class _AnimeListPageState extends State<AnimeListPage> {
               Expanded(
                 child: ScopedBuilder<AnimeListStore, Exception, AnimesModel>(
                   store: _pageController.animeListStore,
-                  onLoading: (_) => const Text('loading anime list'),
+                  onLoading: (_) => Center(
+                    child: CircularProgressIndicator(
+                      color: colors!.primary,
+                    ),
+                  ),
                   onState: (_, state) {
                     final animeList = state.animes;
                     return animeList.isNotEmpty
@@ -234,7 +235,17 @@ class _AnimeListPageState extends State<AnimeListPage> {
                           )
                         : const Text('lista vazia');
                   },
-                  onError: (_, error) => const Text('erro'),
+                  onError: (_, error) => Column(
+                    children: [
+                      const Text('error'),
+                      TextButton(
+                        onPressed: () {
+                          _pageController.animeListStore.getAnimeList();
+                        },
+                        child: const Text('tentar novamente'),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
