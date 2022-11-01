@@ -2,10 +2,6 @@ import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:feature_home/feature_home.dart';
-import 'package:feature_home/src/data/cache/cache.dart';
-import 'package:feature_home/src/data/remote/remote.dart';
-import 'package:feature_home/src/domain/models/models.dart';
-import 'package:feature_home/src/domain/repositories/repositories.dart';
 
 class AnimeRepositoryImpl implements AnimeRepository {
   AnimeRepositoryImpl({
@@ -43,8 +39,8 @@ class AnimeRepositoryImpl implements AnimeRepository {
   }
 
   @override
-  Future<Result<List<Anime>>> getAnimeList() async {
-    return await _remoteDataSource.getAnimeList();
+  Future<Result<List<Anime>>> getAnimeList(int page) async {
+    return await _remoteDataSource.getAnimeList(page);
   }
 
   @override
@@ -53,8 +49,8 @@ class AnimeRepositoryImpl implements AnimeRepository {
   }
 
   @override
-  Future<Result<List<Anime>>> getAnimeListByGenre(String id) async {
-    return await _remoteDataSource.getAnimeListByGenre(id);
+  Future<Result<List<Anime>>> getAnimeListByGenre(String id, int page) async {
+    return await _remoteDataSource.getAnimeListByGenre(id, page);
   }
 
   @override

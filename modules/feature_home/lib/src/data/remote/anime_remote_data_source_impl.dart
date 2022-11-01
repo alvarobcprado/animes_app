@@ -13,26 +13,25 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
 
   final Dio _dio;
   final HomeDioWrapper _wrapper;
-  int _currentPage = 1;
-  bool _hasNextPage = true;
+
+  bool _hasNextAnimeListPage = true;
+  bool _hasNextAnimeByGenrePage = true;
 
   @override
-  Future<Result<List<Anime>>> getAnimeList() async {
-    if (!_hasNextPage) {
+  Future<Result<List<Anime>>> getAnimeList(int page) async {
+    if (!_hasNextAnimeListPage) {
       return const Result.success([]);
     }
 
-    final page = '/top/anime?page=$_currentPage';
-    final result = _wrapper(() => _dio.get(page));
+    final endpoint = '/top/anime?page=$page';
+    final result = _wrapper(() => _dio.get(endpoint));
 
     return result.then(
       (value) => value.when(
         success: (success) {
           final response = AnimeDataResponse.fromJson(success.data);
-          _hasNextPage = response.pagination?.hasNextPage ?? false;
-          if (_hasNextPage) {
-            _currentPage++;
-          }
+          _hasNextAnimeListPage = response.pagination?.hasNextPage ?? false;
+
           return Result.success(response.animes?.toDomain() ?? []);
         },
         error: (error) {
@@ -78,7 +77,7 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
   }
 
   @override
-  Future<Result<List<Anime>>> getAnimeListBySearch(String query) {
+  Future<Result<List<Anime>>> getAnimeListBySearch(String query) async {
     final result = _wrapper(() => _dio.get('/anime?q=$query'));
     return result.then(
       (value) => value.when(
@@ -94,12 +93,23 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
   }
 
   @override
-  Future<Result<List<Anime>>> getAnimeListByGenre(String genreId) {
-    final result = _wrapper(() => _dio.get('/anime?genres=$genreId'));
+  Future<Result<List<Anime>>> getAnimeListByGenre(
+    String genreId,
+    int page,
+  ) async {
+    if (!_hasNextAnimeByGenrePage) {
+      return const Result.success([]);
+    }
+
+    final result = _wrapper(
+      () => _dio.get('/anime?genres=$genreId&page=$page'),
+    );
+
     return result.then(
       (value) => value.when(
         success: (success) {
           final response = AnimeDataResponse.fromJson(success.data);
+          _hasNextAnimeByGenrePage = response.pagination?.hasNextPage ?? false;
           return Result.success(response.animes?.toDomain() ?? []);
         },
         error: (error) {
