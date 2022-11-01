@@ -14,15 +14,8 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
   final Dio _dio;
   final HomeDioWrapper _wrapper;
 
-  bool _hasNextAnimeListPage = true;
-  bool _hasNextAnimeByGenrePage = true;
-
   @override
   Future<Result<List<Anime>>> getAnimeList(int page) async {
-    if (!_hasNextAnimeListPage) {
-      return const Result.success([]);
-    }
-
     final endpoint = '/top/anime?page=$page';
     final result = _wrapper(() => _dio.get(endpoint));
 
@@ -30,7 +23,6 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
       (value) => value.when(
         success: (success) {
           final response = AnimeDataResponse.fromJson(success.data);
-          _hasNextAnimeListPage = response.pagination?.hasNextPage ?? false;
 
           return Result.success(response.animes?.toDomain() ?? []);
         },
@@ -97,10 +89,6 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
     String genreId,
     int page,
   ) async {
-    if (!_hasNextAnimeByGenrePage) {
-      return const Result.success([]);
-    }
-
     final result = _wrapper(
       () => _dio.get('/anime?genres=$genreId&page=$page'),
     );
@@ -109,7 +97,6 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
       (value) => value.when(
         success: (success) {
           final response = AnimeDataResponse.fromJson(success.data);
-          _hasNextAnimeByGenrePage = response.pagination?.hasNextPage ?? false;
           return Result.success(response.animes?.toDomain() ?? []);
         },
         error: (error) {
