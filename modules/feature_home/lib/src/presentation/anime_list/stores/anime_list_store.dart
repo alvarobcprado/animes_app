@@ -1,16 +1,7 @@
 import 'package:core/core.dart';
 import 'package:core/dependencies/state_management.dart';
 import 'package:feature_home/feature_home.dart';
-
-class AnimesModel {
-  AnimesModel({
-    this.animes = const [],
-    this.isLoadingNewPage = false,
-  });
-
-  List<Anime> animes;
-  bool isLoadingNewPage;
-}
+import 'package:feature_home/src/presentation/anime_list/anime_list_state.dart';
 
 class AnimeListStore extends StreamStore<Exception, AnimesModel> {
   AnimeListStore({
@@ -20,7 +11,7 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
   })  : _getAnimeListUseCase = getAnimeListUseCase,
         _getSearchedAnimeListUseCase = getSearchedAnimeListUseCase,
         _getAnimesByGenreUseCase = getAnimesByGenreUseCase,
-        super(AnimesModel());
+        super(AnimesModel.initial());
 
   final GetAnimeListUseCase _getAnimeListUseCase;
   final GetSearchedAnimeListUseCase _getSearchedAnimeListUseCase;
@@ -36,8 +27,7 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
     if (state.animes.isEmpty) {
       setLoading(true);
     } else {
-      state.isLoadingNewPage = true;
-      update(state, force: true);
+      update(state.copyWith(isLoadingNewPage: true));
     }
 
     final result = await _getAnimeListUseCase.call(params: null);
@@ -45,7 +35,9 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
     result.when(
       success: (animes) {
         _animesByPagination.addAll(animes);
-        update(AnimesModel(animes: _animesByPagination));
+        update(
+          state.copyWith(animes: _animesByPagination, isLoadingNewPage: false),
+        );
       },
       error: (exception) {
         setError(exception);
@@ -71,7 +63,7 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
     result.when(
       success: (animes) {
         _animesBySearch.addAll(animes);
-        update(AnimesModel(animes: animes));
+        update(state.copyWith(animes: _animesBySearch));
       },
       error: (exception) {
         setError(exception);
@@ -86,7 +78,7 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
     _updateGenresFilter(id, isAddingGenre);
 
     if (_genresFilter.isEmpty) {
-      update(AnimesModel(animes: _animesByPagination));
+      update(state.copyWith(animes: _animesByPagination));
       setLoading(false);
       _debouncer.dispose();
       return;
@@ -103,7 +95,7 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
         result.when(
           success: (animes) {
             _animesByGenre.addAll(animes);
-            update(AnimesModel(animes: _animesByGenre));
+            update(state.copyWith(animes: _animesByGenre));
           },
           error: (exception) {
             setError(exception);
