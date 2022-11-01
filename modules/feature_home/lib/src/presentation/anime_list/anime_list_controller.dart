@@ -24,4 +24,8 @@ class AnimeListController {
   Future<void> getAnimesBySearch(String query) async {
     await animeListStore.getAnimesBySearch(query);
   }
+
+  Future<void> getMoreAnimes() async {
+    await animeListStore.getMoreAnimes();
+  }
 }

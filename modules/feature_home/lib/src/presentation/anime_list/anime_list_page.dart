@@ -68,7 +68,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
       () {
         if (_scrollController.position.pixels ==
             _scrollController.position.maxScrollExtent) {
-          widget.controller.getAnimeList();
+          _pageController.getMoreAnimes();
         }
       },
     );
