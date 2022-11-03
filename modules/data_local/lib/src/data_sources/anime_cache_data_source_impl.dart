@@ -14,8 +14,8 @@ class AnimeCacheDataSourceImpl implements AnimeCacheDataSource {
 
   @override
   Future<Result<AnimeDetailsAuxiliarCache>> getAnimeDetails(int id) async {
-    final box = await _hive.openBox<AnimeDetailsCache>(BoxName.animeDetails);
-    final animeDetailsCache = box.get(id);
+    final box = await _hive.openBox(BoxName.animeDetails);
+    final AnimeDetailsCache? animeDetailsCache = box.get(id);
     if (animeDetailsCache != null) {
       return Result.success(animeDetailsCache.toCacheAuxiliar());
     }
