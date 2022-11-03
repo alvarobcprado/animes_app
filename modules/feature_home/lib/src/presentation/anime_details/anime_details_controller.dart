@@ -1,3 +1,4 @@
+import 'package:feature_home/feature_home.dart';
 import 'package:feature_home/src/presentation/anime_details/stores/stores.dart';
 
 class AnimeDetailsController {
@@ -13,7 +14,7 @@ class AnimeDetailsController {
     await animeDetailsStore.getAnimeDetails(id);
   }
 
-  Future<void> toggleFavoriteAnime(int id) async {
-    await toggleFavoriteAnimeStore.toggleFavoriteAnime(id);
+  Future<void> toggleFavoriteAnime(AnimeDetails animeDetails) async {
+    await toggleFavoriteAnimeStore.toggleFavoriteAnime(animeDetails);
   }
 }

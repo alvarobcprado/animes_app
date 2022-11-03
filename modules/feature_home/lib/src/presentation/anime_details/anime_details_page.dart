@@ -37,10 +37,13 @@ class AnimeDetailsPage extends StatefulWidget {
 }
 
 class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
+  late AnimeDetailsController _pageController;
+
   @override
   void initState() {
     super.initState();
-    widget.controller.getAnimeDetails(widget.animeId);
+    _pageController = widget.controller;
+    _pageController.getAnimeDetails(widget.animeId);
   }
 
   @override
@@ -76,10 +79,15 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                     children: [
                       SpacerBox.verticalS(),
                       ImageCardButton(
-                        buttonIcon: Icons.favorite_outline,
+                        buttonIcon: animeDetail.isFavorite
+                            ? Icons.favorite
+                            : Icons.favorite_outline,
                         buttonLabel: 'Favoritar',
                         imageUrl: animeDetail.image,
-                        onButtonPressed: () {},
+                        onButtonPressed: () {
+                          _pageController.animeDetailsStore
+                              .toggleFavoriteAnime(animeDetail);
+                        },
                       ),
                       SpacerBox.verticalS(),
                       Visibility(
