@@ -1,5 +1,6 @@
 import 'package:core/dependencies/state_management.dart';
 
+import '../../../domain/models/anime_details.dart';
 import '../../../domain/use_cases/toggle_favorite_anime_use_case.dart';
 
 class ToggleFavoriteAnimeModel {
@@ -19,10 +20,10 @@ class ToggleFavoriteAnimeStore
 
   final ToggleFavoriteAnimeUseCase _toggleFavoriteAnimeUseCase;
 
-  Future<void> toggleFavoriteAnime(int id) async {
+  Future<void> toggleFavoriteAnime(AnimeDetails animeDetails) async {
     setLoading(true);
     final result = await _toggleFavoriteAnimeUseCase.call(
-        params: ToggleFavoriteAnimeUseCaseParams(id: id));
+        params: ToggleFavoriteAnimeUseCaseParams(animeDetails: animeDetails));
     result.when(success: (_) {
       update(ToggleFavoriteAnimeModel(success: true));
     }, error: (exception) {
