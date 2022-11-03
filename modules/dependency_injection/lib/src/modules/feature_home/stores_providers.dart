@@ -23,12 +23,14 @@ List<SingleChildWidget> storesProviders() => [
               getSearchedAnimeListUseCase: usecase,
             ),
       ),
-      ProxyProvider<GetAnimeDetailsUseCase, AnimeDetailsStore>(
-        update: (_, usecase, store) =>
-            store ??
-            AnimeDetailsStore(
-              getAnimeDetailsUseCase: usecase,
-            ),
+      ProxyProvider2<GetAnimeDetailsUseCase, ToggleFavoriteAnimeUseCase, AnimeDetailsStore>(
+        update:
+            (_, getAnimeDetailsUseCase, togglefavoriteAnimeUseCase, store) =>
+                store ??
+                AnimeDetailsStore(
+                  getAnimeDetailsUseCase: getAnimeDetailsUseCase,
+                  toggleFavoriteAnimeUseCase: togglefavoriteAnimeUseCase,
+                ),
       ),
       ProxyProvider<ToggleFavoriteAnimeUseCase, ToggleFavoriteAnimeStore>(
         update: (_, usecase, store) =>
