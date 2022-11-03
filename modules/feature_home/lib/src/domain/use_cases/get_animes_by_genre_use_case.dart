@@ -14,12 +14,13 @@ class GetAnimesByGenreUseCase
   @override
   Future<Result<List<Anime>>> call(
       {required GetAnimesByGenreUseCaseParams params}) async {
-    return await _repository.getAnimeListByGenre(params.id);
+    return await _repository.getAnimeListByGenre(params.id, params.page);
   }
 }
 
 class GetAnimesByGenreUseCaseParams {
-  GetAnimesByGenreUseCaseParams({required this.id});
+  GetAnimesByGenreUseCaseParams({required this.id, required this.page});
 
   final String id;
+  final int page;
 }
