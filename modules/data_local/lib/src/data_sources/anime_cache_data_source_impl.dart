@@ -45,10 +45,10 @@ class AnimeCacheDataSourceImpl implements AnimeCacheDataSource {
   }
 
   @override
-  Future<Result<List<AnimeAuxiliarCache>>> getFavoriteAnimes() async {
+  Future<List<AnimeDetailsAuxiliarCache>> getFavoriteAnimes() async {
     final box = await _hive.openBox(BoxName.favoriteAnimes);
-    final favoritesCache = List<AnimeCache>.from(box.values);
-    return Result.success(favoritesCache.toCacheAuxiliar());
+    final favoritesAnimesCache = List<AnimeDetailsCache>.from(box.values);
+    return favoritesAnimesCache.toCacheAuxiliar();
   }
 
   @override
@@ -86,7 +86,7 @@ class AnimeCacheDataSourceImpl implements AnimeCacheDataSource {
   }
 
   @override
-  Future<void> saveFavoriteAnime(AnimeAuxiliarCache anime) async {
+  Future<void> saveFavoriteAnime(AnimeDetailsAuxiliarCache anime) async {
     final animeCache = anime.toCache();
     final box = await _hive.openBox(BoxName.favoriteAnimes);
     await box.put(animeCache.id, animeCache);
