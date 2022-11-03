@@ -1,6 +1,6 @@
 import 'package:core/dependencies/state_management.dart';
 
-import '../../../domain/models/anime.dart';
+import '../../../domain/models/anime_details.dart';
 import '../../../domain/use_cases/get_favorite_animes_use_case.dart';
 
 class FavoriteAnimesModel {
@@ -8,7 +8,7 @@ class FavoriteAnimesModel {
     this.animes = const [],
   });
 
-  List<Anime> animes;
+  List<AnimeDetails> animes;
 }
 
 class FavoriteAnimesStore extends StreamStore<Exception, FavoriteAnimesModel> {
