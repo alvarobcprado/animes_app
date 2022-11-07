@@ -36,6 +36,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
   late TextEditingController _searchController;
   late ScrollController _scrollController;
   late AnimeListController _pageController;
+  late String _lastSearchQuery = '';
   final String _searchHint = 'Digite o nome do anime que procura';
 
   @override
@@ -57,9 +58,13 @@ class _AnimeListPageState extends State<AnimeListPage> {
 
   void _setupSearchController() {
     _searchController = TextEditingController();
-    _searchController.addListener(() {
-      _pageController.animeListStore.getAnimesBySearch(_searchController.text);
-    });
+  }
+
+  void _onSearchChanged(String query) {
+    if (query != _lastSearchQuery) {
+      _pageController.animeListStore.getAnimesBySearch(query);
+      _lastSearchQuery = query;
+    }
   }
 
   void _setupScrollController() {
@@ -88,6 +93,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
               AppSearchBar(
                 controller: _searchController,
                 hintText: _searchHint,
+                onChanged: _onSearchChanged,
               ),
               PaddingBox.verticalXS(
                 child: ScopedBuilder<GenresStore, Exception, GenresModel>(
