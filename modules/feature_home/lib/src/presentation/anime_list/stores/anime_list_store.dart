@@ -72,24 +72,28 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
       update(AnimesModel(animes: _animes));
       setLoading(false);
       _paginationSource = AnimePaginationSource.list;
+      _debouncer.dispose();
       return;
     }
 
-    final result = await _getSearchedAnimeListUseCase.call(
-      params: GetSearchedAnimeListUseCaseParams(query: query),
-    );
+    _debouncer(
+      () async {
+        final result = await _getSearchedAnimeListUseCase.call(
+          params: GetSearchedAnimeListUseCaseParams(query: query),
+        );
+        result.when(
+          success: (animes) {
+            _animesBySearch.addAll(animes);
+            update(state.copyWith(animes: animes));
+          },
+          error: (exception) {
+            setError(exception);
+          },
+        );
 
-    result.when(
-      success: (animes) {
-        _animesBySearch.addAll(animes);
-        update(state.copyWith(animes: _animesBySearch));
-      },
-      error: (exception) {
-        setError(exception);
+        setLoading(false);
       },
     );
-
-    setLoading(false);
   }
 
   Future<void> getAnimesByGenre(String id, bool isAddingGenre) async {
