@@ -82,180 +82,187 @@ class _AnimeListPageState extends State<AnimeListPage> {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).extension<AppColorsFoundation>();
-    return Scaffold(
-      body: SafeArea(
-        child: PaddingBox.ltrbFactor(
-          topFactor: 2,
-          leftFactor: 2,
-          rightFactor: 2,
-          child: Column(
-            children: [
-              AppSearchBar(
-                controller: _searchController,
-                hintText: _searchHint,
-                onChanged: _onSearchChanged,
-              ),
-              PaddingBox.verticalXS(
-                child: ScopedBuilder<GenresStore, Exception, GenresModel>(
-                  store: _pageController.genresStore,
-                  onLoading: (_) => const SizedBox(),
-                  onState: (_, state) {
-                    final genreList = state.genres;
-                    return genreList.isNotEmpty
-                        ? FilterSelectChipList(
-                            onSelected: (isSelected, index) {
-                              _pageController.getAnimesByGenre(
-                                genreList[index].id.toString(),
-                                isSelected,
-                              );
-                            },
-                            items: genreList.map((e) => e.name).toList(),
-                          )
-                        : const SizedBox();
-                  },
-                  onError: (_, error) => const SizedBox(),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: SafeArea(
+          child: PaddingBox.ltrbFactor(
+            topFactor: 2,
+            leftFactor: 2,
+            rightFactor: 2,
+            child: Column(
+              children: [
+                AppSearchBar(
+                  controller: _searchController,
+                  hintText: _searchHint,
+                  onChanged: _onSearchChanged,
                 ),
-              ),
-              Expanded(
-                child: ScopedBuilder<AnimeListStore, Exception, AnimesModel>(
-                  store: _pageController.animeListStore,
-                  onLoading: (_) => Center(
-                    child: CircularProgressIndicator(
-                      color: colors!.primary,
-                    ),
+                PaddingBox.verticalXS(
+                  child: ScopedBuilder<GenresStore, Exception, GenresModel>(
+                    store: _pageController.genresStore,
+                    onLoading: (_) => const SizedBox(),
+                    onState: (_, state) {
+                      final genreList = state.genres;
+                      return genreList.isNotEmpty
+                          ? FilterSelectChipList(
+                              onSelected: (isSelected, index) {
+                                _pageController.getAnimesByGenre(
+                                  genreList[index].id.toString(),
+                                  isSelected,
+                                );
+                              },
+                              items: genreList.map((e) => e.name).toList(),
+                            )
+                          : const SizedBox();
+                    },
+                    onError: (_, error) => const SizedBox(),
                   ),
-                  onState: (_, state) {
-                    final animeList = state.animes;
-                    return animeList.isNotEmpty
-                        ? Stack(
-                            children: [
-                              Column(
-                                children: [
-                                  Expanded(
-                                    child: CardList(
-                                      scrollController: _scrollController,
-                                      items: animeList
-                                          .map(
-                                            (e) => LabeledCardItem(
-                                              imageUrl: e.image,
-                                              labels: [
-                                                LabeledCardText(
-                                                  title: 'Título:',
-                                                  subtitle: e.title,
-                                                ),
-                                                LabeledCardText(
-                                                  title: 'Gênero:',
-                                                  subtitle: e.genres.isNotEmpty
-                                                      ? e.genres.join(", ")
-                                                      : '-',
-                                                ),
-                                                LabeledCardText(
-                                                  title: 'Episódios:',
-                                                  subtitle:
-                                                      e.totalEpisodes == -1
-                                                          ? 'Em breve'
-                                                          : e.totalEpisodes
-                                                              .toString(),
-                                                ),
-                                                LabeledCardText(
-                                                  title: 'Data de lançamento:',
-                                                  subtitle: e.release.isNotEmpty
-                                                      ? e.release
-                                                          .convertDateToBrLocale()
-                                                      : 'Em breve',
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                          .toList(),
-                                      onTap: (index) {},
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              AnimatedPositioned(
-                                duration: const Duration(milliseconds: 300),
-                                bottom: state.isLoadingNewPage ? 48 : 0,
-                                left: 0,
-                                right: 0,
-                                child: AnimatedOpacity(
-                                  duration: const Duration(milliseconds: 300),
-                                  opacity: state.isLoadingNewPage ? 1 : 0,
-                                  child: DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      color: colors?.surface,
-                                      shape: BoxShape.circle,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: colors!.onSurface.withOpacity(
-                                            0.5,
-                                          ),
-                                          blurRadius: 2,
-                                          offset: const Offset(0, 2),
-                                        ),
-                                      ],
-                                    ),
-                                    child: PaddingBox.allFactor(
-                                      factor: 0.5,
-                                      child: CircleAvatar(
-                                        backgroundColor: Colors.transparent,
-                                        child: CircularProgressIndicator(
-                                          color: colors.primary,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 16,
-                                right: 0,
-                                child: Column(
+                ),
+                Expanded(
+                  child: ScopedBuilder<AnimeListStore, Exception, AnimesModel>(
+                    store: _pageController.animeListStore,
+                    onLoading: (_) => Center(
+                      child: CircularProgressIndicator(
+                        color: colors!.primary,
+                      ),
+                    ),
+                    onState: (_, state) {
+                      final animeList = state.animes;
+                      return animeList.isNotEmpty
+                          ? Stack(
+                              children: [
+                                Column(
                                   children: [
-                                    IconButton(
-                                      color: colors.onPrimary,
-                                      style: IconButton.styleFrom(
-                                        backgroundColor: colors.primary,
-                                        padding: const EdgeInsets.all(12),
+                                    Expanded(
+                                      child: CardList(
+                                        scrollController: _scrollController,
+                                        items: animeList
+                                            .map(
+                                              (e) => LabeledCardItem(
+                                                imageUrl: e.image,
+                                                labels: [
+                                                  LabeledCardText(
+                                                    title: 'Título:',
+                                                    subtitle: e.title,
+                                                  ),
+                                                  LabeledCardText(
+                                                    title: 'Gênero:',
+                                                    subtitle: e
+                                                            .genres.isNotEmpty
+                                                        ? e.genres.join(", ")
+                                                        : '-',
+                                                  ),
+                                                  LabeledCardText(
+                                                    title: 'Episódios:',
+                                                    subtitle:
+                                                        e.totalEpisodes == -1
+                                                            ? 'Em breve'
+                                                            : e.totalEpisodes
+                                                                .toString(),
+                                                  ),
+                                                  LabeledCardText(
+                                                    title:
+                                                        'Data de lançamento:',
+                                                    subtitle: e
+                                                            .release.isNotEmpty
+                                                        ? e.release
+                                                            .convertDateToBrLocale()
+                                                        : 'Em breve',
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                            .toList(),
+                                        onTap: (index) {},
                                       ),
-                                      onPressed: () {
-                                        _scrollController.jumpTo(
-                                          0,
-                                        );
-                                      },
-                                      icon: const Icon(Icons.arrow_upward),
-                                    ),
-                                    SpacerBox.verticalXS(),
-                                    IconButton(
-                                      color: colors.onPrimary,
-                                      style: IconButton.styleFrom(
-                                        backgroundColor: colors.primary,
-                                        padding: const EdgeInsets.all(12),
-                                      ),
-                                      onPressed: () {},
-                                      icon: const Icon(Icons.favorite),
                                     ),
                                   ],
                                 ),
-                              ),
-                            ],
-                          )
-                        : const Text('lista vazia');
-                  },
-                  onError: (_, error) => Column(
-                    children: [
-                      const Text('error'),
-                      TextButton(
-                        onPressed: () {
-                          _pageController.animeListStore.getAnimeList();
-                        },
-                        child: const Text('tentar novamente'),
-                      ),
-                    ],
+                                AnimatedPositioned(
+                                  duration: const Duration(milliseconds: 300),
+                                  bottom: state.isLoadingNewPage ? 48 : 0,
+                                  left: 0,
+                                  right: 0,
+                                  child: AnimatedOpacity(
+                                    duration: const Duration(milliseconds: 300),
+                                    opacity: state.isLoadingNewPage ? 1 : 0,
+                                    child: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                        color: colors?.surface,
+                                        shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                colors!.onSurface.withOpacity(
+                                              0.5,
+                                            ),
+                                            blurRadius: 2,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: PaddingBox.allFactor(
+                                        factor: 0.5,
+                                        child: CircleAvatar(
+                                          backgroundColor: Colors.transparent,
+                                          child: CircularProgressIndicator(
+                                            color: colors.primary,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 16,
+                                  right: 0,
+                                  child: Column(
+                                    children: [
+                                      IconButton(
+                                        color: colors.onPrimary,
+                                        style: IconButton.styleFrom(
+                                          backgroundColor: colors.primary,
+                                          padding: const EdgeInsets.all(12),
+                                        ),
+                                        onPressed: () {
+                                          _scrollController.jumpTo(
+                                            0,
+                                          );
+                                        },
+                                        icon: const Icon(Icons.arrow_upward),
+                                      ),
+                                      SpacerBox.verticalXS(),
+                                      IconButton(
+                                        color: colors.onPrimary,
+                                        style: IconButton.styleFrom(
+                                          backgroundColor: colors.primary,
+                                          padding: const EdgeInsets.all(12),
+                                        ),
+                                        onPressed: () {},
+                                        icon: const Icon(Icons.favorite),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            )
+                          : const Text('lista vazia');
+                    },
+                    onError: (_, error) => Column(
+                      children: [
+                        const Text('error'),
+                        TextButton(
+                          onPressed: () {
+                            _pageController.animeListStore.getAnimeList();
+                          },
+                          child: const Text('tentar novamente'),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
