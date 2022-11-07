@@ -11,6 +11,7 @@ import 'atoms/labeled_icon_button_component.dart';
 import 'atoms/regular_row_component.dart';
 import 'molecules/app_search_bar_component.dart';
 import 'molecules/card_list_component.dart';
+import 'molecules/failure_component.dart';
 import 'molecules/filter_select_chip_list.dart';
 import 'molecules/image_card_button_component.dart';
 
@@ -41,6 +42,7 @@ class WidgetbookHotReload extends StatelessWidget {
                 AppSearchBarComponent(),
                 ImageCardButtonComponent(),
                 CardListComponent(),
+                FailureComponent(),
               ],
             ),
           ],
