@@ -69,8 +69,13 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
   }
 
   @override
-  Future<Result<List<Anime>>> getAnimeListBySearch(String query) async {
-    final result = _wrapper(() => _dio.get('/anime?q=$query'));
+  Future<Result<List<Anime>>> getAnimeListBySearch(
+    String query,
+    int page,
+  ) async {
+    final result = _wrapper(
+      () => _dio.get('/anime?q=$query&page=$page'),
+    );
     return result.then(
       (value) => value.when(
         success: (success) {

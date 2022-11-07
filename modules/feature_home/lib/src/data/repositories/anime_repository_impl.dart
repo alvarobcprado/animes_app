@@ -44,8 +44,11 @@ class AnimeRepositoryImpl implements AnimeRepository {
   }
 
   @override
-  Future<Result<List<Anime>>> getAnimeListBySearch(String query) async {
-    return await _remoteDataSource.getAnimeListBySearch(query);
+  Future<Result<List<Anime>>> getAnimeListBySearch(
+    String query,
+    int page,
+  ) async {
+    return await _remoteDataSource.getAnimeListBySearch(query, page);
   }
 
   @override
