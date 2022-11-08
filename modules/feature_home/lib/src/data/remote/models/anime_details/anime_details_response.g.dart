@@ -9,7 +9,7 @@ part of 'anime_details_response.dart';
 AnimeDetailsResponse _$AnimeDetailsResponseFromJson(
         Map<String, dynamic> json) =>
     AnimeDetailsResponse(
-      json['malId'] as int?,
+      json['mal_id'] as int?,
       json['title'] as String?,
       json['title_english'] as String?,
       json['images'] == null
@@ -27,7 +27,7 @@ AnimeDetailsResponse _$AnimeDetailsResponseFromJson(
 Map<String, dynamic> _$AnimeDetailsResponseToJson(
         AnimeDetailsResponse instance) =>
     <String, dynamic>{
-      'malId': instance.id,
+      'mal_id': instance.id,
       'title': instance.title,
       'title_english': instance.titleEnglish,
       'images': instance.images,

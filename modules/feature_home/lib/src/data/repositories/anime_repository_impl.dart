@@ -19,7 +19,22 @@ class AnimeRepositoryImpl implements AnimeRepository {
 
   @override
   Future<Result<AnimeDetails>> getAnimeDetails(int id) async {
-    return await _remoteDataSource.getAnimeDetails(id);
+    final result = await _remoteDataSource.getAnimeDetails(id);
+    return result.when(success: (animeDetails) async {
+      await _cacheDataSource.saveAnimeDetails(animeDetails.toCache());
+      return await _getAnimeDetailsFromCache(id);
+    }, error: (error) async {
+      return await _getAnimeDetailsFromCache(id);
+    });
+  }
+
+  Future<Result<AnimeDetails>> _getAnimeDetailsFromCache(int id) async {
+    final resultCache = await _cacheDataSource.getAnimeDetails(id);
+    return resultCache.when(success: (animeDetailsCache) async {
+      return Result.success(animeDetailsCache.toDomain());
+    }, error: (error) async {
+      return Result.error(error);
+    });
   }
 
   @override
