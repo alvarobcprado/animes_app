@@ -36,12 +36,11 @@ class AnimeDetailsPage extends StatefulWidget {
 }
 
 class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
-  late AnimeDetailsController _pageController;
+  AnimeDetailsController get _pageController => widget.controller;
 
   @override
   void initState() {
     super.initState();
-    _pageController = widget.controller;
     _pageController.getAnimeDetails(widget.animeId);
   }
 
