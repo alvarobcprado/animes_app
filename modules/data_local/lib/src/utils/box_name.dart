@@ -3,5 +3,4 @@ class BoxName {
   static const animeDetails = 'details';
   static const animeGenres = 'genres';
   static const animeList = 'anime-list';
-  static const searchedAnime = 'search';
 }
