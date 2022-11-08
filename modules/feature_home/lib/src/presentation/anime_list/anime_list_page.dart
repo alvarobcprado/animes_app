@@ -247,17 +247,11 @@ class _AnimeListPageState extends State<AnimeListPage> {
                             )
                           : const Text('lista vazia');
                     },
-                    onError: (_, error) => Column(
-                      children: [
-                        const Text('error'),
-                        TextButton(
-                          onPressed: () {
-                            _pageController.animeListStore.getAnimeList();
-                          },
-                          child: const Text('tentar novamente'),
-                        ),
-                      ],
-                    ),
+                    onError: (_, error) => Failure(
+                        message: 'Ocorreu um erro',
+                        buttonText: 'Tentar novamente',
+                        onButtonPressed: () =>
+                            _pageController.animeListStore.getAnimeList()),
                   ),
                 ),
               ],
