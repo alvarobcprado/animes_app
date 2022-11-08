@@ -35,7 +35,7 @@ class AnimeListPage extends StatefulWidget {
 class _AnimeListPageState extends State<AnimeListPage> {
   late TextEditingController _searchController;
   late ScrollController _scrollController;
-  late AnimeListController _pageController;
+  AnimeListController get _pageController => widget.controller;
   late String _lastSearchQuery = '';
   final String _searchHint = 'Digite o nome do anime que procura';
 
@@ -44,7 +44,6 @@ class _AnimeListPageState extends State<AnimeListPage> {
     super.initState();
     _setupScrollController();
     _setupSearchController();
-    _pageController = widget.controller;
     _pageController.genresStore.getGenres();
     _pageController.animeListStore.getAnimeList();
   }
