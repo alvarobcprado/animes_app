@@ -1,4 +1,5 @@
 {
   "@@ locale": "pt_BR",
-  "Teste": "Teste"
+  "occurredError": "Ocorreu um erro",
+  "connectionFail": "Falha na conexão"
 }
