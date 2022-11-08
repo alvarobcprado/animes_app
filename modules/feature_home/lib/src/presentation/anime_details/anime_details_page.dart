@@ -65,9 +65,11 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                 onLoading: (_) => const Center(
                   child: CircularProgressIndicator(),
                 ),
-                onError: (_, error) => Center(
-                  child: Text(error.toString()),
-                ),
+                onError: (_, error) => Failure(
+                    message: 'Ocorreu um erro',
+                    buttonText: 'Tentar novamente',
+                    onButtonPressed: () => _pageController.animeDetailsStore
+                        .getAnimeDetails(widget.animeId)),
                 onState: (context, state) {
                   final animeDetail = state.animeDetails;
                   if (animeDetail == null) {
