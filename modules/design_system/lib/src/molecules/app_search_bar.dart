@@ -54,6 +54,11 @@ class _AppSearchBarState extends State<AppSearchBar> {
     }
   }
 
+  void _onClearField() {
+    widget.controller.clear();
+    widget.onChanged?.call('');
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -79,7 +84,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
         ),
         suffixIcon: _hasClearButton
             ? GestureDetector(
-                onTap: widget.controller.clear,
+                onTap: _onClearField,
                 child: Icon(
                   Icons.clear,
                   color: colors.primary,
