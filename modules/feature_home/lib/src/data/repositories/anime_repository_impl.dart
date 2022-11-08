@@ -33,16 +33,12 @@ class AnimeRepositoryImpl implements AnimeRepository {
     final resultCache = await _cacheDataSource.getAnimeDetails(id);
     return resultCache.when(success: (animeDetailsCache) async {
       final animeDetails = animeDetailsCache.toDomain();
-      animeDetails.isFavorite = await _favoriteListContainsAnime(id);
+      animeDetails.isFavorite =
+          await _cacheDataSource.verifyIfAnimeIsFavorite(id);
       return Result.success(animeDetails);
     }, error: (error) async {
       return Result.error(error);
     });
-  }
-
-  Future<bool> _favoriteListContainsAnime(int id) async {
-    final favorites = await _cacheDataSource.getFavoriteAnimes();
-    return favorites.map((e) => e.id).toList().contains(id);
   }
 
   @override

@@ -13,4 +13,5 @@ abstract class AnimeCacheDataSource {
   Future<Result<List<GenreAuxiliarCache>>> getAnimeGenres();
   Future<Result<List<AnimeAuxiliarCache>>> getAnimeListBySearch(String query);
   Future<List<AnimeDetailsAuxiliarCache>> getFavoriteAnimes();
+  Future<bool> verifyIfAnimeIsFavorite(int animeId);
 }

@@ -91,4 +91,13 @@ class AnimeCacheDataSourceImpl implements AnimeCacheDataSource {
     final box = await _hive.openBox(BoxName.favoriteAnimes);
     await box.put(animeCache.id, animeCache);
   }
+
+  @override
+  Future<bool> verifyIfAnimeIsFavorite(int animeId) async {
+    final box = await _hive.openBox(BoxName.favoriteAnimes);
+    if (box.containsKey(animeId)) {
+      return true;
+    }
+    return false;
+  }
 }
