@@ -16,13 +16,12 @@ class AnimeDetailsPage extends StatefulWidget {
   final AnimeDetailsController controller;
   final int animeId;
 
-  static Widget create(int animeId) => ProxyProvider2<AnimeDetailsStore,
-          ToggleFavoriteAnimeStore, AnimeDetailsController>(
-        update: (_, animeDetailsStore, toggleFavoriteAnimeStore, controller) =>
+  static Widget create(int animeId) =>
+      ProxyProvider<AnimeDetailsStore, AnimeDetailsController>(
+        update: (_, animeDetailsStore, controller) =>
             controller ??
             AnimeDetailsController(
               animeDetailsStore,
-              toggleFavoriteAnimeStore,
             ),
         child: Consumer<AnimeDetailsController>(
           builder: (_, controller, __) => AnimeDetailsPage(
@@ -85,8 +84,7 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                         buttonLabel: 'Favoritar',
                         imageUrl: animeDetail.image,
                         onButtonPressed: () {
-                          _pageController.animeDetailsStore
-                              .toggleFavoriteAnime(animeDetail);
+                          _pageController.toggleFavoriteAnime(animeDetail);
                         },
                       ),
                       SpacerBox.verticalS(),
