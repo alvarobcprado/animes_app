@@ -1,0 +1,8 @@
+arb-dir: lib/l10n
+template-arb-file: home_en.arb
+
+output-localization-file: home_strings.dart
+output-class: HomeStrings
+
+output-dir: lib/generated
+synthetic-package: false
