@@ -8,62 +8,87 @@ class SpacerBox extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  factory SpacerBox.customFactor({
+  const SpacerBox.customFactor({
+    Key? key,
     double horizontalFactor = 0,
     double verticalFactor = 0,
-  }) =>
-      SpacerBox._(
-        height: AppSizesFoundation.baseSpace * verticalFactor,
-        width: AppSizesFoundation.baseSpace * horizontalFactor,
-      );
+  }) : this._(
+          key: key,
+          height: AppSizesFoundation.baseSpace * verticalFactor,
+          width: AppSizesFoundation.baseSpace * horizontalFactor,
+        );
 
-  factory SpacerBox.verticalFactor({double sizeFactor = 0}) => SpacerBox._(
-        height: sizeFactor * AppSizesFoundation.baseSpace,
-      );
+  const SpacerBox.verticalFactor({double sizeFactor = 0, Key? key})
+      : this.customFactor(
+          key: key,
+          verticalFactor: sizeFactor,
+        );
 
-  factory SpacerBox.horizontalFactor({double sizeFactor = 0}) => SpacerBox._(
-        width: sizeFactor * AppSizesFoundation.baseSpace,
-      );
+  const SpacerBox.horizontalFactor({double sizeFactor = 0, Key? key})
+      : this.customFactor(
+          key: key,
+          horizontalFactor: sizeFactor,
+        );
 
-  factory SpacerBox.horizontalXS() => const SpacerBox._(
-        width: 1 * AppSizesFoundation.baseSpace,
-      );
+  const SpacerBox.horizontalXS({Key? key})
+      : this.customFactor(
+          key: key,
+          horizontalFactor: 1,
+        );
 
-  factory SpacerBox.horizontalS() => const SpacerBox._(
-        width: 2 * AppSizesFoundation.baseSpace,
-      );
+  const SpacerBox.horizontalS({Key? key})
+      : this.customFactor(
+          key: key,
+          horizontalFactor: 2,
+        );
 
-  factory SpacerBox.horizontalM() => const SpacerBox._(
-        width: 4 * AppSizesFoundation.baseSpace,
-      );
+  const SpacerBox.horizontalM({Key? key})
+      : this.customFactor(
+          key: key,
+          horizontalFactor: 4,
+        );
 
-  factory SpacerBox.horizontalL() => const SpacerBox._(
-        width: 8 * AppSizesFoundation.baseSpace,
-      );
+  const SpacerBox.horizontalL({Key? key})
+      : this.customFactor(
+          key: key,
+          horizontalFactor: 8,
+        );
 
-  factory SpacerBox.horizontalXL() => const SpacerBox._(
-        width: 16 * AppSizesFoundation.baseSpace,
-      );
+  const SpacerBox.horizontalXL({Key? key})
+      : this.customFactor(
+          key: key,
+          horizontalFactor: 16,
+        );
 
-  factory SpacerBox.verticalXS() => const SpacerBox._(
-        height: 1 * AppSizesFoundation.baseSpace,
-      );
+  const SpacerBox.verticalXS({Key? key})
+      : this.customFactor(
+          key: key,
+          verticalFactor: 1,
+        );
 
-  factory SpacerBox.verticalS() => const SpacerBox._(
-        height: 2 * AppSizesFoundation.baseSpace,
-      );
+  const SpacerBox.verticalS({Key? key})
+      : this.customFactor(
+          key: key,
+          verticalFactor: 2,
+        );
 
-  factory SpacerBox.verticalM() => const SpacerBox._(
-        height: 4 * AppSizesFoundation.baseSpace,
-      );
+  const SpacerBox.verticalM({Key? key})
+      : this.customFactor(
+          key: key,
+          verticalFactor: 4,
+        );
 
-  factory SpacerBox.verticalL() => const SpacerBox._(
-        height: 8 * AppSizesFoundation.baseSpace,
-      );
+  const SpacerBox.verticalL({Key? key})
+      : this.customFactor(
+          key: key,
+          verticalFactor: 8,
+        );
 
-  factory SpacerBox.verticalXL() => const SpacerBox._(
-        height: 16 * AppSizesFoundation.baseSpace,
-      );
+  const SpacerBox.verticalXL({Key? key})
+      : this.customFactor(
+          key: key,
+          verticalFactor: 16,
+        );
 
   final double? height;
   final double? width;
