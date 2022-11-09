@@ -50,11 +50,21 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Teste`
-  String get Teste {
+  /// `An occurred error`
+  String get occurredError {
     return Intl.message(
-      'Teste',
-      name: 'Teste',
+      'An occurred error',
+      name: 'occurredError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Connection fail`
+  String get connectionFail {
+    return Intl.message(
+      'Connection fail',
+      name: 'connectionFail',
       desc: '',
       args: [],
     );
