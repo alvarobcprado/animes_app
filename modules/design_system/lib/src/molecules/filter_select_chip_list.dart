@@ -19,6 +19,8 @@ class FilterSelectChipList extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: items.length,
+        addAutomaticKeepAlives: false,
+        addRepaintBoundaries: false,
         separatorBuilder: (context, index) => const SpacerBox.horizontalXS(),
         itemBuilder: (context, index) {
           return LabeledChip(
