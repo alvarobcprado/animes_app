@@ -45,7 +45,7 @@ class LabeledCard extends StatelessWidget {
                 ),
               ),
             ),
-            SpacerBox.horizontalXS(),
+            const SpacerBox.horizontalXS(),
             Expanded(
               flex: 2,
               child: SingleChildScrollView(
@@ -62,7 +62,7 @@ class LabeledCard extends StatelessWidget {
                 ),
               ),
             ),
-            SpacerBox.horizontalXS(),
+            const SpacerBox.horizontalXS(),
           ],
         ),
       ),
