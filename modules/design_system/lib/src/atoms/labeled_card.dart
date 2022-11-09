@@ -83,14 +83,14 @@ class _LabeledCardInfo extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ...item.labels.map(
-              (label) => RegularRow(
-                title: label.title,
-                subtitle: label.subtitle,
-              ),
-            ),
-          ],
+          children: item.labels
+              .map(
+                (label) => RegularRow(
+                  title: label.title,
+                  subtitle: label.subtitle,
+                ),
+              )
+              .toList(),
         ),
       ),
     );
