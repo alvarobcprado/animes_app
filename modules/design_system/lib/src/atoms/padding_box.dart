@@ -8,153 +8,165 @@ class PaddingBox extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  factory PaddingBox.ltrbFactor({
+  PaddingBox.ltrbFactor({
     double leftFactor = 0,
     double rightFactor = 0,
     double topFactor = 0,
     double bottomFactor = 0,
     required Widget child,
-  }) =>
-      PaddingBox(
-        padding: EdgeInsets.fromLTRB(
-          leftFactor * AppSizesFoundation.baseSpace,
-          topFactor * AppSizesFoundation.baseSpace,
-          rightFactor * AppSizesFoundation.baseSpace,
-          bottomFactor * AppSizesFoundation.baseSpace,
-        ),
-        child: child,
-      );
+    Key? key,
+  }) : this(
+          child: child,
+          key: key,
+          padding: EdgeInsets.fromLTRB(
+            AppSizesFoundation.baseSpace * leftFactor,
+            AppSizesFoundation.baseSpace * topFactor,
+            AppSizesFoundation.baseSpace * rightFactor,
+            AppSizesFoundation.baseSpace * bottomFactor,
+          ),
+        );
 
-  factory PaddingBox.allFactor({
+  PaddingBox.allFactor({
     required Widget child,
-    double factor = 0,
-  }) =>
-      PaddingBox(
-        padding: EdgeInsets.all(factor * AppSizesFoundation.baseSpace),
-        child: child,
-      );
+    required double factor,
+    Key? key,
+  }) : this(
+          child: child,
+          key: key,
+          padding: EdgeInsets.all(AppSizesFoundation.baseSpace * factor),
+        );
 
-  factory PaddingBox.verticalFactor({
-    double factor = 0,
-    required Widget child,
-  }) =>
-      PaddingBox(
-        padding: EdgeInsets.symmetric(
-          vertical: factor * AppSizesFoundation.baseSpace,
-        ),
-        child: child,
-      );
-
-  factory PaddingBox.horizontalFactor({
+  PaddingBox.verticalFactor({
     double factor = 0,
     required Widget child,
-  }) =>
-      PaddingBox(
-        padding: EdgeInsets.symmetric(
-          horizontal: factor * AppSizesFoundation.baseSpace,
-        ),
-        child: child,
-      );
+    Key? key,
+  }) : this(
+          child: child,
+          key: key,
+          padding: EdgeInsets.symmetric(
+            vertical: AppSizesFoundation.baseSpace * factor,
+          ),
+        );
 
-  factory PaddingBox.verticalXS({
+  PaddingBox.horizontalFactor({
+    double factor = 0,
     required Widget child,
-  }) =>
-      PaddingBox(
-        padding: const EdgeInsets.symmetric(
-          vertical: 1 * AppSizesFoundation.baseSpace,
-        ),
-        child: child,
-      );
+    Key? key,
+  }) : this(
+          child: child,
+          key: key,
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSizesFoundation.baseSpace * factor,
+          ),
+        );
 
-  factory PaddingBox.verticalS({
+  const PaddingBox.verticalXS({
     required Widget child,
-  }) =>
-      PaddingBox(
-        padding: const EdgeInsets.symmetric(
-          vertical: 2 * AppSizesFoundation.baseSpace,
-        ),
-        child: child,
-      );
+    Key? key,
+  }) : this(
+          child: child,
+          key: key,
+          padding: const EdgeInsets.symmetric(vertical: 1),
+        );
 
-  factory PaddingBox.verticalM({
+  const PaddingBox.verticalS({
     required Widget child,
-  }) =>
-      PaddingBox(
-        padding: const EdgeInsets.symmetric(
-          vertical: 4 * AppSizesFoundation.baseSpace,
-        ),
-        child: child,
-      );
+    Key? key,
+  }) : this(
+          padding: const EdgeInsets.symmetric(
+            vertical: 2 * AppSizesFoundation.baseSpace,
+          ),
+          key: key,
+          child: child,
+        );
 
-  factory PaddingBox.verticalL({
+  const PaddingBox.verticalM({
     required Widget child,
-  }) =>
-      PaddingBox(
-        padding: const EdgeInsets.symmetric(
-          vertical: 8 * AppSizesFoundation.baseSpace,
-        ),
-        child: child,
-      );
+    Key? key,
+  }) : this(
+          padding: const EdgeInsets.symmetric(
+            vertical: 4 * AppSizesFoundation.baseSpace,
+          ),
+          key: key,
+          child: child,
+        );
 
-  factory PaddingBox.verticalXL({
+  const PaddingBox.verticalL({
     required Widget child,
-  }) =>
-      PaddingBox(
-        padding: const EdgeInsets.symmetric(
-          vertical: 16 * AppSizesFoundation.baseSpace,
-        ),
-        child: child,
-      );
+    Key? key,
+  }) : this(
+          padding: const EdgeInsets.symmetric(
+            vertical: 8 * AppSizesFoundation.baseSpace,
+          ),
+          key: key,
+          child: child,
+        );
 
-  factory PaddingBox.horizontalXS({
+  const PaddingBox.verticalXL({
     required Widget child,
-  }) =>
-      PaddingBox(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 1 * AppSizesFoundation.baseSpace,
-        ),
-        child: child,
-      );
+    Key? key,
+  }) : this(
+          padding: const EdgeInsets.symmetric(
+            vertical: 16 * AppSizesFoundation.baseSpace,
+          ),
+          key: key,
+          child: child,
+        );
 
-  factory PaddingBox.horizontalS({
+  const PaddingBox.horizontalXS({
     required Widget child,
-  }) =>
-      PaddingBox(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 2 * AppSizesFoundation.baseSpace,
-        ),
-        child: child,
-      );
+    Key? key,
+  }) : this(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 1 * AppSizesFoundation.baseSpace,
+          ),
+          key: key,
+          child: child,
+        );
 
-  factory PaddingBox.horizontalM({
+  const PaddingBox.horizontalS({
     required Widget child,
-  }) =>
-      PaddingBox(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 4 * AppSizesFoundation.baseSpace,
-        ),
-        child: child,
-      );
+    Key? key,
+  }) : this(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 2 * AppSizesFoundation.baseSpace,
+          ),
+          key: key,
+          child: child,
+        );
 
-  factory PaddingBox.horizontalL({
+  const PaddingBox.horizontalM({
     required Widget child,
-  }) =>
-      PaddingBox(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 8 * AppSizesFoundation.baseSpace,
-        ),
-        child: child,
-      );
+    Key? key,
+  }) : this(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 4 * AppSizesFoundation.baseSpace,
+          ),
+          key: key,
+          child: child,
+        );
 
-  factory PaddingBox.horizontalXL({
+  const PaddingBox.horizontalL({
     required Widget child,
-  }) =>
-      PaddingBox(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16 * AppSizesFoundation.baseSpace,
-        ),
-        child: child,
-      );
+    Key? key,
+  }) : this(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 8 * AppSizesFoundation.baseSpace,
+          ),
+          key: key,
+          child: child,
+        );
+
+  const PaddingBox.horizontalXL({
+    required Widget child,
+    Key? key,
+  }) : this(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16 * AppSizesFoundation.baseSpace,
+          ),
+          key: key,
+          child: child,
+        );
 
   final EdgeInsets padding;
   final Widget child;
