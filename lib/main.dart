@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const [Locale('pt'), Locale('en')],
+        supportedLocales: CoreStrings.supportedLocales,
       ),
     );
   }
