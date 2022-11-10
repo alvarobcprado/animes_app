@@ -1,5 +1,5 @@
-import 'package:core/dependencies/routing.dart';
 import 'package:core/core.dart';
+import 'package:core/dependencies/routing.dart';
 import 'package:data_local/src/shared/shared.dart';
 import 'package:dependency_injection/dependency_injection.dart';
 import 'package:design_system/design_system.dart';
@@ -42,7 +42,10 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: CoreStrings.supportedLocales,
+        supportedLocales: const [
+          ...CoreStrings.supportedLocales,
+          ...HomeStrings.supportedLocales,
+        ],
       ),
     );
   }
