@@ -1,3 +1,10 @@
 {
-  "@@ locale": "en_US"
+  "@@ locale": "en_US",
+  "animeDetailsPageOriginalTitle": "Original title:",
+  "animeDetailsPageEnglishTitle": "English title:",
+  "animeDetailsPageRelease": "Release:",
+  "animeDetailsPageEnd": "End:",
+  "animeDetailsPageNote": "Note:",
+  "animeDetailsPageSynopsis": "Synopsis:",
+  "animeDetailsPageFavorite": "Favorite"
 }
