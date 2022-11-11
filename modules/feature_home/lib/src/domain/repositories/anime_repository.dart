@@ -5,8 +5,8 @@ abstract class AnimeRepository {
   Future<Result<List<Anime>>> getAnimeList(int page);
   Future<Result<AnimeDetails>> getAnimeDetails(int id);
   Future<Result<List<Genre>>> getAnimeGenres();
+  Future<Result<void>> toggleFavoriteAnime(AnimeDetails animeDetails);
+  Future<Result<List<AnimeDetails>>> getFavoriteAnimes();
   Future<Result<List<Anime>>> getAnimeListBySearch(String query, int page);
   Future<Result<List<Anime>>> getAnimeListByGenre(String id, int page);
-  Future<Result<void>> toggleFavoriteAnime(int id);
-  Future<Result<List<Anime>>> getFavoriteAnimes();
 }

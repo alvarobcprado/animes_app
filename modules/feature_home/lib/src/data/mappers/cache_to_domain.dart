@@ -34,3 +34,18 @@ extension GenreListAuxiliarCacheToGenreList on List<GenreAuxiliarCache> {
     return map((genreAuxiliarCache) => Genre(genreAuxiliarCache.name, genreAuxiliarCache.id)).toList();
   }
 }
+
+extension AnimeDetailsListAuxiliarToAnimeDetailsList on List<AnimeDetailsAuxiliarCache> {
+  List<AnimeDetails> toDomain() {
+    return map((animeDetails) => AnimeDetails(
+      animeDetails.id,
+      animeDetails.title,
+      animeDetails.titleEnglish,
+      animeDetails.image,
+      animeDetails.release,
+      animeDetails.end,
+      animeDetails.synopsis,
+      animeDetails.score,
+    )).toList();
+  }
+}

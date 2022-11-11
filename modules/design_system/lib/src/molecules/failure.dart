@@ -24,7 +24,7 @@ class Failure extends StatelessWidget {
       children: [
         Text(
           message,
-          style: textStyles.h1,
+          style: textStyles.h5,
         ),
         const SpacerBox.verticalXS(),
         ElevatedButton(

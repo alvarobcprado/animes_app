@@ -39,3 +39,18 @@ extension AnimeCacheToAnimeAuxiliar on AnimeCache {
     );
   }
 }
+
+extension AnimeDetailsListCacheToAnimeDetailsListAuxiliar on List<AnimeDetailsCache> {
+  List<AnimeDetailsAuxiliarCache> toCacheAuxiliar() {
+    return map((animeDetailsCache) => AnimeDetailsAuxiliarCache(
+          animeDetailsCache.id,
+          animeDetailsCache.title,
+          animeDetailsCache.titleEnglish,
+          animeDetailsCache.image,
+          animeDetailsCache.release,
+          animeDetailsCache.end,
+          animeDetailsCache.synopsis,
+          animeDetailsCache.score,
+        )).toList();
+  }
+}

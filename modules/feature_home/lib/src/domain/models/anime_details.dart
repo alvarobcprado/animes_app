@@ -8,6 +8,7 @@ class AnimeDetails {
     this.end,
     this.synopsis,
     this.score,
+    {this.isFavorite = false}
   );
 
   final int id;
@@ -18,4 +19,5 @@ class AnimeDetails {
   final String end;
   final String synopsis;
   final double score;
+  bool isFavorite;
 }

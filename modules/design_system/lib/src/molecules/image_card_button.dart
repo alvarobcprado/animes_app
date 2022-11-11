@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:design_system/design_system.dart';
 import 'package:design_system/src/foundations/sizes.dart';
 import 'package:flutter/material.dart';
@@ -31,11 +33,12 @@ class ImageCardButton extends StatelessWidget {
     return AspectRatio(
       aspectRatio: MediaQuery.of(context).orientation == Orientation.portrait
           ? 16 / 9
-          : 16 / 4.5,
+          : 16 / 6.5,
       child: Card(
         elevation: 0,
         color: cardBackgroundColor ?? colors.primary,
         margin: EdgeInsets.zero,
+        clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSizesFoundation.baseSpace * 2),
           side: BorderSide.none,
@@ -43,13 +46,16 @@ class ImageCardButton extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(
-                AppSizesFoundation.baseSpace * 2,
-              ),
+            AppNetworkImage(
+              imageUrl: imageUrl,
+              fit: BoxFit.cover,
+              loadingColor: cardLoadingColor ?? colors.onPrimary,
+            ),
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
               child: AppNetworkImage(
                 imageUrl: imageUrl,
-                fit: BoxFit.cover,
+                fit: BoxFit.fitHeight,
                 loadingColor: cardLoadingColor ?? colors.onPrimary,
               ),
             ),

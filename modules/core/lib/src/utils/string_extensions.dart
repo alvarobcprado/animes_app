@@ -1,10 +1,18 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 extension StringExtensions on String {
-  String convertDateToBrLocale() {
-    const dateFormat = 'dd/MM/yyyy';
-    final dateTime = DateTime.parse(this);
+  String convertDateToCurrentLocale(BuildContext context) {
+    try {
+      final currentLocal = Localizations.localeOf(context);
 
-    return DateFormat(dateFormat).format(dateTime);
+      final dateFormat =
+          currentLocal == const Locale('pt') ? 'dd/MM/yyyy' : 'MM/dd/yyyy';
+      final dateTime = DateTime.parse(this);
+
+      return DateFormat(dateFormat).format(dateTime);
+    } catch (e) {
+      return '';
+    }
   }
 }

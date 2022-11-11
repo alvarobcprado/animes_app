@@ -5,5 +5,12 @@
   "animeListPageLabeledCardGenre": "Gênero:",
   "animeListPageLabeledCardEpisodes": "Episódios:",
   "animeListPageLabeledCardRelease": "Data de lançamento:",
-  "animeListPageInformationSoon": "Em breve"
+  "animeListPageInformationSoon": "Em breve",
+  "animeDetailsPageOriginalTitle": "Título original:",
+  "animeDetailsPageEnglishTitle": "Título inglês:",
+  "animeDetailsPageRelease": "Data de lançamento:",
+  "animeDetailsPageEnd": "Data de encerramento:",
+  "animeDetailsPageNote": "Nota:",
+  "animeDetailsPageSynopsis": "Sinopse:",
+  "animeDetailsPageFavorite": "Favoritar"
 }
