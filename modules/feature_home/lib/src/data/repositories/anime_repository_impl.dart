@@ -23,6 +23,8 @@ class AnimeRepositoryImpl implements AnimeRepository {
     final result = await _remoteDataSource.getAnimeDetails(id);
     return result.when(success: (animeDetails) async {
       await _cacheDataSource.saveAnimeDetails(animeDetails.toCache());
+      animeDetails.isFavorite =
+          await _cacheDataSource.verifyIfAnimeIsFavorite(id);
       return Result.success(animeDetails);
     }, error: (error) async {
       return await _getAnimeDetailsFromCache(id);
