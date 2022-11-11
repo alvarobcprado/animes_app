@@ -244,7 +244,8 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                           backgroundColor: colors.primary,
                                           padding: const EdgeInsets.all(12),
                                         ),
-                                        onPressed: () {},
+                                        onPressed: ()  =>
+                                            GoRouter.of(context).pushFavorite(),
                                         icon: const Icon(Icons.favorite),
                                       ),
                                     ],
