@@ -30,4 +30,11 @@ List<SingleChildWidget> storesProviders() => [
                   toggleFavoriteAnimeUseCase: togglefavoriteAnimeUseCase,
                 ),
       ),
+      ProxyProvider<GetFavoriteAnimesUseCase, FavoriteAnimesStore>(
+        update: (_, usecase, store) =>
+            store ??
+            FavoriteAnimesStore(
+              getFavoriteAnimesUseCase: usecase,
+            ),
+      ),
     ];
