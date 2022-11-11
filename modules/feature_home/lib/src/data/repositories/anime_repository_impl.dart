@@ -23,7 +23,7 @@ class AnimeRepositoryImpl implements AnimeRepository {
     final result = await _remoteDataSource.getAnimeDetails(id);
     return result.when(success: (animeDetails) async {
       await _cacheDataSource.saveAnimeDetails(animeDetails.toCache());
-      return await _getAnimeDetailsFromCache(id);
+      return Result.success(animeDetails);
     }, error: (error) async {
       return await _getAnimeDetailsFromCache(id);
     });
@@ -46,7 +46,7 @@ class AnimeRepositoryImpl implements AnimeRepository {
     final result = await _remoteDataSource.getAnimeGenres();
     return result.when(success: (genreList) async {
       await _cacheDataSource.saveAnimeGenres(genreList.toCache());
-      return await _getGenreListFromCache();
+      return Result.success(genreList);
     }, error: (error) async {
       return await _getGenreListFromCache();
     });
