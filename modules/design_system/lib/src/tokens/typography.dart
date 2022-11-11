@@ -47,4 +47,17 @@ abstract class AppTypography {
     fontStyle: FontStyle.normal,
     color: AppColors.onDarkError,
   );
+
+  static const TextStyle h5Light = TextStyle(
+    fontSize: 14,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.bold,
+    color: AppColors.onLightSurface,
+  );
+  static const TextStyle h5Dark = TextStyle(
+    fontSize: 14,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.bold,
+    color: AppColors.onDarkSurface,
+  );
 }
