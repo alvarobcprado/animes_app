@@ -14,7 +14,7 @@ class CardList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemCount: items.length,
-      separatorBuilder: (context, index) => SpacerBox.verticalS(),
+      separatorBuilder: (context, index) => const SpacerBox.verticalS(),
       itemBuilder: (context, index) {
         return LabeledCard(
           onTap: () => onTap(index),

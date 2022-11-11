@@ -14,55 +14,83 @@ class LabeledCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).extension<AppColorsFoundation>()!;
-    final orientation = MediaQuery.of(context).orientation;
 
-    return GestureDetector(
-      onTap: onTap,
+    return Card(
+      margin: EdgeInsets.zero,
+      color: colors.surface,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          AppSizesFoundation.baseSpace,
+        ),
+        side: BorderSide(
+          color: colors.primary,
+          width: 2,
+        ),
+      ),
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            _LabeledCardImage(item: item),
+            const SpacerBox.horizontalXS(),
+            _LabeledCardInfo(item: item),
+            const SpacerBox.horizontalXS(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _LabeledCardImage extends StatelessWidget {
+  const _LabeledCardImage({
+    Key? key,
+    required this.item,
+  }) : super(key: key);
+
+  final LabeledCardItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
       child: AspectRatio(
-        aspectRatio: orientation == Orientation.portrait ? 16 / 8 : 16 / 5,
-        child: Card(
-          margin: EdgeInsets.zero,
-          color: colors.surface,
-          clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              AppSizesFoundation.baseSpace,
-            ),
-            side: BorderSide(
-              color: colors.primary,
-              width: 2,
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Flexible(
-                flex: orientation == Orientation.portrait ? 3 : 2,
-                child: AppNetworkImage(
-                  imageUrl: item.imageUrl,
-                  fit: BoxFit.cover,
+        aspectRatio: MediaQuery.of(context).orientation == Orientation.portrait
+            ? 3 / 4
+            : 1,
+        child: AppNetworkImage(
+          imageUrl: item.imageUrl,
+          fit: BoxFit.fill,
+        ),
+      ),
+    );
+  }
+}
+
+class _LabeledCardInfo extends StatelessWidget {
+  const _LabeledCardInfo({
+    Key? key,
+    required this.item,
+  }) : super(key: key);
+
+  final LabeledCardItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 2,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: item.labels
+              .map(
+                (label) => RegularRow(
+                  title: label.title,
+                  subtitle: label.subtitle,
                 ),
-              ),
-              SpacerBox.horizontalXS(),
-              Flexible(
-                flex: 5,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ...item.labels.map(
-                        (label) => RegularRow(
-                          title: label.title,
-                          subtitle: label.subtitle,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SpacerBox.horizontalXS(),
-            ],
-          ),
+              )
+              .toList(),
         ),
       ),
     );

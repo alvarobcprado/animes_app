@@ -1,9 +1,10 @@
+import 'package:core/core.dart';
 import 'package:core/dependencies/routing.dart';
-import 'package:core/generated/l10n.dart';
 import 'package:data_local/src/shared/shared.dart';
 import 'package:dependency_injection/dependency_injection.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
+import 'package:feature_home/generated/home_strings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -35,12 +36,16 @@ class MyApp extends StatelessWidget {
         routeInformationParser: _router.routeInformationParser,
         routeInformationProvider: _router.routeInformationProvider,
         localizationsDelegates: const [
-          S.delegate,
+          CoreStrings.delegate,
+          HomeStrings.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: S.delegate.supportedLocales,
+        supportedLocales: const [
+          ...CoreStrings.supportedLocales,
+          ...HomeStrings.supportedLocales,
+        ],
       ),
     );
   }

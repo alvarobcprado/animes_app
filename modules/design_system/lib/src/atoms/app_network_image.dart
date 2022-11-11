@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:design_system/src/foundations/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -24,33 +25,29 @@ class AppNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).extension<AppColorsFoundation>()!;
-    return Image.network(
-      imageUrl,
+    return CachedNetworkImage(
+      imageUrl: imageUrl,
       width: width,
       height: height,
       fit: fit,
-      frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-        return AnimatedSwitcher(
-          duration: const Duration(
-            milliseconds: 250,
-          ),
-          child: frame != null
-              ? SizedBox.expand(child: child)
-              : Center(
-                  child: loadingPlaceholder ??
-                      CircularProgressIndicator(
-                        color: loadingColor ?? colors.primary,
-                      ),
-                ),
-        );
+      progressIndicatorBuilder: (_, __, progress) {
+        return loadingPlaceholder ??
+            Center(
+              child: CircularProgressIndicator(
+                color: loadingColor ?? colors.primary,
+                value: progress.progress,
+              ),
+            );
       },
-      errorBuilder: (_, __, ___) => SizedBox(
-        width: width,
-        height: height,
-        child: Center(
-          child: errorPlaceholder ?? const Placeholder(),
-        ),
-      ),
+      errorWidget: (context, url, error) =>
+          errorPlaceholder ??
+          Center(
+            child: errorPlaceholder ??
+                Icon(
+                  Icons.error,
+                  color: colors.error,
+                ),
+          ),
     );
   }
 }
