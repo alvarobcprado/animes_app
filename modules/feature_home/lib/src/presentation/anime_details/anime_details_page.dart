@@ -114,7 +114,7 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                         visible: animeDetail.release.isNotEmpty,
                         child: RegularRow(
                           title: HomeStrings.of(context)!.animeDetailsPageRelease,
-                          subtitle: animeDetail.release,
+                          subtitle: animeDetail.release.convertDateToCurrentLocale(context),
                           isLineRestricted: false,
                         ),
                       ),
@@ -122,7 +122,7 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                         visible: animeDetail.end.isNotEmpty,
                         child: RegularRow(
                           title: HomeStrings.of(context)!.animeDetailsPageEnd,
-                          subtitle: animeDetail.end,
+                          subtitle: animeDetail.end.convertDateToCurrentLocale(context),
                           isLineRestricted: false,
                         ),
                       ),
