@@ -48,5 +48,5 @@ extension HomeRoutesExtension on GoRouter {
 
   void pushDetails(int id) => pushNamed(_detailsRoute, params: {'id': '$id'});
 
-  void pushFavorite(int id) => pushNamed(_favoriteRoute);
+  void pushFavorite() => pushNamed(_favoriteRoute);
 }
