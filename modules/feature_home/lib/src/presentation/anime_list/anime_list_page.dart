@@ -3,6 +3,7 @@ import 'package:core/dependencies/dependency_injection.dart';
 import 'package:core/dependencies/state_management.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
+import 'package:feature_home/generated/home_strings.dart';
 import 'package:feature_home/src/presentation/anime_list/anime_list_controller.dart';
 import 'package:feature_home/src/presentation/anime_list/anime_list_state.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,6 @@ class _AnimeListPageState extends State<AnimeListPage> {
   late ScrollController _scrollController;
   AnimeListController get _pageController => widget.controller;
   late String _lastSearchQuery = '';
-  final String _searchHint = 'Digite o nome do anime que procura';
 
   @override
   void initState() {
@@ -93,7 +93,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
               children: [
                 AppSearchBar(
                   controller: _searchController,
-                  hintText: _searchHint,
+                  hintText: HomeStrings.of(context)!.animeListPageSearchHint,
                   onChanged: _onSearchChanged,
                 ),
                 PaddingBox.verticalXS(
@@ -141,32 +141,32 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                                 imageUrl: e.image,
                                                 labels: [
                                                   LabeledCardText(
-                                                    title: 'Título:',
+                                                    title: HomeStrings.of(context)!.animeListPageLabeledCardTitle,
                                                     subtitle: e.title,
                                                   ),
                                                   LabeledCardText(
-                                                    title: 'Gênero:',
+                                                    title: HomeStrings.of(context)!.animeListPageLabeledCardGenre,
                                                     subtitle: e
                                                             .genres.isNotEmpty
                                                         ? e.genres.join(", ")
                                                         : '-',
                                                   ),
                                                   LabeledCardText(
-                                                    title: 'Episódios:',
+                                                    title: HomeStrings.of(context)!.animeListPageLabeledCardEpisodes,
                                                     subtitle:
                                                         e.totalEpisodes == -1
-                                                            ? 'Em breve'
+                                                            ? HomeStrings.of(context)!.animeListPageInformationSoon
                                                             : e.totalEpisodes
                                                                 .toString(),
                                                   ),
                                                   LabeledCardText(
                                                     title:
-                                                        'Data de lançamento:',
+                                                    HomeStrings.of(context)!.animeListPageLabeledCardRelease,
                                                     subtitle: e
                                                             .release.isNotEmpty
                                                         ? e.release
                                                             .convertDateToBrLocale()
-                                                        : 'Em breve',
+                                                        : HomeStrings.of(context)!.animeListPageInformationSoon,
                                                   ),
                                                 ],
                                               ),
@@ -230,7 +230,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                         },
                                         icon: const Icon(Icons.arrow_upward),
                                       ),
-                                      SpacerBox.verticalXS(),
+                                      const SpacerBox.verticalXS(),
                                       IconButton(
                                         color: colors.onPrimary,
                                         style: IconButton.styleFrom(
@@ -247,11 +247,14 @@ class _AnimeListPageState extends State<AnimeListPage> {
                             )
                           : const Text('lista vazia');
                     },
-                    onError: (_, error) => Failure(
-                        message: 'Ocorreu um erro',
-                        buttonText: 'Tentar novamente',
-                        onButtonPressed: () =>
-                            _pageController.animeListStore.getAnimeList()),
+                    onError: (_, error) {
+                      final message = error!.getErrorMessage(context);
+                      return Failure(
+                          message: message,
+                          buttonText: CoreStrings.of(context)!.tryAgain,
+                          onButtonPressed: () =>
+                              _pageController.animeListStore.getAnimeList());
+                    },
                   ),
                 ),
               ],
