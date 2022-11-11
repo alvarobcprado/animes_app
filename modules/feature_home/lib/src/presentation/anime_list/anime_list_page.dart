@@ -157,7 +157,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                       LabeledCardText(
                                         title: 'Status',
                                         subtitle:
-                                            e.release.convertDateToBrLocale(),
+                                            e.release.convertDateToCurrentLocale(context),
                                       ),
                                     ],
                                   ),
