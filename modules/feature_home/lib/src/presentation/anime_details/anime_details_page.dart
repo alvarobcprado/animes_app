@@ -1,7 +1,9 @@
+import 'package:core/core.dart';
 import 'package:core/dependencies/dependency_injection.dart';
 import 'package:core/dependencies/state_management.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
+import 'package:feature_home/generated/home_strings.dart';
 import 'package:flutter/material.dart';
 
 import 'anime_details_controller.dart';
@@ -65,11 +67,14 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                 onLoading: (_) => const Center(
                   child: CircularProgressIndicator(),
                 ),
-                onError: (_, error) => Failure(
-                    message: 'Ocorreu um erro',
-                    buttonText: 'Tentar novamente',
-                    onButtonPressed: () => _pageController.animeDetailsStore
-                        .getAnimeDetails(widget.animeId)),
+                onError: (_, error) {
+                  final message = error!.getErrorMessage(context);
+                  return Failure(
+                      message: message,
+                      buttonText: CoreStrings.of(context)!.tryAgain,
+                      onButtonPressed: () => _pageController.animeDetailsStore
+                          .getAnimeDetails(widget.animeId));
+                },
                 onState: (context, state) {
                   final animeDetail = state.animeDetails;
                   if (animeDetail == null) {
@@ -77,22 +82,22 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                   }
                   return Column(
                     children: [
-                      SpacerBox.verticalS(),
+                      const SpacerBox.verticalS(),
                       ImageCardButton(
                         buttonIcon: animeDetail.isFavorite
                             ? Icons.favorite
                             : Icons.favorite_outline,
-                        buttonLabel: 'Favoritar',
+                        buttonLabel: HomeStrings.of(context)!.animeDetailsPageFavorite,
                         imageUrl: animeDetail.image,
                         onButtonPressed: () {
                           _pageController.toggleFavoriteAnime(animeDetail);
                         },
                       ),
-                      SpacerBox.verticalS(),
+                      const SpacerBox.verticalS(),
                       Visibility(
                         visible: animeDetail.title.isNotEmpty,
                         child: RegularRow(
-                          title: 'Titulo original',
+                          title: HomeStrings.of(context)!.animeDetailsPageOriginalTitle,
                           subtitle: animeDetail.title,
                           isLineRestricted: false,
                         ),
@@ -100,7 +105,7 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                       Visibility(
                         visible: animeDetail.titleEnglish.isNotEmpty,
                         child: RegularRow(
-                          title: 'Titulo inglês',
+                          title: HomeStrings.of(context)!.animeDetailsPageEnglishTitle,
                           subtitle: animeDetail.titleEnglish,
                           isLineRestricted: false,
                         ),
@@ -108,7 +113,7 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                       Visibility(
                         visible: animeDetail.release.isNotEmpty,
                         child: RegularRow(
-                          title: 'Data de lançamento',
+                          title: HomeStrings.of(context)!.animeDetailsPageRelease,
                           subtitle: animeDetail.release,
                           isLineRestricted: false,
                         ),
@@ -116,25 +121,25 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                       Visibility(
                         visible: animeDetail.end.isNotEmpty,
                         child: RegularRow(
-                          title: 'Data de encerramento',
+                          title: HomeStrings.of(context)!.animeDetailsPageEnd,
                           subtitle: animeDetail.end,
                           isLineRestricted: false,
                         ),
                       ),
                       RegularRow(
-                        title: 'Nota',
+                        title: HomeStrings.of(context)!.animeDetailsPageNote,
                         subtitle: animeDetail.score.toString(),
                         isLineRestricted: false,
                       ),
                       Visibility(
                         visible: animeDetail.synopsis.isNotEmpty,
                         child: RegularRow(
-                          title: 'Sinopse',
+                          title: HomeStrings.of(context)!.animeDetailsPageSynopsis,
                           subtitle: animeDetail.synopsis,
                           isLineRestricted: false,
                         ),
                       ),
-                      SpacerBox.verticalS(),
+                      const SpacerBox.verticalS(),
                     ],
                   );
                 },
