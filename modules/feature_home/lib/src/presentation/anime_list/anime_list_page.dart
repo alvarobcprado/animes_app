@@ -166,14 +166,20 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                                     subtitle: e
                                                             .release.isNotEmpty
                                                         ? e.release
-                                                            .convertDateToBrLocale()
-                                                        : HomeStrings.of(context)!.animeListPageInformationSoon,
+                                                            .convertDateToCurrentLocale(
+                                                                context)
+                                                        : HomeStrings.of(
+                                                                context)!
+                                                            .animeListPageInformationSoon,
                                                   ),
                                                 ],
                                               ),
                                             )
                                             .toList(),
-                                        onTap: (index) {},
+                                        onTap: (index) =>
+                                            GoRouter.of(context).pushDetails(
+                                          state.animes[index].id,
+                                        ),
                                       ),
                                     ),
                                   ],
