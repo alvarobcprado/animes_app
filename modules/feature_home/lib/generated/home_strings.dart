@@ -93,6 +93,47 @@ abstract class HomeStrings {
     Locale('pt')
   ];
 
+  /// No description provided for @animeDetailsPageOriginalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Original title:'**
+  String get animeDetailsPageOriginalTitle;
+
+  /// No description provided for @animeDetailsPageEnglishTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'English title:'**
+  String get animeDetailsPageEnglishTitle;
+
+  /// No description provided for @animeDetailsPageRelease.
+  ///
+  /// In en, this message translates to:
+  /// **'Release:'**
+  String get animeDetailsPageRelease;
+
+  /// No description provided for @animeDetailsPageEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'End:'**
+  String get animeDetailsPageEnd;
+
+  /// No description provided for @animeDetailsPageNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Note:'**
+  String get animeDetailsPageNote;
+
+  /// No description provided for @animeDetailsPageSynopsis.
+  ///
+  /// In en, this message translates to:
+  /// **'Synopsis:'**
+  String get animeDetailsPageSynopsis;
+
+  /// No description provided for @animeDetailsPageFavorite.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite'**
+  String get animeDetailsPageFavorite;
 }
 
 class _HomeStringsDelegate extends LocalizationsDelegate<HomeStrings> {

@@ -104,6 +104,12 @@ abstract class CoreStrings {
   /// In en, this message translates to:
   /// **'Connection fail'**
   String get connectionFail;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get tryAgain;
 }
 
 class _CoreStringsDelegate extends LocalizationsDelegate<CoreStrings> {

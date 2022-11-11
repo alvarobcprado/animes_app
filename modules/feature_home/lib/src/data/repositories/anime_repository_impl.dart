@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:core/core.dart';
-import 'package:feature_home/feature_home.dart';
 import 'package:feature_home/src/data/cache/cache.dart';
+import 'package:feature_home/src/data/mappers/cache_to_domain.dart';
+import 'package:feature_home/src/data/mappers/domain_to_cache.dart';
 import 'package:feature_home/src/data/remote/remote.dart';
 import 'package:feature_home/src/domain/models/models.dart';
 import 'package:feature_home/src/domain/repositories/repositories.dart';
@@ -19,7 +20,25 @@ class AnimeRepositoryImpl implements AnimeRepository {
 
   @override
   Future<Result<AnimeDetails>> getAnimeDetails(int id) async {
-    return await _remoteDataSource.getAnimeDetails(id);
+    final result = await _remoteDataSource.getAnimeDetails(id);
+    return result.when(success: (animeDetails) async {
+      await _cacheDataSource.saveAnimeDetails(animeDetails.toCache());
+      return Result.success(animeDetails);
+    }, error: (error) async {
+      return await _getAnimeDetailsFromCache(id);
+    });
+  }
+
+  Future<Result<AnimeDetails>> _getAnimeDetailsFromCache(int id) async {
+    final resultCache = await _cacheDataSource.getAnimeDetails(id);
+    return resultCache.when(success: (animeDetailsCache) async {
+      final animeDetails = animeDetailsCache.toDomain();
+      animeDetails.isFavorite =
+          await _cacheDataSource.verifyIfAnimeIsFavorite(id);
+      return Result.success(animeDetails);
+    }, error: (error) async {
+      return Result.error(error);
+    });
   }
 
   @override
@@ -27,7 +46,7 @@ class AnimeRepositoryImpl implements AnimeRepository {
     final result = await _remoteDataSource.getAnimeGenres();
     return result.when(success: (genreList) async {
       await _cacheDataSource.saveAnimeGenres(genreList.toCache());
-      return await _getGenreListFromCache();
+      return Result.success(genreList);
     }, error: (error) async {
       return await _getGenreListFromCache();
     });
@@ -53,12 +72,18 @@ class AnimeRepositoryImpl implements AnimeRepository {
   }
 
   @override
-  Future<Result<List<Anime>>> getFavoriteAnimes() {
-    throw UnimplementedError();
+  Future<Result<List<AnimeDetails>>> getFavoriteAnimes() async {
+    final favoritesAnimes = await _cacheDataSource.getFavoriteAnimes();
+    return Result.success(favoritesAnimes.toDomain());
   }
 
   @override
-  Future<Result<void>> toggleFavoriteAnime(int id) {
-    throw UnimplementedError();
+  Future<Result<void>> toggleFavoriteAnime(AnimeDetails animeDetails) async {
+    if (animeDetails.isFavorite) {
+      return Result.success(
+          await _cacheDataSource.removeFavoriteAnime(animeDetails.id));
+    }
+    return Result.success(
+        await _cacheDataSource.saveFavoriteAnime(animeDetails.toCache()));
   }
 }

@@ -1,5 +1,6 @@
 {
   "@@ locale": "en_US",
   "occurredError": "An occurred error",
-  "connectionFail": "Connection fail"
+  "connectionFail": "Connection fail",
+  "tryAgain": "Try again"
 }

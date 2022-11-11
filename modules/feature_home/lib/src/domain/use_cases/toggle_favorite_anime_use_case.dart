@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 
+import '../models/anime_details.dart';
 import '../repositories/anime_repository.dart';
 
 class ToggleFavoriteAnimeUseCase
@@ -13,12 +14,12 @@ class ToggleFavoriteAnimeUseCase
   @override
   Future<Result<void>> call(
       {required ToggleFavoriteAnimeUseCaseParams params}) async {
-    return await _repository.toggleFavoriteAnime(params.id);
+    return await _repository.toggleFavoriteAnime(params.animeDetails);
   }
 }
 
 class ToggleFavoriteAnimeUseCaseParams {
-  ToggleFavoriteAnimeUseCaseParams({required this.id});
+  ToggleFavoriteAnimeUseCaseParams({required this.animeDetails});
 
-  final int id;
+  final AnimeDetails animeDetails;
 }
