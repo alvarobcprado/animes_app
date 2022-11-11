@@ -37,14 +37,6 @@ class AnimeCacheDataSourceImpl implements AnimeCacheDataSource {
   }
 
   @override
-  Future<Result<List<AnimeAuxiliarCache>>> getAnimeListBySearch(
-      String query) async {
-    final box = await _hive.openBox(BoxName.searchedAnime);
-    final animeListCache = List<AnimeCache>.from(box.values);
-    return Result.success(animeListCache.toCacheAuxiliar());
-  }
-
-  @override
   Future<List<AnimeDetailsAuxiliarCache>> getFavoriteAnimes() async {
     final box = await _hive.openBox(BoxName.favoriteAnimes);
     final favoritesAnimesCache = List<AnimeDetailsCache>.from(box.values);
@@ -75,13 +67,6 @@ class AnimeCacheDataSourceImpl implements AnimeCacheDataSource {
   Future<void> saveAnimeList(List<AnimeAuxiliarCache> animeList) async {
     final animeListCache = animeList.toCache();
     final box = await _hive.openBox(BoxName.animeList);
-    animeListCache.map((item) async => await box.put(item.id, item));
-  }
-
-  @override
-  Future<void> saveAnimeListBySearch(List<AnimeAuxiliarCache> animeList) async {
-    final animeListCache = animeList.toCache();
-    final box = await _hive.openBox(BoxName.searchedAnime);
     animeListCache.map((item) async => await box.put(item.id, item));
   }
 
