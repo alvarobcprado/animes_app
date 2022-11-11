@@ -9,4 +9,7 @@ class CoreStringsPt extends CoreStrings {
 
   @override
   String get connectionFail => 'Falha na conexão';
+
+  @override
+  String get tryAgain => 'Tentar novamente';
 }

@@ -9,4 +9,7 @@ class CoreStringsEn extends CoreStrings {
 
   @override
   String get connectionFail => 'Connection fail';
+
+  @override
+  String get tryAgain => 'Try again';
 }
