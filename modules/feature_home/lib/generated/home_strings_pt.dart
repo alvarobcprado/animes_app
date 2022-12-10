@@ -5,39 +5,41 @@ class HomeStringsPt extends HomeStrings {
   HomeStringsPt([String locale = 'pt']) : super(locale);
 
   @override
-  String get animeDetailsPageOriginalTitle => 'Título original:';
-
-  @override
-  String get animeDetailsPageEnglishTitle => 'Título inglês:';
-  @override
   String get animeListPageSearchHint => 'Digite o nome do anime que procura';
 
   @override
-  String get animeListPageLabeledCardTitle => 'Título:';
+  String get animeListPageLabeledCardTitle => 'Title:';
 
   @override
-  String get animeListPageLabeledCardGenre => 'Gênero:';
+  String get animeListPageLabeledCardGenre => 'Genre:';
 
   @override
-  String get animeListPageLabeledCardEpisodes => 'Episódios:';
+  String get animeListPageLabeledCardEpisodes => 'Episodes:';
 
   @override
-  String get animeDetailsPageRelease => 'Data de lançamento:';
+  String get animeInformationSoon => 'Em breve';
 
   @override
-  String get animeDetailsPageEnd => 'Data de encerramento:';
+  String get animeOriginalTitle => 'Título original:';
 
   @override
-  String get animeDetailsPageNote => 'Nota:';
+  String get animeEnglishTitle => 'Título inglês:';
 
   @override
-  String get animeDetailsPageSynopsis => 'Sinopse:';
+  String get animeReleaseDate => 'Data de lançamento:';
+
+  @override
+  String get animeEndDate => 'Data de encerramento:';
+
+  @override
+  String get animeNote => 'Nota:';
+
+  @override
+  String get animeSynopsis => 'Sinopse:';
 
   @override
   String get animeDetailsPageFavorite => 'Favoritar';
-  @override
-  String get animeListPageLabeledCardRelease => 'Data de lançamento:';
 
   @override
-  String get animeListPageInformationSoon => 'Em breve';
+  String get favoriteAnimesPageTitleAppBar => 'Favoritos';
 }
