@@ -170,6 +170,12 @@ abstract class HomeStrings {
   /// In en, this message translates to:
   /// **'Favorites'**
   String get favoriteAnimesPageTitleAppBar;
+
+  /// No description provided for @favoriteAnimesPageNoAnimes.
+  ///
+  /// In en, this message translates to:
+  /// **'Add anime to your favorites'**
+  String get favoriteAnimesPageNoAnimes;
 }
 
 class _HomeStringsDelegate extends LocalizationsDelegate<HomeStrings> {

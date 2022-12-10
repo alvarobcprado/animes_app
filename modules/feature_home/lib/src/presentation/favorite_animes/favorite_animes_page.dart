@@ -119,8 +119,8 @@ class _FavoriteAnimesPageState extends State<FavoriteAnimesPage> {
                           state.animes[index].id,
                         ),
                       )
-                    : const Center(
-                        child: Text('No favorites'),
+                    : Center(
+                        child: Text(HomeStrings.of(context)!.favoriteAnimesPageNoAnimes),
                       );
               }),
         ),

@@ -42,4 +42,7 @@ class HomeStringsPt extends HomeStrings {
 
   @override
   String get favoriteAnimesPageTitleAppBar => 'Favoritos';
+
+  @override
+  String get favoriteAnimesPageNoAnimes => 'Adicione animes aos seus favoritos';
 }

@@ -12,5 +12,6 @@
   "animeNote": "Note:",
   "animeSynopsis": "Synopsis:",
   "animeDetailsPageFavorite": "Favorite",
-  "favoriteAnimesPageTitleAppBar": "Favorites"
+  "favoriteAnimesPageTitleAppBar": "Favorites",
+  "favoriteAnimesPageNoAnimes": "Add anime to your favorites"
 }
