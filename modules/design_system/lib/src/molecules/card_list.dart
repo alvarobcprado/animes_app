@@ -6,11 +6,11 @@ class CardList extends StatelessWidget {
     Key? key,
     required this.items,
     required this.onTap,
-    required this.scrollController,
+    this.scrollController,
   }) : super(key: key);
   final List<LabeledCardItem> items;
   final Function(int) onTap;
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
 
   @override
   Widget build(BuildContext context) {
