@@ -97,7 +97,7 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                       Visibility(
                         visible: animeDetail.title.isNotEmpty,
                         child: RegularRow(
-                          title: HomeStrings.of(context)!.animeDetailsPageOriginalTitle,
+                          title: HomeStrings.of(context)!.animeOriginalTitle,
                           subtitle: animeDetail.title,
                           isLineRestricted: false,
                         ),
@@ -105,7 +105,7 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                       Visibility(
                         visible: animeDetail.titleEnglish.isNotEmpty,
                         child: RegularRow(
-                          title: HomeStrings.of(context)!.animeDetailsPageEnglishTitle,
+                          title: HomeStrings.of(context)!.animeEnglishTitle,
                           subtitle: animeDetail.titleEnglish,
                           isLineRestricted: false,
                         ),
@@ -113,7 +113,7 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                       Visibility(
                         visible: animeDetail.release.isNotEmpty,
                         child: RegularRow(
-                          title: HomeStrings.of(context)!.animeDetailsPageRelease,
+                          title: HomeStrings.of(context)!.animeReleaseDate,
                           subtitle: animeDetail.release.convertDateToCurrentLocale(context),
                           isLineRestricted: false,
                         ),
@@ -121,20 +121,20 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                       Visibility(
                         visible: animeDetail.end.isNotEmpty,
                         child: RegularRow(
-                          title: HomeStrings.of(context)!.animeDetailsPageEnd,
+                          title: HomeStrings.of(context)!.animeEndDate,
                           subtitle: animeDetail.end.convertDateToCurrentLocale(context),
                           isLineRestricted: false,
                         ),
                       ),
                       RegularRow(
-                        title: HomeStrings.of(context)!.animeDetailsPageNote,
+                        title: HomeStrings.of(context)!.animeNote,
                         subtitle: animeDetail.score.toString(),
                         isLineRestricted: false,
                       ),
                       Visibility(
                         visible: animeDetail.synopsis.isNotEmpty,
                         child: RegularRow(
-                          title: HomeStrings.of(context)!.animeDetailsPageSynopsis,
+                          title: HomeStrings.of(context)!.animeSynopsis,
                           subtitle: animeDetail.synopsis,
                           isLineRestricted: false,
                         ),

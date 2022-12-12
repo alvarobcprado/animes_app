@@ -15,29 +15,34 @@ class HomeStringsEn extends HomeStrings {
 
   @override
   String get animeListPageLabeledCardEpisodes => 'Episodes:';
-  @override
-  String get animeDetailsPageOriginalTitle => 'Original title:';
 
   @override
-  String get animeDetailsPageEnglishTitle => 'English title:';
+  String get animeInformationSoon => 'Em breve';
 
   @override
-  String get animeListPageLabeledCardRelease => 'Release:';
+  String get animeOriginalTitle => 'Original title:';
 
   @override
-  String get animeListPageInformationSoon => 'Em breve';
-  @override
-  String get animeDetailsPageRelease => 'Release:';
+  String get animeEnglishTitle => 'English title:';
 
   @override
-  String get animeDetailsPageEnd => 'End:';
+  String get animeReleaseDate => 'Release:';
 
   @override
-  String get animeDetailsPageNote => 'Note:';
+  String get animeEndDate => 'End:';
 
   @override
-  String get animeDetailsPageSynopsis => 'Synopsis:';
+  String get animeNote => 'Note:';
+
+  @override
+  String get animeSynopsis => 'Synopsis:';
 
   @override
   String get animeDetailsPageFavorite => 'Favorite';
+
+  @override
+  String get favoriteAnimesPageTitleAppBar => 'Favorites';
+
+  @override
+  String get favoriteAnimesPageNoAnimes => 'Add anime to your favorites';
 }

@@ -117,58 +117,65 @@ abstract class HomeStrings {
   /// **'Episodes:'**
   String get animeListPageLabeledCardEpisodes;
 
-  /// No description provided for @animeListPageLabeledCardRelease.
-  ///
-  /// In en, this message translates to:
-  /// **'Release:'**
-  String get animeListPageLabeledCardRelease;
-
-  /// No description provided for @animeListPageInformationSoon.
+  /// No description provided for @animeInformationSoon.
   ///
   /// In en, this message translates to:
   /// **'Em breve'**
-  String get animeListPageInformationSoon;
-  /// No description provided for @animeDetailsPageOriginalTitle.
+  String get animeInformationSoon;
+
+  /// No description provided for @animeOriginalTitle.
   ///
   /// In en, this message translates to:
   /// **'Original title:'**
-  String get animeDetailsPageOriginalTitle;
+  String get animeOriginalTitle;
 
-  /// No description provided for @animeDetailsPageEnglishTitle.
+  /// No description provided for @animeEnglishTitle.
   ///
   /// In en, this message translates to:
   /// **'English title:'**
-  String get animeDetailsPageEnglishTitle;
+  String get animeEnglishTitle;
 
-  /// No description provided for @animeDetailsPageRelease.
+  /// No description provided for @animeReleaseDate.
   ///
   /// In en, this message translates to:
   /// **'Release:'**
-  String get animeDetailsPageRelease;
+  String get animeReleaseDate;
 
-  /// No description provided for @animeDetailsPageEnd.
+  /// No description provided for @animeEndDate.
   ///
   /// In en, this message translates to:
   /// **'End:'**
-  String get animeDetailsPageEnd;
+  String get animeEndDate;
 
-  /// No description provided for @animeDetailsPageNote.
+  /// No description provided for @animeNote.
   ///
   /// In en, this message translates to:
   /// **'Note:'**
-  String get animeDetailsPageNote;
+  String get animeNote;
 
-  /// No description provided for @animeDetailsPageSynopsis.
+  /// No description provided for @animeSynopsis.
   ///
   /// In en, this message translates to:
   /// **'Synopsis:'**
-  String get animeDetailsPageSynopsis;
+  String get animeSynopsis;
 
   /// No description provided for @animeDetailsPageFavorite.
   ///
   /// In en, this message translates to:
   /// **'Favorite'**
   String get animeDetailsPageFavorite;
+
+  /// No description provided for @favoriteAnimesPageTitleAppBar.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get favoriteAnimesPageTitleAppBar;
+
+  /// No description provided for @favoriteAnimesPageNoAnimes.
+  ///
+  /// In en, this message translates to:
+  /// **'Add anime to your favorites'**
+  String get favoriteAnimesPageNoAnimes;
 }
 
 class _HomeStringsDelegate extends LocalizationsDelegate<HomeStrings> {

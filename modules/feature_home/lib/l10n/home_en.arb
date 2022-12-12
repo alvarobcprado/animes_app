@@ -4,13 +4,14 @@
   "animeListPageLabeledCardTitle": "Title:",
   "animeListPageLabeledCardGenre": "Genre:",
   "animeListPageLabeledCardEpisodes": "Episodes:",
-  "animeListPageLabeledCardRelease": "Release:",
-  "animeListPageInformationSoon": "Em breve",
-  "animeDetailsPageOriginalTitle": "Original title:",
-  "animeDetailsPageEnglishTitle": "English title:",
-  "animeDetailsPageRelease": "Release:",
-  "animeDetailsPageEnd": "End:",
-  "animeDetailsPageNote": "Note:",
-  "animeDetailsPageSynopsis": "Synopsis:",
-  "animeDetailsPageFavorite": "Favorite"
+  "animeInformationSoon": "Em breve",
+  "animeOriginalTitle": "Original title:",
+  "animeEnglishTitle": "English title:",
+  "animeReleaseDate": "Release:",
+  "animeEndDate": "End:",
+  "animeNote": "Note:",
+  "animeSynopsis": "Synopsis:",
+  "animeDetailsPageFavorite": "Favorite",
+  "favoriteAnimesPageTitleAppBar": "Favorites",
+  "favoriteAnimesPageNoAnimes": "Add anime to your favorites"
 }

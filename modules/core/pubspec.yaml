@@ -21,7 +21,7 @@ dependencies:
   cached_network_image: ^3.2.1
   json_annotation: ^4.7.0
   flutter_triple: ^1.2.7+4
-
+  focus_detector: ^2.0.1
 
 dev_dependencies:
   flutter_test:

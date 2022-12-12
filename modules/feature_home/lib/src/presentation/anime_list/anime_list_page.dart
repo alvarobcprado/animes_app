@@ -156,13 +156,13 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                                     title: HomeStrings.of(context)!.animeListPageLabeledCardEpisodes,
                                                     subtitle:
                                                         e.totalEpisodes == -1
-                                                            ? HomeStrings.of(context)!.animeListPageInformationSoon
+                                                            ? HomeStrings.of(context)!.animeInformationSoon
                                                             : e.totalEpisodes
                                                                 .toString(),
                                                   ),
                                                   LabeledCardText(
                                                     title:
-                                                    HomeStrings.of(context)!.animeListPageLabeledCardRelease,
+                                                    HomeStrings.of(context)!.animeReleaseDate,
                                                     subtitle: e
                                                             .release.isNotEmpty
                                                         ? e.release
@@ -170,7 +170,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
                                                                 context)
                                                         : HomeStrings.of(
                                                                 context)!
-                                                            .animeListPageInformationSoon,
+                                                            .animeInformationSoon,
                                                   ),
                                                 ],
                                               ),
