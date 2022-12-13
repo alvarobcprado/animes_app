@@ -1,9 +1,6 @@
 import 'package:core/dependencies/state_management.dart';
 import 'package:feature_home/feature_home.dart';
 
-import '../../../domain/models/anime_details.dart';
-import '../../../domain/use_cases/get_anime_details_use_case.dart';
-
 class AnimeDetailsModel {
   AnimeDetailsModel({
     this.animeDetails,
