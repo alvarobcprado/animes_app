@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:core/core.dart';
+import 'package:feature_home/feature_home.dart';
 import 'package:feature_home/src/data/cache/cache.dart';
 import 'package:feature_home/src/data/mappers/cache_to_domain.dart';
 import 'package:feature_home/src/data/mappers/domain_to_cache.dart';
@@ -64,13 +65,21 @@ class AnimeRepositoryImpl implements AnimeRepository {
   }
 
   @override
-  Future<Result<List<Anime>>> getAnimeList() async {
-    return await _remoteDataSource.getAnimeList();
+  Future<Result<List<Anime>>> getAnimeList(int page) async {
+    return await _remoteDataSource.getAnimeList(page);
   }
 
   @override
-  Future<Result<List<Anime>>> getAnimeListBySearch(String query) async {
-    return await _remoteDataSource.getAnimeListBySearch(query);
+  Future<Result<List<Anime>>> getAnimeListBySearch(
+    String query,
+    int page,
+  ) async {
+    return await _remoteDataSource.getAnimeListBySearch(query, page);
+  }
+
+  @override
+  Future<Result<List<Anime>>> getAnimeListByGenre(String id, int page) async {
+    return await _remoteDataSource.getAnimeListByGenre(id, page);
   }
 
   @override

@@ -44,4 +44,11 @@ List<SingleChildWidget> usecaseProviders() => [
               repository: repository,
             ),
       ),
+      ProxyProvider<AnimeRepository, GetAnimesByGenreUseCase>(
+        update: (_, repository, usecase) =>
+            usecase ??
+            GetAnimesByGenreUseCase(
+              repository: repository,
+            ),
+      ),
     ];

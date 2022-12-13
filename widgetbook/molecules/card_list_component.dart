@@ -22,6 +22,7 @@ class CardListComponent extends WidgetbookWidget {
                   'Sete',
                 ];
                 return CardList(
+                  scrollController: ScrollController(),
                   items: list
                       .map(
                         (e) => LabeledCardItem(

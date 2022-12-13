@@ -11,13 +11,14 @@ AnimeDataResponse _$AnimeDataResponseFromJson(Map<String, dynamic> json) =>
       (json['data'] as List<dynamic>?)
           ?.map((e) => AnimeResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
-      json['links'] == null
+      json['pagination'] == null
           ? null
-          : AnimeUrlResponse.fromJson(json['links'] as Map<String, dynamic>),
+          : AnimePaginationResponse.fromJson(
+              json['pagination'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AnimeDataResponseToJson(AnimeDataResponse instance) =>
     <String, dynamic>{
       'data': instance.animes,
-      'links': instance.url,
+      'pagination': instance.pagination,
     };

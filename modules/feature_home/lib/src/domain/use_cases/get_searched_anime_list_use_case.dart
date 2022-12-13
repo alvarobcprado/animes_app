@@ -12,16 +12,19 @@ class GetSearchedAnimeListUseCase
   final AnimeRepository _repository;
 
   @override
-  Future<Result<List<Anime>>> call(
-      {required GetSearchedAnimeListUseCaseParams params}) async {
-    return await _repository.getAnimeListBySearch(params.query);
+  Future<Result<List<Anime>>> call({
+    required GetSearchedAnimeListUseCaseParams params,
+  }) async {
+    return await _repository.getAnimeListBySearch(params.query, params.page);
   }
 }
 
 class GetSearchedAnimeListUseCaseParams {
   GetSearchedAnimeListUseCaseParams({
     required this.query,
+    required this.page,
   });
 
   final String query;
+  final int page;
 }

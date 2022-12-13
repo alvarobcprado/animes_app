@@ -34,7 +34,7 @@ extension AnimeDetailsResponseToAnimeDetails on AnimeDetailsResponse {
 extension GenreListResponseToGenreList on GenreDataResponse {
   List<Genre> toDomain() {
     return genreList
-            ?.map((genreResponse) => Genre(genreResponse.name ?? ''))
+            ?.map((genreResponse) => Genre(genreResponse.name ?? '', genreResponse.id ?? -1))
             .toList() ??
         [];
   }

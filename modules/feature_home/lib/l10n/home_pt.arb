@@ -1,10 +1,17 @@
 {
   "@@ locale": "pt_BR",
-  "animeDetailsPageOriginalTitle": "Título original:",
-  "animeDetailsPageEnglishTitle": "Título inglês:",
-  "animeDetailsPageRelease": "Data de lançamento:",
-  "animeDetailsPageEnd": "Data de encerramento:",
-  "animeDetailsPageNote": "Nota:",
-  "animeDetailsPageSynopsis": "Sinopse:",
-  "animeDetailsPageFavorite": "Favoritar"
+  "animeListPageSearchHint": "Digite o nome do anime que procura",
+  "animeLabeledCardTitle": "Título:",
+  "animeLabeledCardGenre": "Gênero:",
+  "animeLabeledCardEpisodes": "Episódios:",
+  "animeInformationSoon": "Em breve",
+  "animeOriginalTitle": "Título original:",
+  "animeEnglishTitle": "Título inglês:",
+  "animeReleaseDate": "Data de lançamento:",
+  "animeEndDate": "Data de encerramento:",
+  "animeNote": "Nota:",
+  "animeSynopsis": "Sinopse:",
+  "animeDetailsPageFavorite": "Favoritar",
+  "favoriteAnimesPageTitleAppBar": "Favoritos",
+  "favoriteAnimesPageNoAnimes": "Adicione animes aos seus favoritos"
 }

@@ -23,7 +23,7 @@ extension AnimeDetailsCacheToAnimeDetailsAuxiliar on AnimeDetailsCache {
 
 extension GenreListCacheToGenreListAuxiliar on List<GenreCache> {
   List<GenreAuxiliarCache> toCacheAuxiliar() {
-    return map((genreCache) => GenreAuxiliarCache(genreCache.name)).toList();
+    return map((genreCache) => GenreAuxiliarCache(genreCache.name, genreCache.id)).toList();
   }
 }
 

@@ -13,17 +13,17 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
 
   final Dio _dio;
   final HomeDioWrapper _wrapper;
-  String? _nextPage;
 
   @override
-  Future<Result<List<Anime>>> getAnimeList() async {
-    final page = _nextPage ?? '/top/anime';
-    final result = _wrapper(() => _dio.get(page));
+  Future<Result<List<Anime>>> getAnimeList(int page) async {
+    final endpoint = '/top/anime?page=$page';
+    final result = _wrapper(() => _dio.get(endpoint));
+
     return result.then(
       (value) => value.when(
         success: (success) {
           final response = AnimeDataResponse.fromJson(success.data);
-          _nextPage = response.url?.next;
+
           return Result.success(response.animes?.toDomain() ?? []);
         },
         error: (error) {
@@ -69,8 +69,35 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
   }
 
   @override
-  Future<Result<List<Anime>>> getAnimeListBySearch(String query) {
-    final result = _wrapper(() => _dio.get('/anime?q=$query'));
+  Future<Result<List<Anime>>> getAnimeListBySearch(
+    String query,
+    int page,
+  ) async {
+    final result = _wrapper(
+      () => _dio.get('/anime?q=$query&page=$page'),
+    );
+    return result.then(
+      (value) => value.when(
+        success: (success) {
+          final response = AnimeDataResponse.fromJson(success.data);
+          return Result.success(response.animes?.toDomain() ?? []);
+        },
+        error: (error) {
+          return Result.error(error);
+        },
+      ),
+    );
+  }
+
+  @override
+  Future<Result<List<Anime>>> getAnimeListByGenre(
+    String genreId,
+    int page,
+  ) async {
+    final result = _wrapper(
+      () => _dio.get('/anime?genres=$genreId&page=$page'),
+    );
+
     return result.then(
       (value) => value.when(
         success: (success) {
