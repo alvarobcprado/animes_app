@@ -5,6 +5,7 @@ import 'package:feature_home/generated/home_strings.dart';
 import 'package:feature_home/src/presentation/anime_list/anime_list_controller.dart';
 import 'package:feature_home/src/presentation/anime_list/widgets/anime_genres_filter_row.dart';
 import 'package:feature_home/src/presentation/anime_list/widgets/paginated_anime_list.dart';
+
 import 'package:flutter/material.dart';
 
 class AnimeListPage extends StatefulWidget {
