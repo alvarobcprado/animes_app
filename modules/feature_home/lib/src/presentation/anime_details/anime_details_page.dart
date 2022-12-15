@@ -4,6 +4,7 @@ import 'package:core/dependencies/state_management.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
 import 'package:feature_home/generated/home_strings.dart';
+import 'package:feature_home/src/presentation/anime_details/widgets/anime_info_row.dart';
 import 'package:flutter/material.dart';
 
 import 'anime_details_controller.dart';
@@ -49,6 +50,7 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).extension<AppColorsFoundation>();
+    final homeStrings = HomeStrings.of(context)!;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -87,57 +89,41 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
                         buttonIcon: animeDetail.isFavorite
                             ? Icons.favorite
                             : Icons.favorite_outline,
-                        buttonLabel: HomeStrings.of(context)!.animeDetailsPageFavorite,
+                        buttonLabel:
+                            HomeStrings.of(context)!.animeDetailsPageFavorite,
                         imageUrl: animeDetail.image,
                         onButtonPressed: () {
                           _pageController.toggleFavoriteAnime(animeDetail);
                         },
                       ),
                       const SpacerBox.verticalS(),
-                      Visibility(
-                        visible: animeDetail.title.isNotEmpty,
-                        child: RegularRow(
-                          title: HomeStrings.of(context)!.animeOriginalTitle,
-                          subtitle: animeDetail.title,
-                          isLineRestricted: false,
+                      AnimeInfoRow(
+                        title: homeStrings.animeOriginalTitle,
+                        info: animeDetail.title,
+                      ),
+                      AnimeInfoRow(
+                        title: homeStrings.animeEnglishTitle,
+                        info: animeDetail.titleEnglish,
+                      ),
+                      AnimeInfoRow(
+                        title: homeStrings.animeReleaseDate,
+                        info: animeDetail.release.convertDateToCurrentLocale(
+                          context,
                         ),
                       ),
-                      Visibility(
-                        visible: animeDetail.titleEnglish.isNotEmpty,
-                        child: RegularRow(
-                          title: HomeStrings.of(context)!.animeEnglishTitle,
-                          subtitle: animeDetail.titleEnglish,
-                          isLineRestricted: false,
+                      AnimeInfoRow(
+                        title: homeStrings.animeEndDate,
+                        info: animeDetail.end.convertDateToCurrentLocale(
+                          context,
                         ),
                       ),
-                      Visibility(
-                        visible: animeDetail.release.isNotEmpty,
-                        child: RegularRow(
-                          title: HomeStrings.of(context)!.animeReleaseDate,
-                          subtitle: animeDetail.release.convertDateToCurrentLocale(context),
-                          isLineRestricted: false,
-                        ),
+                      AnimeInfoRow(
+                        title: homeStrings.animeNote,
+                        info: animeDetail.score.toString(),
                       ),
-                      Visibility(
-                        visible: animeDetail.end.isNotEmpty,
-                        child: RegularRow(
-                          title: HomeStrings.of(context)!.animeEndDate,
-                          subtitle: animeDetail.end.convertDateToCurrentLocale(context),
-                          isLineRestricted: false,
-                        ),
-                      ),
-                      RegularRow(
-                        title: HomeStrings.of(context)!.animeNote,
-                        subtitle: animeDetail.score.toString(),
-                        isLineRestricted: false,
-                      ),
-                      Visibility(
-                        visible: animeDetail.synopsis.isNotEmpty,
-                        child: RegularRow(
-                          title: HomeStrings.of(context)!.animeSynopsis,
-                          subtitle: animeDetail.synopsis,
-                          isLineRestricted: false,
-                        ),
+                      AnimeInfoRow(
+                        title: homeStrings.animeSynopsis,
+                        info: animeDetail.synopsis,
                       ),
                       const SpacerBox.verticalS(),
                     ],

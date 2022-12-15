@@ -2,12 +2,6 @@ import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:feature_home/feature_home.dart';
-import 'package:feature_home/src/data/cache/cache.dart';
-import 'package:feature_home/src/data/mappers/cache_to_domain.dart';
-import 'package:feature_home/src/data/mappers/domain_to_cache.dart';
-import 'package:feature_home/src/data/remote/remote.dart';
-import 'package:feature_home/src/domain/models/models.dart';
-import 'package:feature_home/src/domain/repositories/repositories.dart';
 
 class AnimeRepositoryImpl implements AnimeRepository {
   AnimeRepositoryImpl({

@@ -9,6 +9,7 @@ enum AnimePaginationSource {
   list,
 }
 
+// ignore: must_be_immutable
 class AnimeListStore extends StreamStore<Exception, AnimesModel> {
   AnimeListStore({
     required GetAnimeListUseCase getAnimeListUseCase,
