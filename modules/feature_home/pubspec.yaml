@@ -14,6 +14,8 @@ dependencies:
     path: ../design_system
   core:
     path: ../core
+  navigation:
+    path: ../navigation
 
   intl: ^0.17.0
   flutter_localizations:

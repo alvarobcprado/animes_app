@@ -8,3 +8,4 @@ export 'src/presentation/anime_details/stores/stores.dart';
 export 'src/presentation/anime_list/stores/stores.dart';
 export 'src/presentation/favorite_animes/stores/stores.dart';
 export 'src/routes/routes.dart';
+export 'src/boundary/boundary.dart';
