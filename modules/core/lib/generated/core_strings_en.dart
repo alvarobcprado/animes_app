@@ -12,4 +12,7 @@ class CoreStringsEn extends CoreStrings {
 
   @override
   String get tryAgain => 'Try again';
+
+  @override
+  String get enter => 'ENTER';
 }
