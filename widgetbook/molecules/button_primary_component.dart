@@ -8,37 +8,37 @@ import 'package:widgetbook/widgetbook.dart';
 class ButtonPrimaryComponent extends WidgetbookWidget {
   ButtonPrimaryComponent({Key? key})
       : super(
-          name: 'ButtonPrimary',
-          useCases: [
-            WidgetbookUseCase(
-              name: 'Loading',
-              builder: (context) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: ButtonPrimary(
-                      isLoading: true,
-                      onPressed: () {},
-                    ),
-                  ),
-                );
-              },
+    name: 'ButtonPrimary',
+    useCases: [
+      WidgetbookUseCase(
+        name: 'Loading',
+        builder: (context) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: ButtonPrimary(
+                isLoading: true,
+                onPressed: () {},
+              ),
             ),
-            WidgetbookUseCase(
-              name: 'Text',
-              builder: (context) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: ButtonPrimary(
-                      isLoading: false,
-                      onPressed: () {},
-                      buttonText: 'ENTRAR',
-                    ),
-                  ),
-                );
-              },
+          );
+        },
+      ),
+      WidgetbookUseCase(
+        name: 'Text',
+        builder: (context) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: ButtonPrimary(
+                isLoading: false,
+                onPressed: () {},
+                buttonText: 'ENTRAR',
+              ),
             ),
-          ],
-        );
+          );
+        },
+      ),
+    ],
+  );
 }

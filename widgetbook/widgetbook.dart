@@ -10,6 +10,7 @@ import 'atoms/labeled_chip_component.dart';
 import 'atoms/labeled_icon_button_component.dart';
 import 'atoms/regular_row_component.dart';
 import 'molecules/app_search_bar_component.dart';
+import 'molecules/button_primary_component.dart';
 import 'molecules/card_list_component.dart';
 import 'molecules/failure_component.dart';
 import 'molecules/filter_select_chip_list.dart';
@@ -43,6 +44,7 @@ class WidgetbookHotReload extends StatelessWidget {
                 ImageCardButtonComponent(),
                 CardListComponent(),
                 FailureComponent(),
+                ButtonPrimaryComponent(),
               ],
             ),
           ],
