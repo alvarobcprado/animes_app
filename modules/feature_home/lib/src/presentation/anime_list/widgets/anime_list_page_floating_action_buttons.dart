@@ -1,4 +1,3 @@
-import 'package:core/dependencies/routing.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/src/routes/home_routes.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +39,7 @@ class AnimeListPageFloatingActionButtons extends StatelessWidget {
               backgroundColor: colors.primary,
               padding: const EdgeInsets.all(12),
             ),
-            onPressed: () => GoRouter.of(context).pushFavorite(),
+            onPressed: () => context.goToFavorites(),
             icon: const Icon(Icons.favorite),
           ),
         ],

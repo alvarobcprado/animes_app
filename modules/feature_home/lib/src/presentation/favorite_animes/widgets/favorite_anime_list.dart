@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:core/dependencies/routing.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/generated/home_strings.dart';
 import 'package:feature_home/src/domain/models/anime_details.dart';
@@ -42,7 +41,7 @@ class FavoriteAnimeList extends StatelessWidget {
             ),
           )
           .toList(),
-      onTap: (index) => GoRouter.of(context).pushDetails(
+      onTap: (index) => context.goToDetails(
         favorites[index].id,
       ),
     );
