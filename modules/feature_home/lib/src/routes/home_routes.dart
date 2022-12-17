@@ -4,22 +4,18 @@ import 'package:feature_home/src/presentation/anime_list/anime_list_page.dart';
 import 'package:feature_home/src/presentation/favorite_animes/favorite_animes_page.dart';
 import 'package:flutter/material.dart';
 
-const _homeRoute = 'Home';
-const _detailsRoute = 'Details';
-const _favoriteRoute = 'Favorite';
-
 class HomeRoutes extends GoRoute {
   HomeRoutes()
       : super(
           path: '/home',
-          name: _homeRoute,
+          name: RouteNames.home,
           pageBuilder: (context, state) => MaterialPage(
             child: AnimeListPage.create(),
           ),
           routes: [
             GoRoute(
               path: 'details/:id',
-              name: _detailsRoute,
+              name: RouteNames.details,
               pageBuilder: (context, state) {
                 return MaterialPage(
                   child: AnimeDetailsPage.create(
@@ -32,7 +28,7 @@ class HomeRoutes extends GoRoute {
             ),
             GoRoute(
               path: 'favorite',
-              name: _favoriteRoute,
+              name: RouteNames.favorite,
               pageBuilder: (context, state) {
                 return MaterialPage(
                   child: FavoriteAnimesPage.create(),
@@ -43,10 +39,13 @@ class HomeRoutes extends GoRoute {
         );
 }
 
-extension HomeRoutesExtension on GoRouter {
-  void pushHome() => pushNamed(_homeRoute);
+extension HomeRoutesExtension on BuildContext {
+  void goToHome() => goNamed(RouteNames.home);
 
-  void pushDetails(int id) => pushNamed(_detailsRoute, params: {'id': '$id'});
+  void goToDetails(int id) => goNamed(
+        RouteNames.details,
+        params: {'id': '$id'},
+      );
 
-  void pushFavorite() => pushNamed(_favoriteRoute);
+  void goToFavorites() => goNamed(RouteNames.favorite);
 }
