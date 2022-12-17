@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
   cached_network_image: ^3.2.2
+  core:
+    path: ../core
 
 dev_dependencies:
   flutter_test:
