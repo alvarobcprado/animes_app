@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'anime_list_state.dart';
 
@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AnimesModel {
   List<Anime> get animes => throw _privateConstructorUsedError;
   bool get isLoadingNewPage => throw _privateConstructorUsedError;
+  bool get hasPaginationError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnimesModelCopyWith<AnimesModel> get copyWith =>
@@ -30,7 +31,8 @@ abstract class $AnimesModelCopyWith<$Res> {
           AnimesModel value, $Res Function(AnimesModel) then) =
       _$AnimesModelCopyWithImpl<$Res, AnimesModel>;
   @useResult
-  $Res call({List<Anime> animes, bool isLoadingNewPage});
+  $Res call(
+      {List<Anime> animes, bool isLoadingNewPage, bool hasPaginationError});
 }
 
 /// @nodoc
@@ -48,6 +50,7 @@ class _$AnimesModelCopyWithImpl<$Res, $Val extends AnimesModel>
   $Res call({
     Object? animes = null,
     Object? isLoadingNewPage = null,
+    Object? hasPaginationError = null,
   }) {
     return _then(_value.copyWith(
       animes: null == animes
@@ -57,6 +60,10 @@ class _$AnimesModelCopyWithImpl<$Res, $Val extends AnimesModel>
       isLoadingNewPage: null == isLoadingNewPage
           ? _value.isLoadingNewPage
           : isLoadingNewPage // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasPaginationError: null == hasPaginationError
+          ? _value.hasPaginationError
+          : hasPaginationError // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -70,7 +77,8 @@ abstract class _$$_AnimesModelCopyWith<$Res>
       __$$_AnimesModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Anime> animes, bool isLoadingNewPage});
+  $Res call(
+      {List<Anime> animes, bool isLoadingNewPage, bool hasPaginationError});
 }
 
 /// @nodoc
@@ -86,6 +94,7 @@ class __$$_AnimesModelCopyWithImpl<$Res>
   $Res call({
     Object? animes = null,
     Object? isLoadingNewPage = null,
+    Object? hasPaginationError = null,
   }) {
     return _then(_$_AnimesModel(
       animes: null == animes
@@ -96,6 +105,10 @@ class __$$_AnimesModelCopyWithImpl<$Res>
           ? _value.isLoadingNewPage
           : isLoadingNewPage // ignore: cast_nullable_to_non_nullable
               as bool,
+      hasPaginationError: null == hasPaginationError
+          ? _value.hasPaginationError
+          : hasPaginationError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -104,12 +117,15 @@ class __$$_AnimesModelCopyWithImpl<$Res>
 
 class _$_AnimesModel implements _AnimesModel {
   _$_AnimesModel(
-      {required final List<Anime> animes, this.isLoadingNewPage = false})
+      {required final List<Anime> animes,
+      this.isLoadingNewPage = false,
+      this.hasPaginationError = false})
       : _animes = animes;
 
   final List<Anime> _animes;
   @override
   List<Anime> get animes {
+    if (_animes is EqualUnmodifiableListView) return _animes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_animes);
   }
@@ -117,10 +133,13 @@ class _$_AnimesModel implements _AnimesModel {
   @override
   @JsonKey()
   final bool isLoadingNewPage;
+  @override
+  @JsonKey()
+  final bool hasPaginationError;
 
   @override
   String toString() {
-    return 'AnimesModel(animes: $animes, isLoadingNewPage: $isLoadingNewPage)';
+    return 'AnimesModel(animes: $animes, isLoadingNewPage: $isLoadingNewPage, hasPaginationError: $hasPaginationError)';
   }
 
   @override
@@ -130,12 +149,17 @@ class _$_AnimesModel implements _AnimesModel {
             other is _$_AnimesModel &&
             const DeepCollectionEquality().equals(other._animes, _animes) &&
             (identical(other.isLoadingNewPage, isLoadingNewPage) ||
-                other.isLoadingNewPage == isLoadingNewPage));
+                other.isLoadingNewPage == isLoadingNewPage) &&
+            (identical(other.hasPaginationError, hasPaginationError) ||
+                other.hasPaginationError == hasPaginationError));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_animes), isLoadingNewPage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_animes),
+      isLoadingNewPage,
+      hasPaginationError);
 
   @JsonKey(ignore: true)
   @override
@@ -147,12 +171,15 @@ class _$_AnimesModel implements _AnimesModel {
 abstract class _AnimesModel implements AnimesModel {
   factory _AnimesModel(
       {required final List<Anime> animes,
-      final bool isLoadingNewPage}) = _$_AnimesModel;
+      final bool isLoadingNewPage,
+      final bool hasPaginationError}) = _$_AnimesModel;
 
   @override
   List<Anime> get animes;
   @override
   bool get isLoadingNewPage;
+  @override
+  bool get hasPaginationError;
   @override
   @JsonKey(ignore: true)
   _$$_AnimesModelCopyWith<_$_AnimesModel> get copyWith =>
@@ -242,6 +269,7 @@ class _$_GenresModel implements _GenresModel {
   final List<Genre> _genres;
   @override
   List<Genre> get genres {
+    if (_genres is EqualUnmodifiableListView) return _genres;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_genres);
   }

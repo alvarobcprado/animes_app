@@ -8,6 +8,7 @@ class AnimesModel with _$AnimesModel {
   factory AnimesModel({
     required List<Anime> animes,
     @Default(false) bool isLoadingNewPage,
+    @Default(false) bool hasPaginationError,
   }) = _AnimesModel;
 
   factory AnimesModel.initial() => AnimesModel(animes: []);
