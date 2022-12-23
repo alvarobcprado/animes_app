@@ -5,6 +5,7 @@ import 'package:feature_home/src/presentation/anime_list/anime_list_controller.d
 import 'package:feature_home/src/presentation/anime_list/anime_list_state.dart';
 import 'package:feature_home/src/presentation/anime_list/stores/anime_list_store.dart';
 import 'package:feature_home/src/presentation/anime_list/widgets/anime_list_page_floating_action_buttons.dart';
+import 'package:feature_home/src/presentation/anime_list/widgets/next_anime_page_error_indicator.dart';
 import 'package:feature_home/src/presentation/anime_list/widgets/next_anime_page_loading_indicator.dart';
 import 'package:feature_home/src/presentation/anime_list/widgets/raw_anime_list.dart';
 import 'package:flutter/material.dart';
@@ -40,9 +41,22 @@ class PaginatedAnimeList extends StatelessWidget {
             replacement: const Text('lista vazia'),
             child: Stack(
               children: [
-                RawAnimeList(
-                  scrollController: _scrollController,
-                  animeList: animeList,
+                Positioned.fill(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: RawAnimeList(
+                          scrollController: _scrollController,
+                          animeList: animeList,
+                        ),
+                      ),
+                      NextAnimePageErrorIndicator(
+                        hasPaginationError: state.hasPaginationError,
+                        onTryAgainTap:
+                            _pageController.animeListStore.getAnimeList,
+                      ),
+                    ],
+                  ),
                 ),
                 NextAnimePageLoadingIndicator(
                   isLoadingNewPage: state.isLoadingNewPage,
@@ -59,8 +73,7 @@ class PaginatedAnimeList extends StatelessWidget {
           return Failure(
             message: message,
             buttonText: CoreStrings.of(context)!.tryAgain,
-            onButtonPressed: () =>
-                _pageController.animeListStore.getAnimeList(),
+            onButtonPressed: _pageController.animeListStore.getAnimeList,
           );
         },
       ),
