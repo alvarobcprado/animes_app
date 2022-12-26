@@ -13,5 +13,6 @@
   "animeSynopsis": "Sinopse:",
   "animeDetailsPageFavorite": "Favoritar",
   "favoriteAnimesPageTitleAppBar": "Favoritos",
-  "favoriteAnimesPageNoAnimes": "Adicione animes aos seus favoritos"
+  "favoriteAnimesPageNoAnimes": "Adicione animes aos seus favoritos",
+  "animeListNextPageError": "Não foi possível carregar mais animes"
 }

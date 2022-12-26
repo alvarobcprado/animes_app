@@ -57,11 +57,24 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
           _animesListPage++;
         }
         update(
-          state.copyWith(animes: _animes, isLoadingNewPage: false),
+          state.copyWith(
+            animes: _animes,
+            isLoadingNewPage: false,
+            hasPaginationError: false,
+          ),
         );
       },
       error: (exception) {
-        setError(exception);
+        if (exception is PaginationErrorException) {
+          update(
+            state.copyWith(
+              hasPaginationError: true,
+              isLoadingNewPage: false,
+            ),
+          );
+        } else {
+          setError(exception);
+        }
       },
     );
 
@@ -101,13 +114,20 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
             if (_hasNextPage(_animesBySearch)) {
               _animesBySearchPage++;
             }
-            update(state.copyWith(
-              animes: _animesBySearch,
-              isLoadingNewPage: false,
-            ));
+            update(
+              state.copyWith(
+                animes: _animesBySearch,
+                isLoadingNewPage: false,
+                hasPaginationError: false,
+              ),
+            );
           },
           error: (exception) {
-            setError(exception);
+            if (exception is PaginationErrorException) {
+              update(state.copyWith(hasPaginationError: true));
+            } else {
+              setError(exception);
+            }
           },
         );
 
@@ -127,7 +147,11 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
 
     if (_genresFilter.isEmpty) {
       update(
-        state.copyWith(animes: _animes, isLoadingNewPage: false),
+        state.copyWith(
+          animes: _animes,
+          isLoadingNewPage: false,
+          hasPaginationError: false,
+        ),
       );
       setLoading(false);
       _paginationSource = AnimePaginationSource.list;
@@ -154,11 +178,19 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
               _animesByGenrePage++;
             }
             update(
-              state.copyWith(animes: _animesByGenre, isLoadingNewPage: false),
+              state.copyWith(
+                animes: _animesByGenre,
+                isLoadingNewPage: false,
+                hasPaginationError: false,
+              ),
             );
           },
           error: (exception) {
-            setError(exception);
+            if (exception is PaginationErrorException) {
+              update(state.copyWith(hasPaginationError: true));
+            } else {
+              setError(exception);
+            }
           },
         );
 
@@ -205,7 +237,7 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
     if (animeList.isEmpty) {
       setLoading(true);
     } else if (_hasNextPage(animeList)) {
-      update(state.copyWith(isLoadingNewPage: true));
+      update(state.copyWith(isLoadingNewPage: true, hasPaginationError: false));
     } else {
       //TODO: add last page reached
       return false;
