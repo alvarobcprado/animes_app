@@ -8,10 +8,12 @@ class Failure extends StatelessWidget {
     required this.message,
     required this.buttonText,
     required this.onButtonPressed,
+    this.centerMessage = false,
   }) : super(key: key);
   final String message;
   final String buttonText;
   final VoidCallback onButtonPressed;
+  final bool centerMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class Failure extends StatelessWidget {
         Text(
           message,
           style: textStyles.h5,
+          textAlign: centerMessage ? TextAlign.center : TextAlign.start,
         ),
         const SpacerBox.verticalXS(),
         ElevatedButton(

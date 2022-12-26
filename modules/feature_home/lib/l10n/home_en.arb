@@ -13,5 +13,6 @@
   "animeSynopsis": "Synopsis:",
   "animeDetailsPageFavorite": "Favorite",
   "favoriteAnimesPageTitleAppBar": "Favorites",
-  "favoriteAnimesPageNoAnimes": "Add anime to your favorites"
+  "favoriteAnimesPageNoAnimes": "Add anime to your favorites",
+  "animeListNextPageError": "Error loading more animes"
 }

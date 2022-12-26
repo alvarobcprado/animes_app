@@ -15,25 +15,6 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
   final HomeDioWrapper _wrapper;
 
   @override
-  Future<Result<List<Anime>>> getAnimeList(int page) async {
-    final endpoint = '/top/anime?page=$page';
-    final result = _wrapper(() => _dio.get(endpoint));
-
-    return result.then(
-      (value) => value.when(
-        success: (success) {
-          final response = AnimeDataResponse.fromJson(success.data);
-
-          return Result.success(response.animes?.toDomain() ?? []);
-        },
-        error: (error) {
-          return Result.error(error);
-        },
-      ),
-    );
-  }
-
-  @override
   Future<Result<AnimeDetails>> getAnimeDetails(int id) {
     final result = _wrapper(() => _dio.get('/anime/$id'));
     return result.then(
@@ -69,24 +50,22 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
   }
 
   @override
+  Future<Result<List<Anime>>> getAnimeList(int page) async {
+    final endpoint = '/top/anime?page=$page';
+    final resultResponse = await _wrapper(() => _dio.get(endpoint));
+
+    return _parseAnimeListResponse(resultResponse, page);
+  }
+
+  @override
   Future<Result<List<Anime>>> getAnimeListBySearch(
     String query,
     int page,
   ) async {
-    final result = _wrapper(
-      () => _dio.get('/anime?q=$query&page=$page'),
-    );
-    return result.then(
-      (value) => value.when(
-        success: (success) {
-          final response = AnimeDataResponse.fromJson(success.data);
-          return Result.success(response.animes?.toDomain() ?? []);
-        },
-        error: (error) {
-          return Result.error(error);
-        },
-      ),
-    );
+    final endpoint = '/anime?q=$query&page=$page';
+    final resultResponse = await _wrapper(() => _dio.get(endpoint));
+
+    return _parseAnimeListResponse(resultResponse, page);
   }
 
   @override
@@ -94,20 +73,27 @@ class AnimeRemoteDataSourceImpl implements AnimeRemoteDataSource {
     String genreId,
     int page,
   ) async {
-    final result = _wrapper(
-      () => _dio.get('/anime?genres=$genreId&page=$page'),
-    );
+    final endpoint = '/anime?genres=$genreId&page=$page';
+    final resultResponse = await _wrapper(() => _dio.get(endpoint));
 
-    return result.then(
-      (value) => value.when(
-        success: (success) {
-          final response = AnimeDataResponse.fromJson(success.data);
-          return Result.success(response.animes?.toDomain() ?? []);
-        },
-        error: (error) {
-          return Result.error(error);
-        },
-      ),
+    return _parseAnimeListResponse(resultResponse, page);
+  }
+
+  Result<List<Anime>> _parseAnimeListResponse(
+    Result resultResponse,
+    int page,
+  ) {
+    return resultResponse.when(
+      success: (success) {
+        final response = AnimeDataResponse.fromJson(success.data);
+        return Result.success(response.animes?.toDomain() ?? []);
+      },
+      error: (error) {
+        if (page > 1) {
+          return Result.error(PaginationErrorException());
+        }
+        return Result.error(error);
+      },
     );
   }
 }

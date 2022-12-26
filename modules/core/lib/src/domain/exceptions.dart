@@ -6,3 +6,4 @@ class NullResponseException implements Exception {}
 
 class NullCacheException implements Exception {}
 
+class PaginationErrorException implements Exception {}

@@ -176,6 +176,12 @@ abstract class HomeStrings {
   /// In en, this message translates to:
   /// **'Add anime to your favorites'**
   String get favoriteAnimesPageNoAnimes;
+
+  /// No description provided for @animeListNextPageError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading more animes'**
+  String get animeListNextPageError;
 }
 
 class _HomeStringsDelegate extends LocalizationsDelegate<HomeStrings> {
