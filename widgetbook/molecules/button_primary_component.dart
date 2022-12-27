@@ -19,6 +19,7 @@ class ButtonPrimaryComponent extends WidgetbookWidget {
               child: ButtonPrimary(
                 isLoading: true,
                 onPressed: () {},
+                buttonText: 'ENTER',
               ),
             ),
           );

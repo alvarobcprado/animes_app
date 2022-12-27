@@ -1,4 +1,3 @@
-import 'package:core/generated/core_strings.dart';
 import 'package:design_system/design_system.dart';
 import 'package:design_system/src/foundations/sizes.dart';
 import 'package:design_system/src/foundations/typography.dart';
@@ -9,11 +8,11 @@ class ButtonPrimary extends StatelessWidget {
     Key? key,
     required this.isLoading,
     required this.onPressed,
-    this.buttonText,
+    required this.buttonText,
   }) : super(key: key);
   final bool isLoading;
   final VoidCallback onPressed;
-  final String? buttonText;
+  final String buttonText;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class ButtonPrimary extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius:
                 BorderRadius.circular(AppSizesFoundation.buttonBorderRadius),
-          ), //////// HERE
+          ),
         ),
         onPressed: onPressed,
         child: isLoading
@@ -41,7 +40,7 @@ class ButtonPrimary extends StatelessWidget {
                 color: colors.surface,
               )
             : Text(
-                buttonText ?? CoreStrings.of(context)!.enter,
+                buttonText,
                 style: textStyles.h2,
               ),
       ),

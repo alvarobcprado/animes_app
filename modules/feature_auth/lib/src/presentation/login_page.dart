@@ -1,4 +1,5 @@
 import 'package:core/dependencies/dependency_injection.dart';
+import 'package:core/generated/core_strings.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
@@ -23,11 +24,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Center(
       child: ButtonPrimary(
-          onPressed: () {
-            widget.boundary.goToFeatureHome(context);
-          },
-          isLoading: false,
-        ),
+        onPressed: () {
+          widget.boundary.goToFeatureHome(context);
+        },
+        isLoading: false,
+        buttonText: CoreStrings.of(context)!.enter,
+      ),
     );
   }
 }
