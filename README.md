@@ -16,7 +16,7 @@ O aplicativo segue o padrão MVVM + Clean Architecture contendo os seguintes mó
 
 - App: Responsável pela inicialização do aplicativo. 
 
-- Core:
+- Core: Módulo que contém código compartilhado e todas as dependências utilizadas no projeto
 
 - Data Local: Módulo responsável por salvar e obter as informações salvas localmente. Este módulo conhece qualquer módulo feature
 
