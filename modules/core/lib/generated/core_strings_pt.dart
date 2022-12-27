@@ -12,4 +12,7 @@ class CoreStringsPt extends CoreStrings {
 
   @override
   String get tryAgain => 'Tentar novamente';
+
+  @override
+  String get enter => 'ENTRAR';
 }

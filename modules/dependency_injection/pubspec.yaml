@@ -16,6 +16,8 @@ dependencies:
     path: ../data_local
   core:
     path: ../core
+  feature_auth:
+    path: ../feature_auth
 
 
 dev_dependencies:

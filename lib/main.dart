@@ -3,6 +3,7 @@ import 'package:core/dependencies/routing.dart';
 import 'package:dependency_injection/dependency_injection.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
+import 'package:feature_auth/feature_auth.dart';
 import 'package:feature_home/generated/home_strings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,9 @@ class MyApp extends StatelessWidget {
 
   final _router = GoRouter(
     debugLogDiagnostics: kDebugMode,
-    initialLocation: '/home',
+    initialLocation: '/login',
     routes: [
+      AuthRoutes(),
       HomeRoutes(),
     ],
   );

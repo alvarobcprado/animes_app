@@ -110,6 +110,12 @@ abstract class CoreStrings {
   /// In en, this message translates to:
   /// **'Try again'**
   String get tryAgain;
+
+  /// No description provided for @enter.
+  ///
+  /// In en, this message translates to:
+  /// **'ENTER'**
+  String get enter;
 }
 
 class _CoreStringsDelegate extends LocalizationsDelegate<CoreStrings> {
