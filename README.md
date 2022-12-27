@@ -14,6 +14,7 @@ Aplicativo Flutter
 
 - O aplicativo possui modularização
 - Possui internacionalização de strings, onde cada feature é responsável pelas suas strings utilizadas, além do módulo core possuir strings compartilhadas no projeto
+- É destinado um módulo para o design system do aplicativo
 - O aplicativo possui a implementação do [Widgetbook](https://www.widgetbook.io/), facilitando testar visualmente os componentes do Design System isoladamente
 - Contém a classe [Result](https://github.com/alvarobcprado/animes_app/blob/main/modules/core/lib/src/commons/result.dart), que tem como objetivo empacotar os dados retornados deixando com que cada camada lide responsavelmente com as possíveis falhas
 
