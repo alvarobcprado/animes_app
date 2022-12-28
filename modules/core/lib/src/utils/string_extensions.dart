@@ -15,4 +15,15 @@ extension StringExtensions on String {
       return '';
     }
   }
+
+  bool isValidName() {
+    const minLength = 2;
+    return RegExp("[a-zA-Z\\s]+").hasMatch(trim()) && length >= minLength;
+  }
+
+  bool isValidEmail() {
+    return RegExp(
+            r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$")
+        .hasMatch(this);
+  }
 }
