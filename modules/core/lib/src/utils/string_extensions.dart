@@ -18,7 +18,7 @@ extension StringExtensions on String {
 
   bool isValidName() {
     const minLength = 2;
-    return RegExp("[a-zA-Z\\s]+").hasMatch(trim()) && length >= minLength;
+    return RegExp("[a-zA-Zà-úÀ-Ú\\s]+").hasMatch(trim()) && length >= minLength;
   }
 
   bool isValidEmail() {

@@ -1,20 +1,7 @@
+import 'package:core/core.dart';
 import 'package:core/dependencies/state_management.dart';
 import 'package:feature_auth/feature_auth.dart';
-import 'package:feature_auth/src/domain/models/user.dart';
-import 'package:feature_auth/src/domain/use_cases/validate_user_email_use_case.dart';
-import 'package:feature_auth/src/domain/use_cases/validate_user_name_use_case.dart';
-
-class AuthModel {
-  final InputStatus emailStatus;
-  final InputStatus nameStatus;
-
-  AuthModel({required this.emailStatus, required this.nameStatus});
-
-  factory AuthModel.initial() => AuthModel(
-        emailStatus: InputStatus.initial,
-        nameStatus: InputStatus.initial,
-      );
-}
+import 'package:feature_auth/src/presentation/auth_state.dart';
 
 class AuthStore extends StreamStore<Exception, AuthModel> {
   AuthStore(
@@ -26,10 +13,26 @@ class AuthStore extends StreamStore<Exception, AuthModel> {
 
   final ValidateUserEmailUseCase _validateUserEmailUseCase;
   final ValidateUserNameUseCase _validateUserNameUseCase;
+  final Debouncer _debouncer = Debouncer(const Duration(milliseconds: 2000));
 
   void doLogin(User user) {
-    final isValidName = _validateUserNameUseCase(user.name);
-    final isValidEmail = _validateUserEmailUseCase(user.email);
-    update(AuthModel(emailStatus: isValidEmail, nameStatus: isValidName));
+    update(
+      state.copyWith(
+        isLoading: true,
+      ),
+    );
+    _debouncer(() {
+      final isValidName = _validateUserNameUseCase(user.name);
+      final isValidEmail = _validateUserEmailUseCase(user.email);
+      update(
+        AuthModel(
+          emailStatus: isValidEmail,
+          nameStatus: isValidName,
+          isLoading: false,
+          isValidAuth: isValidEmail == InputStatus.valid &&
+              isValidName == InputStatus.valid,
+        ),
+      );
+    });
   }
 }
