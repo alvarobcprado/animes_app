@@ -1,10 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core/dependencies/testing.dart';
-import 'package:feature_home/src/data/cache/cache.dart';
-import 'package:feature_home/src/data/remote/anime_remote_data_source.dart';
-import 'package:feature_home/src/data/repositories/anime_repository_impl.dart';
-import 'package:feature_home/src/domain/models/anime_details.dart';
-import 'package:feature_home/src/domain/repositories/repositories.dart';
+import 'package:feature_home/feature_home.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../helper_models.dart';
@@ -114,6 +110,89 @@ void main() {
           verify(() => animeCacheDataSourceMock.getAnimeDetails(1)) //
               .called(1);
           verify(() => animeCacheDataSourceMock.verifyIfAnimeIsFavorite(1))
+              .called(1);
+        },
+      );
+    },
+  );
+
+  group(
+    'getAnimeGenres',
+    () {
+      test(
+        'should return a List<AnimeGenre> when the call to remote data source is successful',
+        () async {
+          when(() => animeRemoteDataSourceMock.getAnimeGenres())
+              .thenAnswer((_) async => Result.success(mockAnimeGenreList));
+
+          when(() => animeCacheDataSourceMock.saveAnimeGenres(any()))
+              .thenAnswer((_) async {});
+
+          final rawResult = await animeRepository.getAnimeGenres();
+
+          final result = rawResult.whenOrNull(success: (data) => data);
+
+          expect(result, isNotNull);
+          expect(result, equals(mockAnimeGenreList));
+
+          verify(() => animeRemoteDataSourceMock.getAnimeGenres()) //
+              .called(1);
+
+          verify(() => animeCacheDataSourceMock.saveAnimeGenres(any()))
+              .called(1);
+        },
+      );
+
+      test(
+        'should return an [Exception] when the call to remote data source and cache data source is unsuccessful',
+        () async {
+          final mockException = Exception();
+
+          when(() => animeRemoteDataSourceMock.getAnimeGenres())
+              .thenAnswer((_) async => Result.error(mockException));
+
+          when(() => animeCacheDataSourceMock.getAnimeGenres())
+              .thenAnswer((_) async => Result.error(mockException));
+
+          final rawResult = await animeRepository.getAnimeGenres();
+
+          final result = rawResult.whenOrNull(
+            error: (error) => error,
+          );
+
+          expect(result, isNotNull);
+          expect(result, equals(mockException));
+
+          verify(() => animeRemoteDataSourceMock.getAnimeGenres()) //
+              .called(1);
+          verify(() => animeCacheDataSourceMock.getAnimeGenres()) //
+              .called(1);
+        },
+      );
+
+      test(
+        'should return a [List<AnimeGenre>] when the call to remote data source is unsuccessful but the call to cache data source is successful',
+        () async {
+          final mockException = Exception();
+
+          when(() => animeRemoteDataSourceMock.getAnimeGenres())
+              .thenAnswer((_) async => Result.error(mockException));
+
+          when(() => animeCacheDataSourceMock.getAnimeGenres()).thenAnswer(
+            (_) async => Result.success(mockAnimeGenreList.toCache()),
+          );
+
+          final rawResult = await animeRepository.getAnimeGenres();
+
+          final result = rawResult.whenOrNull(success: (data) => data);
+
+          expect(result, isNotNull);
+          expect(result, isA<List<Genre>>());
+          expect(result?.length, mockAnimeGenreList.length);
+
+          verify(() => animeRemoteDataSourceMock.getAnimeGenres()) //
+              .called(1);
+          verify(() => animeCacheDataSourceMock.getAnimeGenres()) //
               .called(1);
         },
       );
