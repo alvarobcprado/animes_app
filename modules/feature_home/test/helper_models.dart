@@ -22,3 +22,11 @@ final mockAnimeDetailsAuxiliarCache = AnimeDetailsAuxiliarCache(
   'synopsis',
   9,
 );
+
+final mockAnimeGenreList = [
+  Genre('genreName1', 1),
+  Genre('genreName2', 2),
+  Genre('genreName3', 3),
+  Genre('genreName4', 4),
+  Genre('genreName5', 5),
+];
