@@ -357,4 +357,52 @@ void main() {
       );
     },
   );
+
+  group(
+    'toggleFavoriteAnime',
+    () {
+      test(
+        'should save favorite anime to cache data source when the animeDetails is not favorite yet',
+        () async {
+          final animeDetails = mockAnimeDetails;
+
+          when(() => animeCacheDataSourceMock.saveFavoriteAnime(any()))
+              .thenAnswer((_) async => const Result.success(null));
+
+          when(() => animeCacheDataSourceMock.removeFavoriteAnime(any()))
+              .thenAnswer((_) async => const Result.success(null));
+
+          await animeRepository.toggleFavoriteAnime(animeDetails);
+
+          verify(() => animeCacheDataSourceMock.saveFavoriteAnime(any()))
+              .called(1);
+
+          verifyNever(
+              () => animeCacheDataSourceMock.removeFavoriteAnime(any()));
+        },
+      );
+
+      test(
+        'should remove anime from favorite cache data source when the animeDetails is already favorite',
+        () async {
+          final animeDetails = mockAnimeDetails;
+
+          animeDetails.isFavorite = true;
+
+          when(() => animeCacheDataSourceMock.saveFavoriteAnime(any()))
+              .thenAnswer((_) async => const Result.success(null));
+
+          when(() => animeCacheDataSourceMock.removeFavoriteAnime(any()))
+              .thenAnswer((_) async => const Result.success(null));
+
+          await animeRepository.toggleFavoriteAnime(animeDetails);
+
+          verify(() => animeCacheDataSourceMock.removeFavoriteAnime(any()))
+              .called(1);
+
+          verifyNever(() => animeCacheDataSourceMock.saveFavoriteAnime(any()));
+        },
+      );
+    },
+  );
 }
