@@ -17,6 +17,10 @@ dependencies:
   navigation:
     path: ../navigation
 
+  intl: ^0.17.0
+  flutter_localizations:
+    sdk: flutter
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
