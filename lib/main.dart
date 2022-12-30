@@ -5,6 +5,7 @@ import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
 import 'package:feature_auth/feature_auth.dart';
 import 'package:feature_home/generated/home_strings.dart';
+import 'package:feature_auth/generated/auth_strings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         routeInformationProvider: _router.routeInformationProvider,
         localizationsDelegates: const [
           CoreStrings.delegate,
+          AuthStrings.delegate,
           HomeStrings.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
@@ -45,6 +47,7 @@ class MyApp extends StatelessWidget {
         ],
         supportedLocales: const [
           ...CoreStrings.supportedLocales,
+          ...AuthStrings.supportedLocales,
           ...HomeStrings.supportedLocales,
         ],
       ),

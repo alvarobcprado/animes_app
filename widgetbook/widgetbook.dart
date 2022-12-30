@@ -15,6 +15,7 @@ import 'molecules/card_list_component.dart';
 import 'molecules/failure_component.dart';
 import 'molecules/filter_select_chip_list.dart';
 import 'molecules/image_card_button_component.dart';
+import 'molecules/text_field_primary_component.dart';
 
 class WidgetbookHotReload extends StatelessWidget {
   const WidgetbookHotReload({Key? key}) : super(key: key);
@@ -45,6 +46,7 @@ class WidgetbookHotReload extends StatelessWidget {
                 CardListComponent(),
                 FailureComponent(),
                 ButtonPrimaryComponent(),
+                TextFieldPrimaryComponent(),
               ],
             ),
           ],

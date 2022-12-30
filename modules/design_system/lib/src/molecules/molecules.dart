@@ -4,3 +4,4 @@ export './filter_select_chip_list.dart';
 export './image_card_button.dart';
 export './failure.dart';
 export './button_primary.dart';
+export './text_field_primary.dart';
