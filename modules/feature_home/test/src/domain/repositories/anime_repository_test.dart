@@ -304,4 +304,57 @@ void main() {
       );
     },
   );
+
+  group(
+    'getAnimeListByGenre',
+    () {
+      test(
+        'should return a [List<Anime>] when the call to remote data source is successful',
+        () async {
+          when(
+            () => animeRemoteDataSourceMock.getAnimeListByGenre(any(), any()),
+          ).thenAnswer((_) async => Result.success(mockAnimeList));
+
+          final rawResult = await animeRepository.getAnimeListByGenre(
+            'test',
+            1,
+          );
+
+          final result = rawResult.whenOrNull(success: (data) => data);
+
+          expect(result, isNotNull);
+          expect(result, equals(mockAnimeList));
+
+          verify(
+            () => animeRemoteDataSourceMock.getAnimeListByGenre(any(), any()),
+          ).called(1);
+        },
+      );
+
+      test(
+        'should return an [Exception] when the call to remote data source is unsuccessful',
+        () async {
+          final mockException = Exception();
+
+          when(
+            () => animeRemoteDataSourceMock.getAnimeListByGenre(any(), any()),
+          ).thenAnswer((_) async => Result.error(mockException));
+
+          final rawResult = await animeRepository.getAnimeListByGenre(
+            'test',
+            1,
+          );
+
+          final result = rawResult.whenOrNull(error: (error) => error);
+
+          expect(result, isNotNull);
+          expect(result, equals(mockException));
+
+          verify(
+            () => animeRemoteDataSourceMock.getAnimeListByGenre(any(), any()),
+          ).called(1);
+        },
+      );
+    },
+  );
 }
