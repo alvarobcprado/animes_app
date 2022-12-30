@@ -13,9 +13,6 @@ class AnimeRemoteDataSourceMock extends Mock implements AnimeRemoteDataSource {}
 
 class AnimeCacheDataSourceMock extends Mock implements AnimeCacheDataSource {}
 
-class AnimeDetailsAuxiliarCacheFake extends Fake
-    implements AnimeDetailsAuxiliarCache {}
-
 void main() {
   late AnimeRemoteDataSourceMock animeRemoteDataSourceMock;
   late AnimeCacheDataSourceMock animeCacheDataSourceMock;
@@ -34,7 +31,7 @@ void main() {
   // AnimeDetailsAuxiliarCache type.
   setUpAll(() {
     registerFallbackValue(
-      AnimeDetailsAuxiliarCacheFake(),
+      mockAnimeDetailsAuxiliarCache,
     );
   });
 
