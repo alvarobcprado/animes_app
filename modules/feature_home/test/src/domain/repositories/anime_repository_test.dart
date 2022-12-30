@@ -35,7 +35,7 @@ void main() {
     'getAnimeDetails',
     () {
       test(
-        'should return a [Result.success] with [AnimeDetails] when the call to remote data source is successful',
+        'should return an [AnimeDetails] when the call to remote data source is successful',
         () async {
           when(() => animeRemoteDataSourceMock.getAnimeDetails(any()))
               .thenAnswer((_) async => Result.success(mockAnimeDetails));
@@ -44,9 +44,13 @@ void main() {
           when(() => animeCacheDataSourceMock.verifyIfAnimeIsFavorite(any()))
               .thenAnswer((_) async => false);
 
-          final result = await animeRepository.getAnimeDetails(1);
+          final rawResult = await animeRepository.getAnimeDetails(1);
 
-          expect(result, equals(Result.success(mockAnimeDetails)));
+          final result = rawResult.whenOrNull(
+            success: (animeDetails) => animeDetails,
+          );
+
+          expect(result, equals(mockAnimeDetails));
 
           verify(() => animeRemoteDataSourceMock.getAnimeDetails(1)) //
               .called(1);
@@ -58,7 +62,7 @@ void main() {
       );
 
       test(
-        'should return a [Result.error] with [Exception] when the call to remote data source and cache data source is unsuccessful',
+        'should return an [Exception] when the call to remote data source and cache data source is unsuccessful',
         () async {
           final mockException = Exception();
 
@@ -68,9 +72,13 @@ void main() {
           when(() => animeCacheDataSourceMock.getAnimeDetails(any()))
               .thenAnswer((_) async => Result.error(mockException));
 
-          final result = await animeRepository.getAnimeDetails(1);
+          final rawResult = await animeRepository.getAnimeDetails(1);
 
-          expect(result, equals(Result<AnimeDetails>.error(mockException)));
+          final result = rawResult.whenOrNull(
+            error: (exception) => exception,
+          );
+
+          expect(result, equals(mockException));
 
           verify(() => animeRemoteDataSourceMock.getAnimeDetails(1)) //
               .called(1);
@@ -83,7 +91,7 @@ void main() {
       );
 
       test(
-        'should return a [Result.success] with [AnimeDetails] when the call to remote data source is unsuccessful but the call to cache data source is successful',
+        'should return an [AnimeDetails] when the call to remote data source is unsuccessful but the call to cache data source is successful',
         () async {
           final mockException = Exception();
 
@@ -98,12 +106,14 @@ void main() {
           when(() => animeCacheDataSourceMock.verifyIfAnimeIsFavorite(any()))
               .thenAnswer((_) async => false);
 
-          final result = await animeRepository.getAnimeDetails(1);
+          final rawResult = await animeRepository.getAnimeDetails(1);
 
-          expect(
-            result,
-            isA<Result<AnimeDetails>>(),
+          final result = rawResult.whenOrNull(
+            success: (animeDetails) => animeDetails,
           );
+
+          expect(result, isA<AnimeDetails>());
+          expect(result?.id, mockAnimeDetails.id);
 
           verify(() => animeRemoteDataSourceMock.getAnimeDetails(1)) //
               .called(1);
