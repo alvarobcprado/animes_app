@@ -208,4 +208,47 @@ void main() {
       );
     },
   );
+
+  group(
+    'getAnimeList',
+    () {
+      test(
+        'should return a [List<Anime>] when the call to remote data source is successful',
+        () async {
+          when(() => animeRemoteDataSourceMock.getAnimeList(any()))
+              .thenAnswer((_) async => Result.success(mockAnimeList));
+
+          final rawResult = await animeRepository.getAnimeList(1);
+
+          final result = rawResult.whenOrNull(success: (data) => data);
+
+          expect(result, isNotNull);
+          expect(result, equals(mockAnimeList));
+
+          verify(() => animeRemoteDataSourceMock.getAnimeList(any())).called(1);
+        },
+      );
+
+      test(
+        'should return an [Exception] when the call to remote data source is unsuccessful',
+        () async {
+          final mockException = Exception();
+
+          when(() => animeRemoteDataSourceMock.getAnimeList(any()))
+              .thenAnswer((_) async => Result.error(mockException));
+
+          final rawResult = await animeRepository.getAnimeList(1);
+
+          final result = rawResult.whenOrNull(
+            error: (error) => error,
+          );
+
+          expect(result, isNotNull);
+          expect(result, equals(mockException));
+
+          verify(() => animeRemoteDataSourceMock.getAnimeList(any())).called(1);
+        },
+      );
+    },
+  );
 }
