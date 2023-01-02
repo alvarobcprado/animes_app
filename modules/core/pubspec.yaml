@@ -22,10 +22,9 @@ dependencies:
   json_annotation: ^4.7.0
   flutter_triple: ^1.2.7+4
   focus_detector: ^2.0.1
+  mocktail: ^0.3.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   flutter_lints: ^2.0.0
   freezed: ^2.2.1
   build_runner: ^2.2.0
