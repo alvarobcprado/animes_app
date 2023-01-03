@@ -17,6 +17,7 @@ Aplicativo Flutter
 - É destinado um módulo para o design system do aplicativo
 - O aplicativo possui a implementação do [Widgetbook](https://www.widgetbook.io/), facilitando testar visualmente os componentes do Design System isoladamente
 - Contém a classe [Result](https://github.com/alvarobcprado/animes_app/blob/main/modules/core/lib/src/commons/result.dart), que tem como objetivo empacotar os dados retornados deixando com que cada camada lide responsavelmente com as possíveis falhas
+- Possui testes unitários, utilizando [Mocktail](https://pub.dev/packages/mocktail)
 
 ## Arquitetura
 
@@ -24,7 +25,7 @@ O aplicativo segue o padrão MVVM + Clean Architecture contendo os seguintes mó
 
 - App: Responsável pela inicialização do aplicativo 
 - Core: Módulo que contém código compartilhado e todas as dependências utilizadas no projeto
-- Data Local: Módulo responsável por salvar e obter as informações salvas localmente. Este módulo conhece qualquer módulo feature
+- Data Local: Módulo responsável por salvar e obter as informações salvas localmente. Este módulo contém algumas extensions para o mapeamento de classes que representam um dado local externo para classes que representam tal dado para ser utilizado na camada de apresentação e vice versa. Por exemplo, a classe [AnimeCache](https://github.com/alvarobcprado/animes_app/blob/main/modules/data_local/lib/src/models/anime_cache.dart) está contida neste módulo, mas a [AnimeAuxiliarCache](https://github.com/alvarobcprado/animes_app/blob/main/modules/feature_home/lib/src/data/cache/models/anime_auxiliar_cache.dart) está contida no módulo feature em que será utilizada
 - Dependency Injection: Responsável pela injeção de dependência do aplicativo. Este módulo conhece todos os outros
 - Design System: Módulo independente que contém as cores, tipografias e os componentes reutilizáveis de UI
 - Feature Auth: Módulo responsável pela tela de login
