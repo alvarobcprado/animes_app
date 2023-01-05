@@ -1,5 +1,5 @@
 import 'package:design_system/src/foundations/colors.dart';
-import 'package:design_system/src/foundations/sizes.dart';
+import 'package:design_system/src/foundations/typography.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldPrimary extends StatelessWidget {
@@ -19,21 +19,19 @@ class TextFieldPrimary extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colors = theme.extension<AppColorsFoundation>()!;
+    final textStyles = theme.extension<AppTypographyFoundation>()!;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSizesFoundation.baseSpace,
-      ),
-      child: TextField(
-        controller: controller,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          hintText: hintText,
-          errorText: errorText,
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: colors.primary,
-            ),
+    return TextField(
+      style: textStyles.h6,
+      controller: controller,
+      keyboardType: keyboardType,
+      decoration: InputDecoration(
+        hintStyle: textStyles.h6,
+        hintText: hintText,
+        errorText: errorText,
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: colors.primary,
           ),
         ),
       ),
