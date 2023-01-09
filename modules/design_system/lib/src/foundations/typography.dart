@@ -9,6 +9,7 @@ class AppTypographyFoundation extends ThemeExtension<AppTypographyFoundation> {
     required this.h3,
     required this.h4,
     required this.h5,
+    required this.h6,
   });
 
   static const dark = AppTypographyFoundation(
@@ -17,6 +18,7 @@ class AppTypographyFoundation extends ThemeExtension<AppTypographyFoundation> {
     h3: AppTypography.h3Dark,
     h4: AppTypography.h4Dark,
     h5: AppTypography.h5Dark,
+    h6: AppTypography.h6Dark,
   );
 
   static const light = AppTypographyFoundation(
@@ -25,6 +27,7 @@ class AppTypographyFoundation extends ThemeExtension<AppTypographyFoundation> {
     h3: AppTypography.h3Light,
     h4: AppTypography.h4Light,
     h5: AppTypography.h5Light,
+    h6: AppTypography.h6Light,
   );
 
   final TextStyle h1;
@@ -32,6 +35,7 @@ class AppTypographyFoundation extends ThemeExtension<AppTypographyFoundation> {
   final TextStyle h3;
   final TextStyle h4;
   final TextStyle h5;
+  final TextStyle h6;
 
   @override
   AppTypographyFoundation copyWith({
@@ -40,6 +44,7 @@ class AppTypographyFoundation extends ThemeExtension<AppTypographyFoundation> {
     TextStyle? h3,
     TextStyle? h4,
     TextStyle? h5,
+    TextStyle? h6,
   }) {
     return AppTypographyFoundation(
       h1: h1 ?? this.h1,
@@ -47,6 +52,7 @@ class AppTypographyFoundation extends ThemeExtension<AppTypographyFoundation> {
       h3: h3 ?? this.h3,
       h4: h4 ?? this.h4,
       h5: h5 ?? this.h5,
+      h6: h6 ?? this.h6,
     );
   }
 
@@ -64,6 +70,7 @@ class AppTypographyFoundation extends ThemeExtension<AppTypographyFoundation> {
       h3: TextStyle.lerp(h3, other.h3, t) ?? h3,
       h4: TextStyle.lerp(h4, other.h4, t) ?? h4,
       h5: TextStyle.lerp(h5, other.h5, t) ?? h5,
+      h6: TextStyle.lerp(h6, other.h6, t) ?? h6,
     );
   }
 }

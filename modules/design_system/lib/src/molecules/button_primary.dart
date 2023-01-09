@@ -20,30 +20,25 @@ class ButtonPrimary extends StatelessWidget {
     final colors = theme.extension<AppColorsFoundation>()!;
     final textStyles = theme.extension<AppTypographyFoundation>()!;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSizesFoundation.baseSpace,
-      ),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          minimumSize:
-              const Size(double.infinity, AppSizesFoundation.baseSpace * 7.5),
-          backgroundColor: colors.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.circular(AppSizesFoundation.buttonBorderRadius),
-          ),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize:
+            const Size(double.infinity, AppSizesFoundation.baseSpace * 7.5),
+        backgroundColor: colors.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.circular(AppSizesFoundation.buttonBorderRadius),
         ),
-        onPressed: onPressed,
-        child: isLoading
-            ? CircularProgressIndicator(
-                color: colors.surface,
-              )
-            : Text(
-                buttonText,
-                style: textStyles.h2,
-              ),
       ),
+      onPressed: onPressed,
+      child: isLoading
+          ? CircularProgressIndicator(
+              color: colors.surface,
+            )
+          : Text(
+              buttonText,
+              style: textStyles.h2,
+            ),
     );
   }
 }

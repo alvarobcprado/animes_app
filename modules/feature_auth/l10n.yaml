@@ -1,0 +1,8 @@
+arb-dir: lib/l10n
+template-arb-file: auth_en.arb
+
+output-localization-file: auth_strings.dart
+output-class: AuthStrings
+
+output-dir: lib/generated
+synthetic-package: false

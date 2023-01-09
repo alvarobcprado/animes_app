@@ -60,4 +60,15 @@ abstract class AppTypography {
     fontWeight: FontWeight.bold,
     color: AppColors.onDarkSurface,
   );
+
+  static const TextStyle h6Light = TextStyle(
+    fontSize: 14,
+    fontStyle: FontStyle.normal,
+    color: AppColors.onLightSurface,
+  );
+  static const TextStyle h6Dark = TextStyle(
+    fontSize: 14,
+    fontStyle: FontStyle.normal,
+    color: AppColors.onDarkSurface,
+  );
 }
