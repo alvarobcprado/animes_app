@@ -52,17 +52,16 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40),
+        child: PaddingBox.horizontalM(
           child: Column(
             children: [
-              const SizedBox(height: 140),
+              const SpacerBox.verticalXL(),
               Image.asset(
                 Images.logo,
                 width: 220,
                 height: 220,
               ),
-              const SizedBox(height: 40),
+              const SpacerBox.verticalM(),
               TripleBuilder(
                   store: _pageController.authStore,
                   builder: (context, triple) {
@@ -74,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                       keyboardType: TextInputType.name,
                     );
                   }),
-              const SizedBox(height: 20),
+              const SpacerBox.verticalS(),
               TripleBuilder(
                   store: _pageController.authStore,
                   builder: (context, triple) {
@@ -86,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                       keyboardType: TextInputType.name,
                     );
                   }),
-              const SizedBox(height: 40),
+              const SpacerBox.verticalM(),
               TripleBuilder(
                   store: _pageController.authStore,
                   builder: (context, triple) {
@@ -104,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                       buttonText: CoreStrings.of(context)!.enter,
                     );
                   }),
-              const SizedBox(height: 40),
+              const SpacerBox.verticalL(),
             ],
           ),
         ),
