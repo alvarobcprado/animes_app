@@ -38,3 +38,21 @@ final mockAnimeList = [
   Anime(4, 'imageUrl4', 'title4', ['mockGenre'], 'release4', 4),
   Anime(5, 'imageUrl5', 'title5', ['mockGenre'], 'release5', 5),
 ];
+
+final mockAnimeDetailsList = [
+  AnimeDetails(1, 'title1', 'titleEnglish1', 'image1', 'release1', 'end1',
+      'synopsis1', 1,
+      isFavorite: true),
+  AnimeDetails(2, 'title2', 'titleEnglish2', 'image2', 'release2', 'end2',
+      'synopsis2', 2,
+      isFavorite: true),
+  AnimeDetails(3, 'title3', 'titleEnglish3', 'image3', 'release3', 'end3',
+      'synopsis3', 3,
+      isFavorite: true),
+  AnimeDetails(4, 'title4', 'titleEnglish4', 'image4', 'release4', 'end4',
+      'synopsis1', 4,
+      isFavorite: true),
+  AnimeDetails(5, 'title5', 'titleEnglish5', 'image5', 'release5', 'end5',
+      'synopsis5', 5,
+      isFavorite: true),
+];
