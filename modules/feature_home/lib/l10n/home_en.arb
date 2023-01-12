@@ -14,5 +14,8 @@
   "animeDetailsPageFavorite": "Favorite",
   "favoriteAnimesPageTitleAppBar": "Favorites",
   "favoriteAnimesPageNoAnimes": "Add anime to your favorites",
-  "animeListNextPageError": "Error loading more animes"
+  "animeListNextPageError": "Error loading more animes",
+  "animeDetailsPageAddedFavorite": "Anime added to favorites",
+  "animeDetailsPageRemovedFavorite": "Anime removed from favorites",
+  "animeDetailsPageToggleFavoriteError": "Error adding anime to favorites"
 }

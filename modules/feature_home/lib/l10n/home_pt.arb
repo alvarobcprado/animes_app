@@ -14,5 +14,8 @@
   "animeDetailsPageFavorite": "Favoritar",
   "favoriteAnimesPageTitleAppBar": "Favoritos",
   "favoriteAnimesPageNoAnimes": "Adicione animes aos seus favoritos",
-  "animeListNextPageError": "Não foi possível carregar mais animes"
+  "animeListNextPageError": "Não foi possível carregar mais animes",
+  "animeDetailsPageAddedFavorite": "Anime adicionado aos favoritos",
+  "animeDetailsPageRemovedFavorite": "Anime removido dos favoritos",
+  "animeDetailsPageToggleFavoriteError": "Não foi possível adicionar/remover anime dos favoritos"
 }

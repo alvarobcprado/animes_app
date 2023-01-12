@@ -182,6 +182,24 @@ abstract class HomeStrings {
   /// In en, this message translates to:
   /// **'Error loading more animes'**
   String get animeListNextPageError;
+
+  /// No description provided for @animeDetailsPageAddedFavorite.
+  ///
+  /// In en, this message translates to:
+  /// **'Anime added to favorites'**
+  String get animeDetailsPageAddedFavorite;
+
+  /// No description provided for @animeDetailsPageRemovedFavorite.
+  ///
+  /// In en, this message translates to:
+  /// **'Anime removed from favorites'**
+  String get animeDetailsPageRemovedFavorite;
+
+  /// No description provided for @animeDetailsPageToggleFavoriteError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error adding anime to favorites'**
+  String get animeDetailsPageToggleFavoriteError;
 }
 
 class _HomeStringsDelegate extends LocalizationsDelegate<HomeStrings> {

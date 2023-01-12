@@ -48,4 +48,13 @@ class HomeStringsEn extends HomeStrings {
 
   @override
   String get animeListNextPageError => 'Error loading more animes';
+
+  @override
+  String get animeDetailsPageAddedFavorite => 'Anime added to favorites';
+
+  @override
+  String get animeDetailsPageRemovedFavorite => 'Anime removed from favorites';
+
+  @override
+  String get animeDetailsPageToggleFavoriteError => 'Error adding anime to favorites';
 }

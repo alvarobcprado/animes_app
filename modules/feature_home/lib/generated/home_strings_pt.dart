@@ -48,4 +48,13 @@ class HomeStringsPt extends HomeStrings {
 
   @override
   String get animeListNextPageError => 'Não foi possível carregar mais animes';
+
+  @override
+  String get animeDetailsPageAddedFavorite => 'Anime adicionado aos favoritos';
+
+  @override
+  String get animeDetailsPageRemovedFavorite => 'Anime removido dos favoritos';
+
+  @override
+  String get animeDetailsPageToggleFavoriteError => 'Não foi possível adicionar/remover anime dos favoritos';
 }

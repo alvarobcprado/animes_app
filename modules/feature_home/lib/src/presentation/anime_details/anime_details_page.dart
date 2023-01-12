@@ -39,12 +39,13 @@ class AnimeDetailsPage extends StatelessWidget {
       );
 
   void _onAnimeDetailsAction(BuildContext context, AnimeDetailsAction action) {
+    final homeStrings = HomeStrings.of(context)!;
     if (action is ShowFavoriteAnimeSnackBar) {
-      _showSnackBar(context, 'Anime added to favorites');
+      _showSnackBar(context, homeStrings.animeDetailsPageAddedFavorite);
     } else if (action is ShowUnfavoriteAnimeSnackBar) {
-      _showSnackBar(context, 'Anime removed from favorites');
+      _showSnackBar(context, homeStrings.animeDetailsPageRemovedFavorite);
     } else if (action is ShowFavoriteAnimeErrorSnackBar) {
-      _showSnackBar(context, 'Error adding anime to favorites');
+      _showSnackBar(context, homeStrings.animeDetailsPageToggleFavoriteError);
     }
   }
 
