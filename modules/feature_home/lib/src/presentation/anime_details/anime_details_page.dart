@@ -4,47 +4,58 @@ import 'package:core/dependencies/state_management.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
 import 'package:feature_home/generated/home_strings.dart';
+import 'package:feature_home/src/presentation/anime_details/anime_details_notifier.dart';
+import 'package:feature_home/src/presentation/anime_details/models/anime_details_models.dart';
 import 'package:feature_home/src/presentation/anime_details/widgets/anime_info_row.dart';
 import 'package:flutter/material.dart';
 
-import 'anime_details_controller.dart';
-
-class AnimeDetailsPage extends StatefulWidget {
+class AnimeDetailsPage extends StatelessWidget {
   const AnimeDetailsPage({
     super.key,
-    required this.controller,
+    required this.notifier,
     required this.animeId,
   });
 
-  final AnimeDetailsController controller;
+  final AnimeDetailsNotifier notifier;
   final int animeId;
 
-  static Widget create(int animeId) =>
-      ProxyProvider<AnimeDetailsStore, AnimeDetailsController>(
-        update: (_, animeDetailsStore, controller) =>
-            controller ??
-            AnimeDetailsController(
-              animeDetailsStore,
-            ),
-        child: Consumer<AnimeDetailsController>(
-          builder: (_, controller, __) => AnimeDetailsPage(
-            controller: controller,
+  static Widget create(int animeId) => ProxyProvider2<GetAnimeDetailsUseCase,
+          ToggleFavoriteAnimeUseCase, AnimeDetailsNotifier>(
+        update:
+            (_, getAnimeDetailsUseCase, toggleFavoriteAnimeUseCase, notifier) =>
+                notifier ??
+                AnimeDetailsNotifier(
+                  getAnimeDetailsUseCase: getAnimeDetailsUseCase,
+                  toggleFavoriteAnimeUseCase: toggleFavoriteAnimeUseCase,
+                  animeId: animeId,
+                ),
+        dispose: (_, notifier) => notifier.dispose(),
+        child: Consumer<AnimeDetailsNotifier>(
+          builder: (_, notifier, __) => AnimeDetailsPage(
+            notifier: notifier,
             animeId: animeId,
           ),
         ),
       );
 
-  @override
-  State<AnimeDetailsPage> createState() => _AnimeDetailsPageState();
-}
+  void _onAnimeDetailsAction(BuildContext context, AnimeDetailsAction action) {
+    if (action is ShowFavoriteAnimeSnackBar) {
+      _showSnackBar(context, 'Anime added to favorites');
+    } else if (action is ShowUnfavoriteAnimeSnackBar) {
+      _showSnackBar(context, 'Anime removed from favorites');
+    } else if (action is ShowFavoriteAnimeErrorSnackBar) {
+      _showSnackBar(context, 'Error adding anime to favorites');
+    }
+  }
 
-class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
-  AnimeDetailsController get _pageController => widget.controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController.getAnimeDetails(widget.animeId);
+  void _showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context)
+      ..clearSnackBars()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(message),
+        ),
+      );
   }
 
   @override
@@ -63,71 +74,70 @@ class _AnimeDetailsPageState extends State<AnimeDetailsPage> {
           SliverFillRemaining(
             hasScrollBody: false,
             child: PaddingBox.horizontalS(
-              child: ScopedBuilder<AnimeDetailsStore, Exception,
-                  AnimeDetailsModel>(
-                store: widget.controller.animeDetailsStore,
-                onLoading: (_) => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                onError: (_, error) {
-                  final message = error!.getErrorMessage(context);
-                  return Failure(
-                      message: message,
-                      buttonText: CoreStrings.of(context)!.tryAgain,
-                      onButtonPressed: () => _pageController.animeDetailsStore
-                          .getAnimeDetails(widget.animeId));
-                },
-                onState: (context, state) {
-                  final animeDetail = state.animeDetails;
-                  if (animeDetail == null) {
+              child: ReStateActionWidget<AnimeDetailsState, AnimeDetailsAction>(
+                reState: notifier,
+                onAction: (action) => _onAnimeDetailsAction(context, action),
+                builder: (context, state, child) {
+                  if (state is AnimeDetailsLoading) {
                     return const Center(child: CircularProgressIndicator());
                   }
-                  return Column(
-                    children: [
-                      const SpacerBox.verticalS(),
-                      ImageCardButton(
-                        buttonIcon: animeDetail.isFavorite
-                            ? Icons.favorite
-                            : Icons.favorite_outline,
-                        buttonLabel:
-                            HomeStrings.of(context)!.animeDetailsPageFavorite,
-                        imageUrl: animeDetail.image,
-                        onButtonPressed: () {
-                          _pageController.toggleFavoriteAnime(animeDetail);
-                        },
-                      ),
-                      const SpacerBox.verticalS(),
-                      AnimeInfoRow(
-                        title: homeStrings.animeOriginalTitle,
-                        info: animeDetail.title,
-                      ),
-                      AnimeInfoRow(
-                        title: homeStrings.animeEnglishTitle,
-                        info: animeDetail.titleEnglish,
-                      ),
-                      AnimeInfoRow(
-                        title: homeStrings.animeReleaseDate,
-                        info: animeDetail.release.convertDateToCurrentLocale(
-                          context,
+                  if (state is AnimeDetailsError) {
+                    return Failure(
+                      message: state.error.getErrorMessage(context),
+                      buttonText: CoreStrings.of(context)!.tryAgain,
+                      onButtonPressed: notifier.getAnimeDetails,
+                    );
+                  }
+                  if (state is AnimeDetailsLoaded) {
+                    final animeDetail = state.animeDetails;
+                    return Column(
+                      children: [
+                        const SpacerBox.verticalS(),
+                        ImageCardButton(
+                          buttonIcon: animeDetail.isFavorite
+                              ? Icons.favorite
+                              : Icons.favorite_outline,
+                          buttonLabel:
+                              HomeStrings.of(context)!.animeDetailsPageFavorite,
+                          imageUrl: animeDetail.image,
+                          onButtonPressed: () {
+                            notifier.toggleFavoriteAnime(animeDetail);
+                          },
                         ),
-                      ),
-                      AnimeInfoRow(
-                        title: homeStrings.animeEndDate,
-                        info: animeDetail.end.convertDateToCurrentLocale(
-                          context,
+                        const SpacerBox.verticalS(),
+                        AnimeInfoRow(
+                          title: homeStrings.animeOriginalTitle,
+                          info: animeDetail.title,
                         ),
-                      ),
-                      AnimeInfoRow(
-                        title: homeStrings.animeNote,
-                        info: animeDetail.score.toString(),
-                      ),
-                      AnimeInfoRow(
-                        title: homeStrings.animeSynopsis,
-                        info: animeDetail.synopsis,
-                      ),
-                      const SpacerBox.verticalS(),
-                    ],
-                  );
+                        AnimeInfoRow(
+                          title: homeStrings.animeEnglishTitle,
+                          info: animeDetail.titleEnglish,
+                        ),
+                        AnimeInfoRow(
+                          title: homeStrings.animeReleaseDate,
+                          info: animeDetail.release.convertDateToCurrentLocale(
+                            context,
+                          ),
+                        ),
+                        AnimeInfoRow(
+                          title: homeStrings.animeEndDate,
+                          info: animeDetail.end.convertDateToCurrentLocale(
+                            context,
+                          ),
+                        ),
+                        AnimeInfoRow(
+                          title: homeStrings.animeNote,
+                          info: animeDetail.score.toString(),
+                        ),
+                        AnimeInfoRow(
+                          title: homeStrings.animeSynopsis,
+                          info: animeDetail.synopsis,
+                        ),
+                        const SpacerBox.verticalS(),
+                      ],
+                    );
+                  }
+                  return const SizedBox.shrink();
                 },
               ),
             ),
