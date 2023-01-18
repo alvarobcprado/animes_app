@@ -1,0 +1,8 @@
+{
+  "@@ locale": "en_US",
+  "nameHintText": "Name",
+  "emailHintText": "Email",
+  "emptyField": "Field cannot be empty",
+  "nameInvalid": "Enter a valid name",
+  "emailInvalid": "Enter a valid email"
+}
