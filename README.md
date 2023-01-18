@@ -38,3 +38,7 @@ O aplicativo segue o padrão MVVM + Clean Architecture contendo os seguintes mó
 - Listagem de animes: Tela que exibe por paginação uma lista de animes (aleatórios, por busca ou por categoria)
 - Detalhes de um anime: Apresenta os detalhes de um anime clicado na tela anterior. Nesta tela é possível favoritar/desfavoritar um anime
 - Animes favoritados: Tela que exibe os animes favoritados do usuário
+
+# 
+
+<img height="480px" src="assets/readme/login.png"> <img height="480px" src="assets/readme/home.png"> <img height="480px" src="assets/readme/details.png"> <img height="480px" src="assets/readme/favorites.png">
