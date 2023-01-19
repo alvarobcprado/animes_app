@@ -54,6 +54,7 @@ class _FavoriteAnimesPageState extends State<FavoriteAnimesPage> {
         _pageController.getFavoriteAnimes();
       },
       child: Scaffold(
+        backgroundColor: colors.background,
         appBar: AppBar(
           title: Text(HomeStrings.of(context)!.favoriteAnimesPageTitleAppBar),
         ),

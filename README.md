@@ -25,7 +25,7 @@ O aplicativo segue o padrão MVVM + Clean Architecture contendo os seguintes mó
 
 - App: Responsável pela inicialização do aplicativo 
 - Core: Módulo que contém código compartilhado e todas as dependências utilizadas no projeto
-- Data Local: Módulo responsável por salvar e obter as informações salvas localmente. Este módulo contém algumas extensions para o mapeamento de classes que representam um dado local externo para classes que representam tal dado para ser utilizado na camada de apresentação e vice versa. Por exemplo, a classe [AnimeCache](https://github.com/alvarobcprado/animes_app/blob/main/modules/data_local/lib/src/models/anime_cache.dart) está contida neste módulo, mas a [AnimeAuxiliarCache](https://github.com/alvarobcprado/animes_app/blob/main/modules/feature_home/lib/src/data/cache/models/anime_auxiliar_cache.dart) está contida no módulo feature em que será utilizada
+- Data Local: Módulo responsável por salvar e obter as informações salvas localmente
 - Dependency Injection: Responsável pela injeção de dependência do aplicativo. Este módulo conhece todos os outros
 - Design System: Módulo independente que contém as cores, tipografias e os componentes reutilizáveis de UI
 - Feature Auth: Módulo responsável pela tela de login
@@ -38,3 +38,7 @@ O aplicativo segue o padrão MVVM + Clean Architecture contendo os seguintes mó
 - Listagem de animes: Tela que exibe por paginação uma lista de animes (aleatórios, por busca ou por categoria)
 - Detalhes de um anime: Apresenta os detalhes de um anime clicado na tela anterior. Nesta tela é possível favoritar/desfavoritar um anime
 - Animes favoritados: Tela que exibe os animes favoritados do usuário
+
+# 
+
+<img height="480px" src="assets/readme/login.png"> <img height="480px" src="assets/readme/home.png"> <img height="480px" src="assets/readme/details.png"> <img height="480px" src="assets/readme/favorites.png">
