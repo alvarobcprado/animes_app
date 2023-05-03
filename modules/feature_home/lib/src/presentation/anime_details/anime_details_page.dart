@@ -86,7 +86,9 @@ class AnimeDetailsPage extends StatelessWidget {
                     return Failure(
                       message: state.error.getErrorMessage(context),
                       buttonText: CoreStrings.of(context)!.tryAgain,
-                      onButtonPressed: notifier.getAnimeDetails,
+                      onButtonPressed: () => notifier.process(
+                        const GetAnimeDetails(),
+                      ),
                     );
                   }
                   if (state is AnimeDetailsLoaded) {
@@ -102,7 +104,9 @@ class AnimeDetailsPage extends StatelessWidget {
                               HomeStrings.of(context)!.animeDetailsPageFavorite,
                           imageUrl: animeDetail.image,
                           onButtonPressed: () {
-                            notifier.toggleFavoriteAnime(animeDetail);
+                            notifier.process(
+                              ToggleFavoriteAnime(animeDetails: animeDetail),
+                            );
                           },
                         ),
                         const SpacerBox.verticalS(),

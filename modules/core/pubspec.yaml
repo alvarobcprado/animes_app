@@ -23,7 +23,7 @@ dependencies:
   flutter_triple: ^1.2.7+4
   focus_detector: ^2.0.1
   mocktail: ^0.3.0
-  re_state_action: ^0.0.6
+  re_state_action: ^0.0.10
 
 dev_dependencies:
   flutter_lints: ^2.0.0

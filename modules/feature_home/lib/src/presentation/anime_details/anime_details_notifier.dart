@@ -1,11 +1,10 @@
 import 'package:core/dependencies/state_management.dart';
-import 'package:feature_home/src/domain/models/anime_details.dart';
 import 'package:feature_home/src/domain/use_cases/get_anime_details_use_case.dart';
 import 'package:feature_home/src/domain/use_cases/toggle_favorite_anime_use_case.dart';
 import 'package:feature_home/src/presentation/anime_details/models/anime_details_models.dart';
 
-class AnimeDetailsNotifier
-    extends ReStateAction<AnimeDetailsState, AnimeDetailsAction> {
+class AnimeDetailsNotifier extends ReStateActionEvent<AnimeDetailsState,
+    AnimeDetailsAction, AnimeDetailsEvent> {
   AnimeDetailsNotifier({
     required GetAnimeDetailsUseCase getAnimeDetailsUseCase,
     required ToggleFavoriteAnimeUseCase toggleFavoriteAnimeUseCase,
@@ -14,14 +13,17 @@ class AnimeDetailsNotifier
         _toggleFavoriteAnimeUseCase = toggleFavoriteAnimeUseCase,
         _animeId = animeId,
         super(const AnimeDetailsInitial()) {
-    getAnimeDetails();
+    on<ToggleFavoriteAnime>(_toggleFavoriteAnime);
+    on<GetAnimeDetails>(_getAnimeDetails);
+
+    process(const GetAnimeDetails());
   }
 
   final GetAnimeDetailsUseCase _getAnimeDetailsUseCase;
   final ToggleFavoriteAnimeUseCase _toggleFavoriteAnimeUseCase;
   final int _animeId;
 
-  Future<void> getAnimeDetails() async {
+  Future<void> _getAnimeDetails(GetAnimeDetails? event) async {
     emitState(const AnimeDetailsLoading());
     final result = await _getAnimeDetailsUseCase(
       params: GetAnimeDetailsUseCaseParams(id: _animeId),
@@ -37,7 +39,8 @@ class AnimeDetailsNotifier
     );
   }
 
-  Future<void> toggleFavoriteAnime(AnimeDetails animeDetails) async {
+  Future<void> _toggleFavoriteAnime(ToggleFavoriteAnime event) async {
+    final animeDetails = event.animeDetails;
     final result = await _toggleFavoriteAnimeUseCase.call(
         params: ToggleFavoriteAnimeUseCaseParams(animeDetails: animeDetails));
 

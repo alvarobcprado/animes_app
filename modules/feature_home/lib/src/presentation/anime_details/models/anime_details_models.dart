@@ -39,3 +39,17 @@ class ShowUnfavoriteAnimeSnackBar extends AnimeDetailsAction {
 class ShowFavoriteAnimeErrorSnackBar extends AnimeDetailsAction {
   const ShowFavoriteAnimeErrorSnackBar();
 }
+
+abstract class AnimeDetailsEvent {
+  const AnimeDetailsEvent();
+}
+
+class ToggleFavoriteAnime extends AnimeDetailsEvent {
+  const ToggleFavoriteAnime({required this.animeDetails});
+
+  final AnimeDetails animeDetails;
+}
+
+class GetAnimeDetails extends AnimeDetailsEvent {
+  const GetAnimeDetails();
+}
