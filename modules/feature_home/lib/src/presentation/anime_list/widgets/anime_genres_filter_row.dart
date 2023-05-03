@@ -1,41 +1,43 @@
 import 'package:core/dependencies/state_management.dart';
 import 'package:design_system/design_system.dart';
-import 'package:feature_home/src/presentation/anime_list/anime_list_controller.dart';
-import 'package:feature_home/src/presentation/anime_list/anime_list_state.dart';
-import 'package:feature_home/src/presentation/anime_list/stores/genres_store.dart';
+import 'package:feature_home/src/presentation/anime_list/genre_list_notifier.dart';
+import 'package:feature_home/src/presentation/anime_list/models/genre_list_models.dart';
 import 'package:flutter/material.dart';
 
 class AnimeGenresFilterRow extends StatelessWidget {
   const AnimeGenresFilterRow({
     Key? key,
-    required AnimeListController pageController,
-  })  : _pageController = pageController,
+    required GenreListNotifier genresNotifier,
+    required this.onGenreSelected,
+  })  : _genresNotifier = genresNotifier,
         super(key: key);
 
-  final AnimeListController _pageController;
+  final GenreListNotifier _genresNotifier;
+  final Function(String, bool) onGenreSelected;
 
   @override
   Widget build(BuildContext context) {
     return PaddingBox.verticalXS(
-      child: ScopedBuilder<GenresStore, Exception, GenresModel>(
-        store: _pageController.genresStore,
-        onLoading: (_) => const SizedBox(),
-        onState: (_, state) {
-          final genreList = state.genres;
-          return Visibility(
-            visible: genreList.isNotEmpty,
-            child: FilterSelectChipList(
-              onSelected: (isSelected, index) {
-                _pageController.getAnimesByGenre(
-                  genreList[index].id.toString(),
-                  isSelected,
-                );
-              },
-              items: genreList.map((e) => e.name).toList(),
-            ),
-          );
+      child: ReStateWidget<GenreListState>(
+        reState: _genresNotifier,
+        builder: (context, state, child) {
+          if (state is GenreListLoaded) {
+            final genreList = state.genreList;
+            return Visibility(
+              visible: genreList.isNotEmpty,
+              child: FilterSelectChipList(
+                onSelected: (isSelected, index) {
+                  onGenreSelected(
+                    genreList[index].id.toString(),
+                    isSelected,
+                  );
+                },
+                items: genreList.map((e) => e.name).toList(),
+              ),
+            );
+          }
+          return const SizedBox.shrink();
         },
-        onError: (_, error) => const SizedBox(),
       ),
     );
   }

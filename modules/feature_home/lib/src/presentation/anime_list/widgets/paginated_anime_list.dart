@@ -1,9 +1,8 @@
 import 'package:core/core.dart';
 import 'package:core/dependencies/state_management.dart';
 import 'package:design_system/design_system.dart';
-import 'package:feature_home/src/presentation/anime_list/anime_list_controller.dart';
-import 'package:feature_home/src/presentation/anime_list/anime_list_state.dart';
-import 'package:feature_home/src/presentation/anime_list/stores/anime_list_store.dart';
+import 'package:feature_home/src/presentation/anime_list/anime_list_notifier.dart';
+import 'package:feature_home/src/presentation/anime_list/models/anime_list_models.dart';
 import 'package:feature_home/src/presentation/anime_list/widgets/anime_list_page_floating_action_buttons.dart';
 import 'package:feature_home/src/presentation/anime_list/widgets/next_anime_page_error_indicator.dart';
 import 'package:feature_home/src/presentation/anime_list/widgets/next_anime_page_loading_indicator.dart';
@@ -13,28 +12,37 @@ import 'package:flutter/material.dart';
 class PaginatedAnimeList extends StatelessWidget {
   const PaginatedAnimeList({
     Key? key,
-    required AnimeListController pageController,
+    required AnimeListNotifier animeListNotifier,
     required ScrollController scrollController,
-  })  : _pageController = pageController,
+  })  : _animeListNotifier = animeListNotifier,
         _scrollController = scrollController,
         super(key: key);
 
-  final AnimeListController _pageController;
+  final AnimeListNotifier _animeListNotifier;
 
   final ScrollController _scrollController;
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).extension<AppColorsFoundation>()!;
     return Expanded(
-      child: ScopedBuilder<AnimeListStore, Exception, AnimesModel>(
-        store: _pageController.animeListStore,
-        onLoading: (_) => Center(
-          child: CircularProgressIndicator(
-            color: colors.primary,
-          ),
-        ),
-        onState: (_, state) {
+      child: ReStateWidget<AnimeListModel>(
+        reState: _animeListNotifier,
+        builder: (context, state, child) {
+          if (state.error != null) {
+            final message = state.error!.getErrorMessage(context);
+            return Failure(
+              message: message,
+              buttonText: CoreStrings.of(context)!.tryAgain,
+              onButtonPressed: () => _animeListNotifier.process(
+                const GetAnimes(),
+              ),
+            );
+          }
+
+          if (state == AnimeListModel.loading()) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
           final animeList = state.animes;
           return Visibility(
             visible: animeList.isNotEmpty,
@@ -52,8 +60,9 @@ class PaginatedAnimeList extends StatelessWidget {
                       ),
                       NextAnimePageErrorIndicator(
                         hasPaginationError: state.hasPaginationError,
-                        onTryAgainTap:
-                            _pageController.animeListStore.getAnimeList,
+                        onTryAgainTap: () => _animeListNotifier.process(
+                          const GetNextAnimeListPage(),
+                        ),
                       ),
                     ],
                   ),
@@ -66,14 +75,6 @@ class PaginatedAnimeList extends StatelessWidget {
                 ),
               ],
             ),
-          );
-        },
-        onError: (_, error) {
-          final message = error!.getErrorMessage(context);
-          return Failure(
-            message: message,
-            buttonText: CoreStrings.of(context)!.tryAgain,
-            onButtonPressed: _pageController.animeListStore.getAnimeList,
           );
         },
       ),

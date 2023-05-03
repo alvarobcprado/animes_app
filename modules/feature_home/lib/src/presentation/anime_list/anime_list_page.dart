@@ -2,7 +2,10 @@ import 'package:core/dependencies/dependency_injection.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_home/feature_home.dart';
 import 'package:feature_home/generated/home_strings.dart';
-import 'package:feature_home/src/presentation/anime_list/anime_list_controller.dart';
+import 'package:feature_home/src/presentation/anime_list/anime_list_notifier.dart';
+import 'package:feature_home/src/presentation/anime_list/genre_list_notifier.dart';
+import 'package:feature_home/src/presentation/anime_list/models/anime_list_models.dart';
+import 'package:feature_home/src/presentation/anime_list/models/genre_list_models.dart';
 import 'package:feature_home/src/presentation/anime_list/widgets/anime_genres_filter_row.dart';
 import 'package:feature_home/src/presentation/anime_list/widgets/paginated_anime_list.dart';
 import 'package:flutter/material.dart';
@@ -10,21 +13,45 @@ import 'package:flutter/material.dart';
 class AnimeListPage extends StatefulWidget {
   const AnimeListPage({
     super.key,
-    required this.controller,
+    required this.animeListNotifier,
+    required this.genreListNotifier,
   });
 
-  final AnimeListController controller;
+  final AnimeListNotifier animeListNotifier;
+  final GenreListNotifier genreListNotifier;
 
-  static Widget create() =>
-      ProxyProvider2<GenresStore, AnimeListStore, AnimeListController>(
-        update: (_, genresStore, animeListStore, controller) =>
-            controller ??
-            AnimeListController(
-              genresStore,
-              animeListStore,
-            ),
-        child: Consumer<AnimeListController>(
-          builder: (_, controller, __) => AnimeListPage(controller: controller),
+  static Widget create() => MultiProvider(
+        providers: [
+          ProxyProvider3<GetAnimeListUseCase, GetAnimesByGenreUseCase,
+              GetSearchedAnimeListUseCase, AnimeListNotifier>(
+            update: (
+              _,
+              getAnimeListUseCase,
+              getAnimesByGenreUseCase,
+              getSearchedAnimeListUseCase,
+              animeListNotifier,
+            ) =>
+                animeListNotifier ??
+                AnimeListNotifier(
+                  getAnimeListUseCase: getAnimeListUseCase,
+                  getAnimesByGenreUseCase: getAnimesByGenreUseCase,
+                  getSearchedAnimeListUseCase: getSearchedAnimeListUseCase,
+                ),
+          ),
+          ProxyProvider<GetAnimeGenresUseCase, GenreListNotifier>(
+            update: (_, getAnimeGenresUseCase, genreListNotifier) =>
+                genreListNotifier ??
+                GenreListNotifier(
+                  getAnimeGenresUseCase: getAnimeGenresUseCase,
+                ),
+          ),
+        ],
+        child: Consumer2<AnimeListNotifier, GenreListNotifier>(
+          builder: (_, animeListNotifier, genreListNotifier, __) =>
+              AnimeListPage(
+            animeListNotifier: animeListNotifier,
+            genreListNotifier: genreListNotifier,
+          ),
         ),
       );
 
@@ -35,7 +62,8 @@ class AnimeListPage extends StatefulWidget {
 class _AnimeListPageState extends State<AnimeListPage> {
   late TextEditingController _searchController;
   late ScrollController _scrollController;
-  AnimeListController get _pageController => widget.controller;
+  AnimeListNotifier get _animeListNotifier => widget.animeListNotifier;
+  GenreListNotifier get _genreListNotifier => widget.genreListNotifier;
   late String _lastSearchQuery = '';
 
   @override
@@ -43,8 +71,8 @@ class _AnimeListPageState extends State<AnimeListPage> {
     super.initState();
     _setupScrollController();
     _setupSearchController();
-    _pageController.genresStore.getGenres();
-    _pageController.animeListStore.getAnimeList();
+    _genreListNotifier.process(const GetGenres());
+    _animeListNotifier.process(const GetAnimes());
   }
 
   @override
@@ -60,7 +88,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
 
   void _onSearchChanged(String query) {
     if (query != _lastSearchQuery) {
-      _pageController.animeListStore.getAnimesBySearch(query);
+      _animeListNotifier.process(GetAnimesBySearch(query));
       _lastSearchQuery = query;
     }
   }
@@ -71,7 +99,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
       () {
         if (_scrollController.position.pixels ==
             _scrollController.position.maxScrollExtent) {
-          _pageController.getMoreAnimes();
+          _animeListNotifier.process(const GetNextAnimeListPage());
         }
       },
     );
@@ -94,9 +122,16 @@ class _AnimeListPageState extends State<AnimeListPage> {
                   hintText: HomeStrings.of(context)!.animeListPageSearchHint,
                   onChanged: _onSearchChanged,
                 ),
-                AnimeGenresFilterRow(pageController: _pageController),
+                AnimeGenresFilterRow(
+                  genresNotifier: _genreListNotifier,
+                  onGenreSelected: (genreId, isGenreSelected) {
+                    _animeListNotifier.process(
+                      GetAnimesByGenre(genreId, isGenreSelected),
+                    );
+                  },
+                ),
                 PaginatedAnimeList(
-                  pageController: _pageController,
+                  animeListNotifier: _animeListNotifier,
                   scrollController: _scrollController,
                 ),
               ],

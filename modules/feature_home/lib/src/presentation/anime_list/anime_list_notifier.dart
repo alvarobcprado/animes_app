@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:core/dependencies/state_management.dart';
 import 'package:feature_home/feature_home.dart';
-import 'package:feature_home/src/presentation/anime_list/anime_list_state.dart';
+import 'package:feature_home/src/presentation/anime_list/models/anime_list_models.dart';
 
 enum AnimePaginationSource {
   byGenre,
@@ -10,15 +10,20 @@ enum AnimePaginationSource {
 }
 
 // ignore: must_be_immutable
-class AnimeListStore extends StreamStore<Exception, AnimesModel> {
-  AnimeListStore({
+class AnimeListNotifier extends ReStateEvent<AnimeListModel, AnimeListEvent> {
+  AnimeListNotifier({
     required GetAnimeListUseCase getAnimeListUseCase,
     required GetSearchedAnimeListUseCase getSearchedAnimeListUseCase,
     required GetAnimesByGenreUseCase getAnimesByGenreUseCase,
   })  : _getAnimeListUseCase = getAnimeListUseCase,
         _getSearchedAnimeListUseCase = getSearchedAnimeListUseCase,
         _getAnimesByGenreUseCase = getAnimesByGenreUseCase,
-        super(AnimesModel.initial());
+        super(AnimeListModel.initial()) {
+    on<GetAnimes>(_getAnimeList);
+    on<GetAnimesByGenre>(_getAnimesByGenre);
+    on<GetAnimesBySearch>(_getAnimesBySearch);
+    on<GetNextAnimeListPage>(_getNextAnimeListPage);
+  }
 
   final GetAnimeListUseCase _getAnimeListUseCase;
   final GetSearchedAnimeListUseCase _getSearchedAnimeListUseCase;
@@ -36,7 +41,7 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
   int _animesByGenrePage = 1;
   int _animesBySearchPage = 1;
 
-  Future<void> getAnimeList() async {
+  Future<void> _getAnimeList(GetAnimes event) async {
     final hasAnimeToGet = _setAnimeLoading(_animes);
 
     if (!hasAnimeToGet) {
@@ -56,32 +61,34 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
         if (_hasNextPage(_animes)) {
           _animesListPage++;
         }
-        update(
+
+        emitState(
           state.copyWith(
             animes: _animes,
             isLoadingNewPage: false,
             hasPaginationError: false,
+            error: null,
           ),
         );
       },
       error: (exception) {
         if (exception is PaginationErrorException) {
-          update(
+          emitState(
             state.copyWith(
               hasPaginationError: true,
               isLoadingNewPage: false,
+              error: null,
             ),
           );
         } else {
-          setError(exception);
+          emitState(AnimeListModel.error(exception));
         }
       },
     );
-
-    setLoading(false);
   }
 
-  Future<void> getAnimesBySearch(String query) async {
+  Future<void> _getAnimesBySearch(GetAnimesBySearch event) async {
+    final query = event.searchQuery;
     _updateSearchQuery(query);
 
     final hasAnimeToGet = _setAnimeLoading(_animesBySearch);
@@ -91,8 +98,7 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
     }
 
     if (query.isEmpty) {
-      update(AnimesModel(animes: _animes));
-      setLoading(false);
+      emitState(AnimeListModel(animes: _animes));
       _paginationSource = AnimePaginationSource.list;
       _debouncer.dispose();
       _searchQuery = '';
@@ -114,30 +120,32 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
             if (_hasNextPage(_animesBySearch)) {
               _animesBySearchPage++;
             }
-            update(
+            emitState(
               state.copyWith(
                 animes: _animesBySearch,
                 isLoadingNewPage: false,
                 hasPaginationError: false,
+                error: null,
               ),
             );
           },
           error: (exception) {
             if (exception is PaginationErrorException) {
-              update(state.copyWith(hasPaginationError: true));
+              emitState(state.copyWith(
+                hasPaginationError: true,
+                error: null,
+              ));
             } else {
-              setError(exception);
+              emitState(AnimeListModel.error(exception));
             }
           },
         );
-
-        setLoading(false);
       },
     );
   }
 
-  Future<void> getAnimesByGenre(String id, bool isAddingGenre) async {
-    _updateGenresFilter(id, isAddingGenre);
+  Future<void> _getAnimesByGenre(GetAnimesByGenre event) async {
+    _updateGenresFilter(event.genreId, event.isAddingGenre);
 
     final hasAnimeToGet = _setAnimeLoading(_animesByGenre);
 
@@ -146,14 +154,14 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
     }
 
     if (_genresFilter.isEmpty) {
-      update(
+      emitState(
         state.copyWith(
           animes: _animes,
           isLoadingNewPage: false,
           hasPaginationError: false,
+          error: null,
         ),
       );
-      setLoading(false);
       _paginationSource = AnimePaginationSource.list;
       _debouncer.dispose();
       return;
@@ -177,38 +185,40 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
             if (_hasNextPage(_animesByGenre)) {
               _animesByGenrePage++;
             }
-            update(
+            emitState(
               state.copyWith(
                 animes: _animesByGenre,
                 isLoadingNewPage: false,
                 hasPaginationError: false,
+                error: null,
               ),
             );
           },
           error: (exception) {
             if (exception is PaginationErrorException) {
-              update(state.copyWith(hasPaginationError: true));
+              emitState(state.copyWith(
+                hasPaginationError: true,
+                error: null,
+              ));
             } else {
-              setError(exception);
+              emitState(AnimeListModel.error(exception));
             }
           },
         );
-
-        setLoading(false);
       },
     );
   }
 
-  Future<void> getMoreAnimes() async {
+  Future<void> _getNextAnimeListPage(GetNextAnimeListPage event) async {
     switch (_paginationSource) {
       case AnimePaginationSource.list:
-        await getAnimeList();
+        process(const GetAnimes());
         break;
       case AnimePaginationSource.byGenre:
-        await getAnimesByGenre('', false);
+        process(GetAnimesByGenre(_genresFilter.first, true));
         break;
       case AnimePaginationSource.bySearch:
-        await getAnimesBySearch(_searchQuery);
+        process(GetAnimesBySearch(_searchQuery));
         break;
     }
   }
@@ -235,9 +245,15 @@ class AnimeListStore extends StreamStore<Exception, AnimesModel> {
 
   bool _setAnimeLoading(List<Anime> animeList) {
     if (animeList.isEmpty) {
-      setLoading(true);
+      emitState(AnimeListModel.loading());
     } else if (_hasNextPage(animeList)) {
-      update(state.copyWith(isLoadingNewPage: true, hasPaginationError: false));
+      emitState(
+        state.copyWith(
+          isLoadingNewPage: true,
+          hasPaginationError: false,
+          error: null,
+        ),
+      );
     } else {
       //TODO: add last page reached
       return false;
