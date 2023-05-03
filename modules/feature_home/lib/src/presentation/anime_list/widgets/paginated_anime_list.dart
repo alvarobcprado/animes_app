@@ -22,6 +22,18 @@ class PaginatedAnimeList extends StatelessWidget {
 
   final ScrollController _scrollController;
 
+  void _onPageErrorTryAgainTap() {
+    _animeListNotifier.process(
+      const GetAnimes(),
+    );
+  }
+
+  void _onPaginationErrorTryAgainTap() {
+    _animeListNotifier.process(
+      const GetNextAnimeListPage(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -33,9 +45,7 @@ class PaginatedAnimeList extends StatelessWidget {
             return Failure(
               message: message,
               buttonText: CoreStrings.of(context)!.tryAgain,
-              onButtonPressed: () => _animeListNotifier.process(
-                const GetAnimes(),
-              ),
+              onButtonPressed: _onPageErrorTryAgainTap,
             );
           }
 
@@ -60,9 +70,7 @@ class PaginatedAnimeList extends StatelessWidget {
                       ),
                       NextAnimePageErrorIndicator(
                         hasPaginationError: state.hasPaginationError,
-                        onTryAgainTap: () => _animeListNotifier.process(
-                          const GetNextAnimeListPage(),
-                        ),
+                        onTryAgainTap: _onPaginationErrorTryAgainTap,
                       ),
                     ],
                   ),

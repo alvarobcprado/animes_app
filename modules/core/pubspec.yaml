@@ -20,7 +20,6 @@ dependencies:
   hive_flutter: ^1.1.0
   cached_network_image: ^3.2.1
   json_annotation: ^4.7.0
-  flutter_triple: ^1.2.7+4
   focus_detector: ^2.0.1
   mocktail: ^0.3.0
   re_state_action: ^0.0.10

@@ -105,6 +105,12 @@ class _AnimeListPageState extends State<AnimeListPage> {
     );
   }
 
+  void _onGenreSelected(String genreId, bool isGenreSelected) {
+    _animeListNotifier.process(
+      GetAnimesByGenre(genreId, isGenreSelected),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -124,11 +130,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
                 ),
                 AnimeGenresFilterRow(
                   genresNotifier: _genreListNotifier,
-                  onGenreSelected: (genreId, isGenreSelected) {
-                    _animeListNotifier.process(
-                      GetAnimesByGenre(genreId, isGenreSelected),
-                    );
-                  },
+                  onGenreSelected: _onGenreSelected,
                 ),
                 PaginatedAnimeList(
                   animeListNotifier: _animeListNotifier,

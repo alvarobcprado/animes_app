@@ -59,6 +59,10 @@ class AnimeDetailsPage extends StatelessWidget {
       );
   }
 
+  void _onPageErrorTryAgainTap() {
+    notifier.process(const GetAnimeDetails());
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).extension<AppColorsFoundation>();
@@ -86,9 +90,7 @@ class AnimeDetailsPage extends StatelessWidget {
                     return Failure(
                       message: state.error.getErrorMessage(context),
                       buttonText: CoreStrings.of(context)!.tryAgain,
-                      onButtonPressed: () => notifier.process(
-                        const GetAnimeDetails(),
-                      ),
+                      onButtonPressed: _onPageErrorTryAgainTap,
                     );
                   }
                   if (state is AnimeDetailsLoaded) {
