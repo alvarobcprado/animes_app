@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:feature_home/feature_home.dart';
 
 final mockAnimeDetails = AnimeDetails(
@@ -38,3 +39,7 @@ final mockAnimeList = [
   Anime(4, 'imageUrl4', 'title4', ['mockGenre'], 'release4', 4),
   Anime(5, 'imageUrl5', 'title5', ['mockGenre'], 'release5', 5),
 ];
+
+final mockException = Exception('mockException');
+
+final mockPaginationException = PaginationErrorException();
